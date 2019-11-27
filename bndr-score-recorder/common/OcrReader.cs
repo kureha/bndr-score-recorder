@@ -55,6 +55,9 @@ namespace bndr_score_recorder.common
             // return value
             string result = string.Empty;
 
+            // standard output
+            string standardOutput = string.Empty;
+
             // check file
             if (File.Exists(filePath) == false)
             {
@@ -75,7 +78,7 @@ namespace bndr_score_recorder.common
 
             // crop image
             logger.Info("ImageMagick convert start");
-            string standardOutput = ImageMagickBridge.CropExecute(
+            standardOutput = ImageMagickBridge.CropExecute(
                 @"C:\ImageMagick\convert.exe",
                 filePath,
                 imageMagickOutputFilePath,
