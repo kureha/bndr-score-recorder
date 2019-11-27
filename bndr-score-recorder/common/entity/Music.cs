@@ -8,9 +8,6 @@ namespace bndr_score_recorder.common.entity
 {
     class Music
     {
-        // ID
-        public string id;
-
         // 曲名
         public string title;
 

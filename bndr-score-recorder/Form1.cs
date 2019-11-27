@@ -82,34 +82,7 @@ namespace bndr_score_recorder
             musicAnalyzed.title = titleString;
             musicAnalyzed.level = int.Parse(levelString);
 
-            ScoreResult scoreResultAnalyzed = new ScoreResult();
-            string[] scoreSpliterChar = { "\n" };
-            string[] scoreStringArray = scoreString.Split(scoreSpliterChar, StringSplitOptions.None);
-            List<string> scoreStringList = new List<string>();
-            scoreStringList.AddRange(scoreStringArray);
-
-            scoreStringList.ForEach(line => {
-                if (line.Contains("PERFECT") == true)
-                {
-                    scoreResultAnalyzed.perfect = int.Parse(line.Replace("PERFECT", string.Empty).Trim());
-                } else if (line.Contains("PERFECT") == true)
-                {
-                    scoreResultAnalyzed.great = int.Parse(line.Replace("GREAT", string.Empty).Trim());
-                } else if (line.Contains("GOOD") == true)
-                {
-                    scoreResultAnalyzed.good = int.Parse(line.Replace("GOOD", string.Empty).Trim());
-                } else if (line.Contains("BAD") == true)
-                {
-                    scoreResultAnalyzed.bad = int.Parse(line.Replace("BAD", string.Empty).Trim());
-                } else if (line.Contains("MISS") == true)
-                {
-                    scoreResultAnalyzed.miss = int.Parse(line.Replace("MISS", string.Empty).Trim());
-                }
-            });
-            musicAnalyzed.scoreResultList.Add(scoreResultAnalyzed);
-
-            // result
-            logger.Info(musicAnalyzed);
+            musicAnalyzed.scoreResultList.Add(ScoreResult.Parse(scoreString));
         }
     }
 }
