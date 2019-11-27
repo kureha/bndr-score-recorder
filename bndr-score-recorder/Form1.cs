@@ -1,4 +1,6 @@
-﻿using bndr_score_recorder.common.tesseract;
+﻿using bndr_score_recorder.common;
+using bndr_score_recorder.common.entity;
+using bndr_score_recorder.common.tesseract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +16,16 @@ namespace bndr_score_recorder
 {
     public partial class Form1 : Form
     {
+        // logger
+        private log4net.ILog logger;
+
         public Form1()
         {
+            // Create log4net instance
+            logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            // Initialize log4net
+            log4net.Config.BasicConfigurator.Configure();
+            // Initialize component
             InitializeComponent();
         }
 
@@ -23,8 +33,10 @@ namespace bndr_score_recorder
         {
             // image path variable
             string screenshotImageFilePath;
-            string titleImageFilePath;
-            string scoreImageFilePath;
+            string scoreString = string.Empty;
+            string titleString = string.Empty;
+            string maxComboString = string.Empty;
+            string levelString = string.Empty;
 
             // read from dialog
             OpenFileDialog imagePathFileDialog = new OpenFileDialog();
@@ -37,59 +49,67 @@ namespace bndr_score_recorder
                 return;
             }
 
-            // create path
-            titleImageFilePath = screenshotImageFilePath + ".title.png";
-            scoreImageFilePath = screenshotImageFilePath + ".score.png";
-
-            // crop title
-            ImageMagickBridge.CropExecute(
-                @"C:\ImageMagick\convert.exe",
+            // title read
+            titleString = OcrReader.readFromImageFile(
                 screenshotImageFilePath,
-                titleImageFilePath,
+                ".title",
                 "470x25+345+35");
 
-            // crop score
-            ImageMagickBridge.CropExecute(
-                @"C:\ImageMagick\convert.exe", 
+            // score read
+            scoreString = OcrReader.readFromImageFile(
                 screenshotImageFilePath,
-                scoreImageFilePath,
+                ".score",
                 "230x150+650+250");
 
-            // read title
-            TesseractBridge.Execute(
-                @"C:\Program Files\Tesseract-OCR\tesseract.exe",
-                titleImageFilePath,
-                titleImageFilePath
-                );
+            // max combo read
+            maxComboString = OcrReader.readFromImageFileOnlyNumber(
+                screenshotImageFilePath,
+                ".maxcombo",
+                "80x25+915+330");
 
-            // score file path
-            string titleTextImageFilePath = titleImageFilePath + TesseractBridge.SUFFIX_OUTPUT_FILE_NAME;
-            string titleText = string.Empty;
+            // level read
+            levelString = OcrReader.readFromImageFileOnlyNumber(
+                screenshotImageFilePath,
+                ".level",
+                "40x25+900+35");
 
-            // file read
-            using (StreamReader streamWriter = new StreamReader(titleTextImageFilePath))
-            {
-                titleText = streamWriter.ReadToEnd();
-            }
+            logger.Info("title = " + titleString);
+            logger.Info("level = " + levelString);
+            logger.Info("score = " + scoreString);
+            logger.Info("max combo = " + maxComboString);
 
-            // read score
-            TesseractBridge.Execute(
-                @"C:\Program Files\Tesseract-OCR\tesseract.exe",
-                scoreImageFilePath,
-                scoreImageFilePath
-                );
+            Music musicAnalyzed = new Music();
+            musicAnalyzed.title = titleString;
+            musicAnalyzed.level = int.Parse(levelString);
 
-            string scoreTextImageFilePath = scoreImageFilePath + TesseractBridge.SUFFIX_OUTPUT_FILE_NAME;
-            string scoreText = string.Empty;
+            ScoreResult scoreResultAnalyzed = new ScoreResult();
+            string[] scoreSpliterChar = { "\n" };
+            string[] scoreStringArray = scoreString.Split(scoreSpliterChar, StringSplitOptions.None);
+            List<string> scoreStringList = new List<string>();
+            scoreStringList.AddRange(scoreStringArray);
 
-            // file read
-            using (StreamReader streamWriter = new StreamReader(scoreTextImageFilePath))
-            {
-                scoreText = streamWriter.ReadToEnd();
-            }
+            scoreStringList.ForEach(line => {
+                if (line.Contains("PERFECT") == true)
+                {
+                    scoreResultAnalyzed.perfect = int.Parse(line.Replace("PERFECT", string.Empty).Trim());
+                } else if (line.Contains("PERFECT") == true)
+                {
+                    scoreResultAnalyzed.great = int.Parse(line.Replace("GREAT", string.Empty).Trim());
+                } else if (line.Contains("GOOD") == true)
+                {
+                    scoreResultAnalyzed.good = int.Parse(line.Replace("GOOD", string.Empty).Trim());
+                } else if (line.Contains("BAD") == true)
+                {
+                    scoreResultAnalyzed.bad = int.Parse(line.Replace("BAD", string.Empty).Trim());
+                } else if (line.Contains("MISS") == true)
+                {
+                    scoreResultAnalyzed.miss = int.Parse(line.Replace("MISS", string.Empty).Trim());
+                }
+            });
+            musicAnalyzed.scoreResultList.Add(scoreResultAnalyzed);
 
             // result
-            MessageBox.Show(titleText + "\n" + scoreText);
+            logger.Info(musicAnalyzed);
         }
     }
 }

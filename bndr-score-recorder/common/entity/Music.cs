@@ -18,9 +18,9 @@ namespace bndr_score_recorder.common.entity
         public int level;
 
         // 難易度種別 : CodeMaster.DifficultCodeMaster
-        public int difficultCode;
+        public int difficultCodes;
 
         // ScoreData
-        List<ScoreResult> scoreResultList = new List<ScoreResult>();
+        public List<ScoreResult> scoreResultList = new List<ScoreResult>();
     }
 }

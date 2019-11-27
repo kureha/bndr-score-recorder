@@ -9,9 +9,9 @@ namespace bndr_score_recorder.common.bridge
     class BridgeBase
     {
         // logger
-        private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // process arg spliter
-        public static readonly string ARG_SPLIT_CHAR = " ";
+        protected static readonly string ARG_SPLIT_CHAR = " ";
     }
 }

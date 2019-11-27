@@ -11,13 +11,24 @@ namespace bndr_score_recorder.common.tesseract
     {
         private static readonly string OPTION_CROP = "-crop";
 
+        /// <summary>
+        /// ImageMagickを使用した画像切り出しを実施
+        /// </summary>
+        /// <param name="pathImageMagickExe">ImageMagickのconvert.extのパス</param>
+        /// <param name="pathInputImageFile">切り出しを実施する画像パス</param>
+        /// <param name="pathOutputImageFile">出力画像パス</param>
+        /// <param name="cropOption">有効なImageMagick Cropオプション値</param>
+        /// <returns></returns>
         public static string CropExecute(string pathImageMagickExe, string pathInputImageFile, string pathOutputImageFile, string cropOption)
         {
+            logger.Info("ImageMagick extcution start");
+
             string standardOutputMessage = string.Empty;
 
             using(Process process = new Process())
             {
                 // create process
+                logger.Info("ImageMagick ext path = " + pathImageMagickExe);
                 process.StartInfo.FileName = pathImageMagickExe;
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
@@ -31,6 +42,8 @@ namespace bndr_score_recorder.common.tesseract
                     + @"""" + pathOutputImageFile + @"""";
                 process.StartInfo.CreateNoWindow = false;
 
+                logger.Info("ImageMagick arguments = " + process.StartInfo.Arguments);
+
                 // execute
                 process.Start();
 
@@ -39,7 +52,11 @@ namespace bndr_score_recorder.common.tesseract
 
                 // wait
                 process.WaitForExit();
+
+                logger.Info(standardOutputMessage);
             }
+
+            logger.Info("ImageMagick extcution end");
 
             // return stardard output
             return standardOutputMessage;

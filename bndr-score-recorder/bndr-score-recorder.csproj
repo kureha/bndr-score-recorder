@@ -54,6 +54,7 @@
     <Compile Include="common\CodeMaster.cs" />
     <Compile Include="common\entity\Music.cs" />
     <Compile Include="common\entity\ScoreResult.cs" />
+    <Compile Include="common\OcrReader.cs" />
     <Compile Include="common\Settings.cs" />
     <Compile Include="common\bridge\TesseractBridge.cs" />
     <Compile Include="Form1.cs">
