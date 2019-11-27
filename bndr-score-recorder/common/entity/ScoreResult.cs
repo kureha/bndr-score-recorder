@@ -45,15 +45,15 @@ namespace bndr_score_recorder.common.entity
         /// <summary>
         /// 文字列をもとにScoreResultを生成
         /// </summary>
-        /// <param name="scoreString">Tesseractで読み取ったScoreResult文字列</param>
+        /// <param name="rawScoreString">Tesseractで読み取ったScoreResult文字列</param>
         /// <returns>ScoreResultオブジェクト</returns>
-        public static ScoreResult Parse(string scoreString)
+        public static ScoreResult Parse(string rawScoreString)
         {
             // result
             ScoreResult scoreResult = new ScoreResult();
 
             // split raw string and convert to list
-            string[] rawScoreArray = scoreString.Split(CHAR_RAW_SCORE_LIST_SPLITER, StringSplitOptions.RemoveEmptyEntries);
+            string[] rawScoreArray = rawScoreString.Split(CHAR_RAW_SCORE_LIST_SPLITER, StringSplitOptions.RemoveEmptyEntries);
             List<string> rawScoreList = new List<string>();
             rawScoreList.AddRange(rawScoreArray);
 
