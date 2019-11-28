@@ -5,6 +5,8 @@
 
 # This project's file
 data/
+screenshot_input/
+screenshot_input _test/
 
 # User-specific files
 *.rsuser

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace bndr_score_recorder.common.entity
 {
+    [DataContract]
     class ScoreResult
     {
         // logger
@@ -14,38 +16,46 @@ namespace bndr_score_recorder.common.entity
         // raw score spliter
         private static readonly string[] CHAR_RAW_SCORE_LIST_SPLITER = { "\n" };
 
-        // literals
-        public static readonly string LITERAL_PERFECT = "PERFECT";
-        public static readonly string LITERAL_GREAT = "GREAT";
-        public static readonly string LITERAL_GOOD = "GOOD";
-        public static readonly string LITERAL_BAD = "BAD";
-        public static readonly string LITERAL_MISS = "MISS";
+        // line number define
+        private static readonly int LINE_NUM_PERFECT = 0;
+        private static readonly int LINE_NUM_GREAT = 1;
+        private static readonly int LINE_NUM_GOOD = 2;
+        private static readonly int LINE_NUM_BAD = 3;
+        private static readonly int LINE_NUM_MISS = 4;
 
         // initialize count value
         public static readonly long ERROR_COUNT = -1;
 
         // perfect
+        [DataMember]
         public long perfect;
 
         // great
+        [DataMember]
         public long great;
 
         // good
+        [DataMember]
         public long good;
 
         // bad
+        [DataMember]
         public long bad;
 
         // miss
+        [DataMember]
         public long miss;
 
         // max combo
+        [DataMember]
         public long maxCombo;
 
         // score
+        [DataMember]
         public long score;
 
         // rank code : CodeMaster.RankCodeMaster
+        [DataMember]
         public long rankCode;
 
         /// <summary>
@@ -67,34 +77,11 @@ namespace bndr_score_recorder.common.entity
 
             logger.Info("RawString convert to RawList success. List size = " + rawScoreList.Count);
 
-            // scan rawScore and insert to return object
-            rawScoreList.ForEach(rawScore => {
-                if (rawScore.Contains(LITERAL_PERFECT) == true)
-                {
-                    logger.Info("RawList contains perfect data. raw = " + rawScore);
-                    scoreResult.perfect = int.Parse(rawScore.Replace(LITERAL_PERFECT, string.Empty).Trim());
-                }
-                else if (rawScore.Contains(LITERAL_GREAT) == true)
-                {
-                    logger.Info("RawList contains great data. raw = " + rawScore);
-                    scoreResult.great = int.Parse(rawScore.Replace(LITERAL_GREAT, string.Empty).Trim());
-                }
-                else if (rawScore.Contains(LITERAL_GOOD) == true)
-                {
-                    logger.Info("RawList contains good data. raw = " + rawScore);
-                    scoreResult.good = int.Parse(rawScore.Replace(LITERAL_GOOD, string.Empty).Trim());
-                }
-                else if (rawScore.Contains(LITERAL_BAD) == true)
-                {
-                    logger.Info("RawList contains bad data. raw = " + rawScore);
-                    scoreResult.bad = int.Parse(rawScore.Replace(LITERAL_BAD, string.Empty).Trim());
-                }
-                else if (rawScore.Contains(LITERAL_MISS) == true)
-                {
-                    logger.Info("RawList contains miss data. raw = " + rawScore);
-                    scoreResult.miss = int.Parse(rawScore.Replace(LITERAL_MISS, string.Empty).Trim());
-                }
-            });
+            scoreResult.perfect = ExtractScore(rawScoreArray[LINE_NUM_PERFECT]);
+            scoreResult.great = ExtractScore(rawScoreArray[LINE_NUM_GREAT]);
+            scoreResult.good = ExtractScore(rawScoreArray[LINE_NUM_GOOD]);
+            scoreResult.bad = ExtractScore(rawScoreArray[LINE_NUM_BAD]);
+            scoreResult.miss = ExtractScore(rawScoreArray[LINE_NUM_MISS]);
 
             // check score is valid?
             if (scoreResult.IsValidScore())
@@ -113,19 +100,36 @@ namespace bndr_score_recorder.common.entity
         }
 
         /// <summary>
+        /// 文字列を空白で分割し、末尾の文字列をスコアとみなしてLong型で返却する。
+        /// </summary>
+        /// <param name="rawScoreString">スコア文字列</param>
+        /// <returns>スコア値</returns>
+        private static long ExtractScore(string rawScoreString)
+        {
+            string[] rawScoreArray = rawScoreString.Split();
+            try
+            {
+                return long.Parse(rawScoreArray[rawScoreArray.Length - 1].Trim());
+            } catch (Exception)
+            {
+                return ERROR_COUNT;
+            }
+        }
+
+        /// <summary>
         /// 初期処理を実施し、エラー値を代入する。
         /// </summary>
         public ScoreResult()
         {
-            this.perfect = ERROR_COUNT;
-            this.great = ERROR_COUNT;
-            this.good = ERROR_COUNT;
-            this.bad = ERROR_COUNT;
-            this.miss = ERROR_COUNT;
+            perfect = ERROR_COUNT;
+            great = ERROR_COUNT;
+            good = ERROR_COUNT;
+            bad = ERROR_COUNT;
+            miss = ERROR_COUNT;
 
-            this.maxCombo = ERROR_COUNT;
-            this.score = ERROR_COUNT;
-            this.rankCode = ERROR_COUNT;
+            maxCombo = ERROR_COUNT;
+            score = ERROR_COUNT;
+            rankCode = ERROR_COUNT;
         }
 
         /// <summary>
@@ -138,11 +142,11 @@ namespace bndr_score_recorder.common.entity
             bool result = true;
 
             // if contains "-1", this is error object.
-            if (this.perfect == ERROR_COUNT || 
-                this.great == ERROR_COUNT || 
-                this.good == ERROR_COUNT || 
-                this.bad == ERROR_COUNT || 
-                this.miss == ERROR_COUNT)
+            if (perfect == ERROR_COUNT || 
+                great == ERROR_COUNT || 
+                good == ERROR_COUNT || 
+                bad == ERROR_COUNT || 
+                miss == ERROR_COUNT)
             {
                 result = false;
             }

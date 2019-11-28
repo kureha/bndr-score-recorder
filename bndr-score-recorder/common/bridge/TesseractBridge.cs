@@ -14,12 +14,16 @@ namespace bndr_score_recorder.common.tesseract
         public static readonly string PARAM_NAME_TESSERACT_OPTION_PSM = "--psm";
         public static readonly string PARAM_VALUE_TESSERACT_OPTION_PSM = "6";
 
+        // Option for only number
         public static readonly string PARAM_OPTION_ONLY_NUMBER = "-c tessedit_char_whitelist=0123456789";
+
+        // Option for japanese
+        public static readonly string PARAM_OPTION_JAPANESE_LANG = "-l jpn";
 
 
         /// <summary>
         /// Tesseractを使用した画像から数字を読んでファイル出力を実施。
-        /// 対象文字はすべての文字範囲。
+        /// 対象文字はすべての半角文字。
         /// </summary>
         /// <param name="pathTesseractExe">Tesseractのtesseract.extのパス</param>
         /// <param name="pathInputImageFile">読み取りを実施する画像パス</param>
@@ -28,6 +32,19 @@ namespace bndr_score_recorder.common.tesseract
         public static string ReadExecute(string pathTesseractExe, string pathInputImageFile, string pathOutputTxtFile)
         {
             return ReadExecute(pathTesseractExe, pathInputImageFile, pathOutputTxtFile, string.Empty);
+        }
+
+        /// <summary>
+        /// Tesseractを使用した画像から数字を読んでファイル出力を実施。
+        /// 対象文字は日本語。
+        /// </summary>
+        /// <param name="pathTesseractExe">Tesseractのtesseract.extのパス</param>
+        /// <param name="pathInputImageFile">読み取りを実施する画像パス</param>
+        /// <param name="pathOutputTxtFile">出力テキストファイルパス</param>
+        /// <returns></returns>
+        public static string ReadJapaneseLangExecute(string pathTesseractExe, string pathInputImageFile, string pathOutputTxtFile)
+        {
+            return ReadExecute(pathTesseractExe, pathInputImageFile, pathOutputTxtFile, PARAM_OPTION_JAPANESE_LANG);
         }
 
         /// <summary>

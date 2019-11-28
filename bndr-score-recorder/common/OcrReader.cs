@@ -15,6 +15,7 @@ namespace bndr_score_recorder.common
 
         private static readonly string MODE_ALL = "ALL";
         private static readonly string MODE_ONLY_NUMBER = "ONLY_NUMBER";
+        private static readonly string MODE_JAPANESE_LANG = "JAPANESE_LANG";
 
         /// <summary>
         /// 画像から文字を読み取る。
@@ -24,9 +25,22 @@ namespace bndr_score_recorder.common
         /// <param name="outputSuffix">画像出力ファイル名の末尾追加文字列</param>
         /// <param name="cropValue">有効なImageMagick Cropオプション値</param>
         /// <returns>画像から読み取った文字列</returns>
-        internal static string readFromImageFile(string filePath, string outputSuffix, string cropValue)
+        internal static string ReadFromImageFile(string filePath, string outputSuffix, string cropValue)
         {
-            return readFromImageFile(filePath, outputSuffix, cropValue, MODE_ALL);
+            return ReadFromImageFile(filePath, outputSuffix, cropValue, MODE_ALL);
+        }
+
+        /// <summary>
+        /// 画像から文字を読み取る。
+        /// 対象文字はすべての文字範囲。
+        /// </summary>
+        /// <param name="filePath">ファイルパス</param>
+        /// <param name="outputSuffix">画像出力ファイル名の末尾追加文字列</param>
+        /// <param name="cropValue">有効なImageMagick Cropオプション値</param>
+        /// <returns>画像から読み取った文字列</returns>
+        internal static string ReadFromImageFileJapaneseLang(string filePath, string outputSuffix, string cropValue)
+        {
+            return ReadFromImageFile(filePath, outputSuffix, cropValue, MODE_JAPANESE_LANG);
         }
 
         /// <summary>
@@ -37,9 +51,9 @@ namespace bndr_score_recorder.common
         /// <param name="outputSuffix"></param>
         /// <param name="cropValue"></param>
         /// <returns></returns>
-        internal static string readFromImageFileOnlyNumber(string filePath, string outputSuffix, string cropValue)
+        internal static string ReadFromImageFileOnlyNumber(string filePath, string outputSuffix, string cropValue)
         {
-            return readFromImageFile(filePath, outputSuffix, cropValue, MODE_ONLY_NUMBER);
+            return ReadFromImageFile(filePath, outputSuffix, cropValue, MODE_ONLY_NUMBER);
         }
 
         /// <summary>
@@ -50,7 +64,7 @@ namespace bndr_score_recorder.common
         /// <param name="cropValue">有効なImageMagick Cropオプション値</param>
         /// <param name="mode">Mode値</param>
         /// <returns>画像から読み取った文字列</returns>
-        private static string readFromImageFile(string filePath, string outputSuffix, string cropValue, string mode)
+        private static string ReadFromImageFile(string filePath, string outputSuffix, string cropValue, string mode)
         {
             // return value
             string result = string.Empty;
@@ -112,13 +126,21 @@ namespace bndr_score_recorder.common
                     imageMagickOutputFilePath,
                     tesseractOutputFilePath
                     );
-            } else if (mode == MODE_ONLY_NUMBER)
+            }
+            else if (mode == MODE_JAPANESE_LANG) {
+                standardOutput = TesseractBridge.ReadJapaneseLangExecute(
+                    @"C:\Program Files\Tesseract-OCR\tesseract.exe",
+                    imageMagickOutputFilePath,
+                    tesseractOutputFilePath
+                    );
+            } 
+            else if (mode == MODE_ONLY_NUMBER)
             {
                 standardOutput = TesseractBridge.ReadOnlyNumberExecute(
-                @"C:\Program Files\Tesseract-OCR\tesseract.exe",
-                imageMagickOutputFilePath,
-                tesseractOutputFilePath
-                );
+                    @"C:\Program Files\Tesseract-OCR\tesseract.exe",
+                    imageMagickOutputFilePath,
+                    tesseractOutputFilePath
+                    );
             }
 
 

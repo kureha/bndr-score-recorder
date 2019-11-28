@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.AnalyzeScoreButton = new System.Windows.Forms.Button();
+            this.AnalyzeResultTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // AnalyzeScoreButton
@@ -41,20 +42,31 @@
             this.AnalyzeScoreButton.UseVisualStyleBackColor = true;
             this.AnalyzeScoreButton.Click += new System.EventHandler(this.AnalyzeScoreButton_Click);
             // 
+            // AnalyzeResultTextBox
+            // 
+            this.AnalyzeResultTextBox.Location = new System.Drawing.Point(12, 52);
+            this.AnalyzeResultTextBox.Multiline = true;
+            this.AnalyzeResultTextBox.Name = "AnalyzeResultTextBox";
+            this.AnalyzeResultTextBox.Size = new System.Drawing.Size(776, 386);
+            this.AnalyzeResultTextBox.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.AnalyzeResultTextBox);
             this.Controls.Add(this.AnalyzeScoreButton);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button AnalyzeScoreButton;
+        private System.Windows.Forms.TextBox AnalyzeResultTextBox;
     }
 }
 
