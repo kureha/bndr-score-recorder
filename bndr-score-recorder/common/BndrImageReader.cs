@@ -89,12 +89,13 @@ namespace bndr_score_recorder.common
             logger.Info("OCR read section end.");
 
             // create return value start
-            logger.Info("Musc score result creation start.");
+            logger.Info("Music score result creation start.");
             Music analyzedMusic = new Music
             {
                 title = titleString,
                 level = int.Parse(levelString)
             };
+            analyzedMusic.CreateIdFromTitle();
 
             analyzedMusic.scoreResultList.Add(ScoreResult.Parse(scoreString));
             analyzedMusic.scoreResultList[0].maxCombo = int.Parse(maxComboString);

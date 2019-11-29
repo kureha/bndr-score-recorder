@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,10 @@ namespace bndr_score_recorder.common.entity
     [DataContract]
     class Music
     {
+        // id
+        [DataMember]
+        public string id;
+
         // 曲名
         [DataMember]
         public string title;
@@ -38,6 +43,20 @@ namespace bndr_score_recorder.common.entity
                 memoryStream.Position = 0;
 
                 return streamReader.ReadToEnd();
+            }
+        }
+
+        public void CreateIdFromTitle()
+        {
+            using (SHA512CryptoServiceProvider provider = new SHA512CryptoServiceProvider())
+            {
+                byte[] bytes = provider.ComputeHash(Encoding.UTF8.GetBytes(title));
+                StringBuilder stringBuilder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    stringBuilder.Append(b.ToString("x2"));
+                }
+                id = stringBuilder.ToString();
             }
         }
     }
