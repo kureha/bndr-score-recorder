@@ -62,28 +62,28 @@ namespace bndr_score_recorder.common
             string titleString = OcrReader.ReadFromImageFileJapaneseLang(
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_TITLE,
-                "450x25+345+35");
+                "840x40+615+70");
             logger.Info("Title = " + titleString);
 
             // Score read
-            string scoreString = OcrReader.ReadFromImageFile(
+            string scoreString = OcrReader.ReadFromImageFileOnlyNumber(
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_SCORE,
-                "230x150+650+250");
+                "125x250+1440+450");
             logger.Info("Score = " + scoreString);
 
             // Max combo read
             string maxComboString = OcrReader.ReadFromImageFileOnlyNumber(
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_MAXCOMBO,
-                "80x25+915+330");
+                "120x40+1650+595");
             logger.Info("Max combo = " + maxComboString);
 
             // Level read
             string levelString = OcrReader.ReadFromImageFileOnlyNumber(
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_LEVEL,
-                "40x25+900+35");
+                "70x45+1615+65");
             logger.Info("Level = " + levelString);
 
             logger.Info("OCR read section end.");

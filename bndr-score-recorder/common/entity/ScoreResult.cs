@@ -106,10 +106,9 @@ namespace bndr_score_recorder.common.entity
         /// <returns>スコア値</returns>
         private static long ExtractScore(string rawScoreString)
         {
-            string[] rawScoreArray = rawScoreString.Split();
             try
             {
-                return long.Parse(rawScoreArray[rawScoreArray.Length - 1].Trim());
+                return long.Parse(rawScoreString.Trim());
             } catch (Exception)
             {
                 return ERROR_COUNT;

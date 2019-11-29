@@ -18,7 +18,7 @@ namespace bndr_score_recorder.common.tesseract
         /// <param name="pathInputImageFile">切り出しを実施する画像パス</param>
         /// <param name="pathOutputImageFile">出力画像パス</param>
         /// <param name="cropOption">有効なImageMagick Cropオプション値</param>
-        /// <returns></returns>
+        /// <returns>標準出力</returns>
         public static string CropExecute(string pathImageMagickExe, string pathInputImageFile, string pathOutputImageFile, string cropOption)
         {
             logger.Info("ImageMagick extcution start");
