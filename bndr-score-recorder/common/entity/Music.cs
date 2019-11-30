@@ -46,11 +46,14 @@ namespace BndrScoreRecorder.common.entity
             }
         }
 
+        /// <summary>
+        /// 曲名文字列とLevelからIDを生成する
+        /// </summary>
         public void CreateIdFromTitle()
         {
             using (SHA512CryptoServiceProvider provider = new SHA512CryptoServiceProvider())
             {
-                byte[] bytes = provider.ComputeHash(Encoding.UTF8.GetBytes(title));
+                byte[] bytes = provider.ComputeHash(Encoding.UTF8.GetBytes(title + level.ToString()));
                 StringBuilder stringBuilder = new StringBuilder();
                 foreach (byte b in bytes)
                 {

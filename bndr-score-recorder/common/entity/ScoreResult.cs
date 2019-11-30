@@ -26,6 +26,11 @@ namespace BndrScoreRecorder.common.entity
         // initialize count value
         public static readonly long ERROR_COUNT = -1;
 
+
+        // id
+        [DataMember]
+        public string id;
+
         // perfect
         [DataMember]
         public long perfect;

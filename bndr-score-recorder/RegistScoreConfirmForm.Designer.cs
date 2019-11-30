@@ -117,6 +117,7 @@
             this.PerfectTextBox.Name = "PerfectTextBox";
             this.PerfectTextBox.Size = new System.Drawing.Size(94, 19);
             this.PerfectTextBox.TabIndex = 5;
+            this.PerfectTextBox.TextChanged += new System.EventHandler(this.PerfectTextBox_TextChanged);
             // 
             // GreatTextBox
             // 
@@ -124,6 +125,7 @@
             this.GreatTextBox.Name = "GreatTextBox";
             this.GreatTextBox.Size = new System.Drawing.Size(94, 19);
             this.GreatTextBox.TabIndex = 6;
+            this.GreatTextBox.TextChanged += new System.EventHandler(this.GreatTextBox_TextChanged);
             // 
             // GoodTextBox
             // 
@@ -131,6 +133,7 @@
             this.GoodTextBox.Name = "GoodTextBox";
             this.GoodTextBox.Size = new System.Drawing.Size(94, 19);
             this.GoodTextBox.TabIndex = 7;
+            this.GoodTextBox.TextChanged += new System.EventHandler(this.GoodTextBox_TextChanged);
             // 
             // BadTextBox
             // 
@@ -138,6 +141,7 @@
             this.BadTextBox.Name = "BadTextBox";
             this.BadTextBox.Size = new System.Drawing.Size(94, 19);
             this.BadTextBox.TabIndex = 8;
+            this.BadTextBox.TextChanged += new System.EventHandler(this.BadTextBox_TextChanged);
             // 
             // MissTextBox
             // 
@@ -145,6 +149,7 @@
             this.MissTextBox.Name = "MissTextBox";
             this.MissTextBox.Size = new System.Drawing.Size(94, 19);
             this.MissTextBox.TabIndex = 9;
+            this.MissTextBox.TextChanged += new System.EventHandler(this.MissTextBox_TextChanged);
             // 
             // ConfirmMessageLabel
             // 

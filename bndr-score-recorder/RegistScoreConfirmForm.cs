@@ -84,5 +84,30 @@ namespace BndrScoreRecorder
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        private void PerfectTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GreatTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GoodTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BadTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MissTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
