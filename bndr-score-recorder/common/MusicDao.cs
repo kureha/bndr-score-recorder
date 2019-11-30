@@ -59,19 +59,49 @@ namespace BndrScoreRecorder.common
                     /** Section.1 - Music data **/
                     logger.Info("Section.1 music data insert/replace start.");
 
-                    // SQL
-                    command.CommandText = "INSERT OR REPLACE INTO M_MUSIC(id, title, level, insert_date, update_date) VALUES (@id, @title, @level, datetime('now', 'localtime'), datetime('now', 'localtime'));";
+                    // check file is exists
+                    command.CommandText = "SELECT * FROM M_MUSIC WHERE id = @id";
 
                     // query to log
                     logger.Info(command.CommandText);
 
                     // prepared statement
                     command.Parameters.AddWithValue("id", music.id);
-                    command.Parameters.AddWithValue("title", music.title);
-                    command.Parameters.AddWithValue("level", music.level);
 
-                    // execute
-                    command.ExecuteNonQuery();
+                    // check music is still exists?
+                    bool isMusicExists = false;
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read() == true)
+                        {
+                            isMusicExists = true;
+                        }
+                    }
+                    // clear parameters
+                    command.Parameters.Clear();
+
+                    if (isMusicExists == true)
+                    {
+                        logger.Info("Music master data is exists, skip insert music master data.");
+                    } else
+                    {
+                        // SQL
+                        command.CommandText = "INSERT INTO M_MUSIC(id, title, level, insert_date, update_date) VALUES (@id, @title, @level, datetime('now', 'localtime'), datetime('now', 'localtime'));";
+
+                        // query to log
+                        logger.Info(command.CommandText);
+
+                        // prepared statement
+                        command.Parameters.AddWithValue("id", music.id);
+                        command.Parameters.AddWithValue("title", music.title);
+                        command.Parameters.AddWithValue("level", music.level);
+
+                        // execute
+                        command.ExecuteNonQuery();
+
+                        // clear parameters
+                        command.Parameters.Clear();
+                    }
 
                     logger.Info("Section 1. music data insert/replace end.");
 
