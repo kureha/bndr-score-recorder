@@ -38,6 +38,11 @@ namespace BndrScoreRecorder.common
             };
         }
 
+        /// <summary>
+        /// IDをもとに楽曲マスタと、それに紐づくスコアデータを検索
+        /// </summary>
+        /// <param name="id">楽曲マスタのID</param>
+        /// <returns>IDに一致するMusicオブジェクト</returns>
         public Music selectById(string id)
         {
             // return value
@@ -131,6 +136,11 @@ namespace BndrScoreRecorder.common
             return music;
         }
 
+        /// <summary>
+        /// Musicオブジェクトが既に登録済みかを確認する。
+        /// </summary>
+        /// <param name="music">Musicオブジェクト</param>
+        /// <returns>true:登録済み、false:未登録</returns>
         public bool IsMusicExists(Music music)
         {
             // return value initialized with false
@@ -177,6 +187,11 @@ namespace BndrScoreRecorder.common
             return result;
         }
 
+        /// <summary>
+        /// 楽曲マスタとスコアデータを登録する。
+        /// </summary>
+        /// <param name="music">Musicオブジェクト</param>
+        /// <returns>true:登録成功、false：登録失敗</returns>
         public bool InsertOrReplace(Music music)
         {
             // return value initialized with false

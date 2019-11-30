@@ -75,7 +75,7 @@ namespace BndrScoreRecorder.common.entity
         public string imageFilePath;
 
         /// <summary>
-        /// 文字列をもとにScoreResultを生成
+        /// 文字列をもとにScoreResultを生成する。
         /// </summary>
         /// <param name="rawScoreString">Tesseractで読み取ったScoreResult文字列</param>
         /// <param name="imageFilePath">読み取り元画像ファイルパス</param>
@@ -152,7 +152,7 @@ namespace BndrScoreRecorder.common.entity
         }
 
         /// <summary>
-        /// スコアにエラー値が残っていないか検査するメソッド。
+        /// スコアにエラー値が残っていないか検査する。
         /// </summary>
         /// <returns>true:成功、false:エラー値が存在</returns>
         public bool IsValidScore()

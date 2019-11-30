@@ -29,6 +29,11 @@ namespace BndrScoreRecorder
         // registered music object
         public Music registeredMusic;
 
+        /// <summary>
+        /// 初期化。
+        /// </summary>
+        /// <param name="refMusic">確認フォームに表示するMusicオブジェクト</param>
+        /// <param name="refRegisteredMusic">整合性チェックに使用するMusicオブジェクト</param>
         public RegistScoreConfirmForm(ref Music refMusic, ref Music refRegisteredMusic)
         {
             // Create log4net instance
@@ -62,9 +67,9 @@ namespace BndrScoreRecorder
         }
 
         /// <summary>
-        /// 画面にMusicオブジェクトをアタッチします
+        /// 画面にMusicオブジェクトを表示し、必要に応じて警告を発生させる。
         /// </summary>
-        /// <param name="music"></param>
+        /// <param name="music">表示対象のMusicオブジェクト</param>
         private void DataAttach(Music music)
         {
             // message text
@@ -242,6 +247,11 @@ namespace BndrScoreRecorder
             ScoreMessageTextBox.Text = scoreResultMessageBuilder.ToString();
         }
 
+        /// <summary>
+        /// 登録ボタンを押したときの処理。入力データを内部オブジェクトに反映し、ウインドウを閉じる。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegistButton_Click(object sender, EventArgs e)
         {
             // update music instance
@@ -278,12 +288,20 @@ namespace BndrScoreRecorder
             Close();
         }
 
+        /// <summary>
+        /// キャンセルボタンを押したときの処理。何もせずにウインドウを閉じる。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
+        /// <summary>
+        /// EX ScoreとTotal Notesを再計算し、画面上に再表示＆警告チェックする。
+        /// </summary>
         private void RecalculateAttachedData()
         {
             try

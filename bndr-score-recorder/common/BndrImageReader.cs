@@ -22,6 +22,12 @@ namespace BndrScoreRecorder.common
         // debug mode (dry run for files)
         public static bool DEBUG_MODE = false;
 
+        /// <summary>
+        /// 画像ファイルを解析し、Musicオブジェクトを返却する。
+        /// </summary>
+        /// <param name="screenshotImageFilePath">解析したい画像ファイルのパス</param>
+        /// <param name="destDirPath">アプリケーションのデータ格納先ディレクトリパス</param>
+        /// <returns></returns>
         internal static Music AnalyzeBndrImage(string screenshotImageFilePath, string destDirPath)
         {
             // File path check

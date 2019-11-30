@@ -47,10 +47,10 @@ namespace BndrScoreRecorder.common
         /// 画像から文字を読み取る。
         /// 対象文字は数字のみ。
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="outputSuffix"></param>
-        /// <param name="cropValue"></param>
-        /// <returns></returns>
+        /// <param name="filePath">ファイルパス</param>
+        /// <param name="outputSuffix">画像出力ファイル名の末尾追加文字列</param>
+        /// <param name="cropValue">有効なImageMagick Cropオプション値</param>
+        /// <returns>画像から読み取った文字列</returns>
         internal static string ReadFromImageFileOnlyNumber(string filePath, string outputSuffix, string cropValue)
         {
             return ReadFromImageFile(filePath, outputSuffix, cropValue, MODE_ONLY_NUMBER);

@@ -25,6 +25,9 @@ namespace BndrScoreRecorder
         // sqlite database path
         private string databaseFilePath;
 
+        /// <summary>
+        /// 初期化。
+        /// </summary>
         public MainForm()
         {
             // Create log4net instance
@@ -48,6 +51,11 @@ namespace BndrScoreRecorder
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 解析ボタン押下時の処理。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AnalyzeScoreButton_Click(object sender, EventArgs e)
         {
             // Select target folder
