@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bndr_score_recorder.common.entity
+namespace BndrScoreRecorder.common.entity
 {
     [DataContract]
     class ScoreResult
@@ -54,6 +54,10 @@ namespace bndr_score_recorder.common.entity
         [DataMember]
         public long score;
 
+        // ex score
+        [DataMember]
+        public long exScore;
+
         // rank code : CodeMaster.RankCodeMaster
         [DataMember]
         public long rankCode;
@@ -95,6 +99,9 @@ namespace bndr_score_recorder.common.entity
                 throw new FormatException(errorMessage);
             }
 
+            // calculate ex score
+            scoreResult.exScore = scoreResult.perfect * 2 + scoreResult.great;
+
             // result
             return scoreResult;
         }
@@ -109,8 +116,10 @@ namespace bndr_score_recorder.common.entity
             try
             {
                 return long.Parse(rawScoreString.Trim());
-            } catch (Exception)
+            } catch (Exception e)
             {
+                logger.Error("Score parse error. raw score string = " + rawScoreString);
+                logger.Error(e);
                 return ERROR_COUNT;
             }
         }

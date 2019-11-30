@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bndr_score_recorder.common.bridge
+namespace BndrScoreRecorder.common.bridge
 {
     class BridgeBase
     {

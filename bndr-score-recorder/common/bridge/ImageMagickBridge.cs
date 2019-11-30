@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bndr_score_recorder.common.tesseract
+namespace BndrScoreRecorder.common.tesseract
 {
     class ImageMagickBridge : bridge.BridgeBase
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace bndr_score_recorder
+namespace BndrScoreRecorder
 {
     static class Program
     {

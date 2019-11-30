@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace bndr_score_recorder.Properties
+namespace BndrScoreRecorder.Properties
 {
 
 

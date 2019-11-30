@@ -1,4 +1,4 @@
-﻿using bndr_score_recorder.common.tesseract;
+﻿using BndrScoreRecorder.common.tesseract;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bndr_score_recorder.common
+namespace BndrScoreRecorder.common
 {
     class OcrReader
     {

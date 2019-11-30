@@ -1,4 +1,4 @@
-﻿using bndr_score_recorder.common.entity;
+﻿using BndrScoreRecorder.common.entity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bndr_score_recorder.common
+namespace BndrScoreRecorder.common
 {
     class BndrImageReader
     {
@@ -18,6 +18,9 @@ namespace bndr_score_recorder.common
         private static readonly string SUFFIX_CROPNAME_SCORE = ".score";
         private static readonly string SUFFIX_CROPNAME_MAXCOMBO = ".maxcombo";
         private static readonly string SUFFIX_CROPNAME_LEVEL = ".level";
+
+        // debug mode (dry run for files)
+        public static bool DEBUG_MODE = false;
 
         internal static Music AnalyzeBndrImage(string screenshotImageFilePath, string destDirPath)
         {
@@ -44,8 +47,16 @@ namespace bndr_score_recorder.common
 
             // Move image file to dest directory
             string scrennShotImageFileDestPath = screenshotDestDirPath + Path.DirectorySeparatorChar + Path.GetFileName(screenshotImageFilePath);
-            logger.Info("Move screen shot file. Destination path = " + scrennShotImageFileDestPath);
-            File.Move(screenshotImageFilePath, scrennShotImageFileDestPath);
+            if (DEBUG_MODE == true)
+            {
+                logger.Info("Copy screen shot file. Destination path = " + scrennShotImageFileDestPath);
+                File.Copy(screenshotImageFilePath, scrennShotImageFileDestPath);
+            } else
+            {
+                logger.Info("Move screen shot file. Destination path = " + scrennShotImageFileDestPath);
+                File.Move(screenshotImageFilePath, scrennShotImageFileDestPath);
+            }
+            
 
             // Dest file path check
             logger.Info("OCR read screenshot image file = " + scrennShotImageFileDestPath);

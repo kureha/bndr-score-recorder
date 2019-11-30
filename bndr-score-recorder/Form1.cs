@@ -1,6 +1,6 @@
-﻿using bndr_score_recorder.common;
-using bndr_score_recorder.common.entity;
-using bndr_score_recorder.common.tesseract;
+﻿using BndrScoreRecorder.common;
+using BndrScoreRecorder.common.entity;
+using BndrScoreRecorder.common.tesseract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace bndr_score_recorder
+namespace BndrScoreRecorder
 {
     public partial class Form1 : Form
     {
@@ -21,6 +21,9 @@ namespace bndr_score_recorder
 
         // screenshot data folder path
         private string dataFolderPath;
+
+        // sqlite database path
+        private string databaseFilePath;
 
         public Form1()
         {
@@ -34,6 +37,13 @@ namespace bndr_score_recorder
                 + Path.DirectorySeparatorChar 
                 + "data";
 
+            databaseFilePath = dataFolderPath 
+                + Path.DirectorySeparatorChar 
+                + "bndr-score-recorder.db";
+
+            // enable development mode
+            BndrImageReader.DEBUG_MODE = true;
+
             // Initialize component
             InitializeComponent();
         }
@@ -41,19 +51,21 @@ namespace bndr_score_recorder
         private void AnalyzeScoreButton_Click(object sender, EventArgs e)
         {
             // Select target folder
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.SelectedPath = System.Windows.Forms.Application.StartupPath;
             string selectedPath;
 
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedPath = folderBrowserDialog.SelectedPath;
-                logger.Info("Selected folder = " + selectedPath);
-            }
-            else
-            {
-                return;
-            }
+            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog()) {
+                folderBrowserDialog.SelectedPath = System.Windows.Forms.Application.StartupPath;
+                
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    selectedPath = folderBrowserDialog.SelectedPath;
+                    logger.Info("Selected folder = " + selectedPath);
+                }
+                else
+                {
+                    return;
+                }
+            };
 
             // Collect file list
             IEnumerable<string> screenshotFilePathList = Directory.EnumerateFiles(selectedPath);
@@ -82,6 +94,14 @@ namespace bndr_score_recorder
             });
 
             AnalyzeResultTextBox.Text = resultStringBuilder.ToString();
+
+            // Insert to database
+            logger.Info("Open database path = " + databaseFilePath);
+            MusicDao musicDao = new MusicDao(databaseFilePath);
+
+            analyzedMusicList.ForEach(music => {
+                musicDao.InsertOrReplace(music);
+            });
         }
     }
 }

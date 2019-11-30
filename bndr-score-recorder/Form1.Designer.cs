@@ -1,4 +1,4 @@
-﻿namespace bndr_score_recorder
+﻿namespace BndrScoreRecorder
 {
     partial class Form1
     {
