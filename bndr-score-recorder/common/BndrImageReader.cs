@@ -56,7 +56,6 @@ namespace BndrScoreRecorder.common
                 logger.Info("Move screen shot file. Destination path = " + scrennShotImageFileDestPath);
                 File.Move(screenshotImageFilePath, scrennShotImageFileDestPath);
             }
-            
 
             // Dest file path check
             logger.Info("OCR read screenshot image file = " + scrennShotImageFileDestPath);
@@ -108,7 +107,7 @@ namespace BndrScoreRecorder.common
             };
             analyzedMusic.CreateIdFromTitle();
 
-            analyzedMusic.scoreResultList.Add(ScoreResult.Parse(scoreString));
+            analyzedMusic.scoreResultList.Add(ScoreResult.Parse(scoreString, scrennShotImageFileDestPath.Replace(destDirPath, string.Empty)));
             analyzedMusic.scoreResultList[0].maxCombo = int.Parse(maxComboString);
             logger.Info("Musc score result creation end.");
 

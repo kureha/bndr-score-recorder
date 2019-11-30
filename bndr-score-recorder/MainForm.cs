@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace BndrScoreRecorder
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         // logger
         private log4net.ILog logger;
@@ -25,7 +25,7 @@ namespace BndrScoreRecorder
         // sqlite database path
         private string databaseFilePath;
 
-        public Form1()
+        public MainForm()
         {
             // Create log4net instance
             logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -79,29 +79,32 @@ namespace BndrScoreRecorder
 
             // Parse and get music infos
             logger.Info("Analyze start.");
-            List<Music> analyzedMusicList = new List<Music>();
+
+            StringBuilder resultStringBuilder = new StringBuilder();
+            MusicDao musicDao = new MusicDao(databaseFilePath);
+
             foreach (string filePath in screenshotFilePathList)
             {
                 logger.Info("Analyze target file = " + filePath);
-                analyzedMusicList.Add(BndrImageReader.AnalyzeBndrImage(filePath, dataFolderPath));
+                Music analyzedMusic = BndrImageReader.AnalyzeBndrImage(filePath, dataFolderPath);
+                AnalyzeResultTextBox.AppendText(Music.ToJsonString(analyzedMusic));
+                AnalyzeResultTextBox.AppendText("\r\n");
+
+                //TODO: confirm regist data
+                using (RegistScoreConfirmForm confirmForm = new RegistScoreConfirmForm(ref analyzedMusic))
+                {
+                    if (DialogResult.OK == confirmForm.ShowDialog())
+                    {
+                        logger.Info("DialogResult is ok, regist score data.");
+                        musicDao.InsertOrReplace(analyzedMusic);
+                    } else
+                    {
+                        logger.Info("DialogResult is cancel, skip score data.");
+                    }
+                }
+                
             }
             logger.Info("Analyze end.");
-
-            // Show result
-            StringBuilder resultStringBuilder = new StringBuilder();
-            analyzedMusicList.ForEach(music => {
-                resultStringBuilder.AppendLine(Music.ToJsonString(music));
-            });
-
-            AnalyzeResultTextBox.Text = resultStringBuilder.ToString();
-
-            // Insert to database
-            logger.Info("Open database path = " + databaseFilePath);
-            MusicDao musicDao = new MusicDao(databaseFilePath);
-
-            analyzedMusicList.ForEach(music => {
-                musicDao.InsertOrReplace(music);
-            });
         }
     }
 }

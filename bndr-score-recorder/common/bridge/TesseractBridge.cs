@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BndrScoreRecorder.common.tesseract
 {
-    class TesseractBridge : bridge.BridgeBase
+    public class TesseractBridge : bridge.BridgeBase
     {
         public static readonly string SUFFIX_OUTPUT_FILE_NAME = ".txt";
 

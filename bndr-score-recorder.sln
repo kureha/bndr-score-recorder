@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bndr-score-recorder", "bndr-score-recorder\bndr-score-recorder.csproj", "{F77655BB-750B-4C9C-97AD-269FCECB0BD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BndrScoreRecorder", "bndr-score-recorder\BndrScoreRecorder.csproj", "{F77655BB-750B-4C9C-97AD-269FCECB0BD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

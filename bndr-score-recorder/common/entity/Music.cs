@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BndrScoreRecorder.common.entity
 {
     [DataContract]
-    class Music
+    public class Music
     {
         // id
         [DataMember]

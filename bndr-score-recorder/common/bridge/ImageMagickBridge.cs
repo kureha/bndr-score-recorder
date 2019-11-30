@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BndrScoreRecorder.common.tesseract
 {
-    class ImageMagickBridge : bridge.BridgeBase
+    public class ImageMagickBridge : bridge.BridgeBase
     {
         private static readonly string OPTION_CROP = "-crop";
 

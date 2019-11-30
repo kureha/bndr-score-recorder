@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BndrScoreRecorder.common.entity
 {
     [DataContract]
-    class ScoreResult
+    public class ScoreResult
     {
         // logger
         protected static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -46,6 +46,10 @@ namespace BndrScoreRecorder.common.entity
         [DataMember]
         public long miss;
 
+        // total notes
+        [DataMember]
+        public long totalNotes;
+
         // max combo
         [DataMember]
         public long maxCombo;
@@ -62,12 +66,16 @@ namespace BndrScoreRecorder.common.entity
         [DataMember]
         public long rankCode;
 
+        // screenshot image file path
+        public string imageFilePath;
+
         /// <summary>
         /// 文字列をもとにScoreResultを生成
         /// </summary>
         /// <param name="rawScoreString">Tesseractで読み取ったScoreResult文字列</param>
+        /// <param name="imageFilePath">読み取り元画像ファイルパス</param>
         /// <returns>ScoreResultオブジェクト</returns>
-        public static ScoreResult Parse(string rawScoreString)
+        public static ScoreResult Parse(string rawScoreString, string imageFilePath)
         {
             logger.Info("ScoreResult parse start. rawScoreString = " + rawScoreString);
 
@@ -101,6 +109,16 @@ namespace BndrScoreRecorder.common.entity
 
             // calculate ex score
             scoreResult.exScore = scoreResult.perfect * 2 + scoreResult.great;
+
+            // calculate total notes
+            scoreResult.totalNotes = scoreResult.perfect
+                + scoreResult.great
+                + scoreResult.good
+                + scoreResult.bad
+                + scoreResult.miss;
+
+            // image file path
+            scoreResult.imageFilePath = imageFilePath;
 
             // result
             return scoreResult;
