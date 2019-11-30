@@ -23,7 +23,10 @@ namespace BndrScoreRecorder
         // sqlite database path
         private string databaseFilePath;
 
-        public RegistScoreConfirmForm(ref Music music)
+        // music object
+        public Music music;
+
+        public RegistScoreConfirmForm(ref Music refMusic)
         {
             // Create log4net instance
             logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -36,6 +39,9 @@ namespace BndrScoreRecorder
             databaseFilePath = dataFolderPath
                 + Path.DirectorySeparatorChar
                 + "bndr-score-recorder.db";
+
+            // copy value
+            music = refMusic;
 
             InitializeComponent();
 
@@ -75,6 +81,28 @@ namespace BndrScoreRecorder
 
         private void RegistButton_Click(object sender, EventArgs e)
         {
+            // update music instance
+            music.title = TitleTextBox.Text;
+            music.level = int.Parse(LevelTextBox.Text);
+
+            if (music.scoreResultList.Count > 0)
+            {
+                music.scoreResultList[0].perfect = int.Parse(PerfectTextBox.Text);
+                music.scoreResultList[0].great = int.Parse(GreatTextBox.Text);
+                music.scoreResultList[0].good = int.Parse(GoodTextBox.Text);
+                music.scoreResultList[0].bad = int.Parse(BadTextBox.Text);
+                music.scoreResultList[0].miss = int.Parse(MissTextBox.Text);
+                music.scoreResultList[0].maxCombo = int.Parse(MaxComboTextBox.Text);
+
+                music.scoreResultList[0].exScore = music.scoreResultList[0].perfect * 2 + music.scoreResultList[0].great;
+                music.scoreResultList[0].totalNotes = 
+                    music.scoreResultList[0].perfect
+                    + music.scoreResultList[0].great
+                    + music.scoreResultList[0].good
+                    + music.scoreResultList[0].bad
+                    + music.scoreResultList[0].miss;
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }
