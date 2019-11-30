@@ -100,18 +100,6 @@ namespace BndrScoreRecorder.common.entity
             scoreResult.bad = ExtractScore(rawScoreArray[LINE_NUM_BAD]);
             scoreResult.miss = ExtractScore(rawScoreArray[LINE_NUM_MISS]);
 
-            // check score is valid?
-            if (scoreResult.IsValidScore())
-            {
-                logger.Info("ScoreResult parse succeeded.");
-            } 
-            else
-            {
-                string errorMessage = "ScoreResult parse failed.";
-                logger.Error(errorMessage);
-                throw new FormatException(errorMessage);
-            }
-
             // calculate ex score
             scoreResult.exScore = scoreResult.perfect * 2 + scoreResult.great;
 

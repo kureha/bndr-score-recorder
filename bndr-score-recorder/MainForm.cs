@@ -90,8 +90,22 @@ namespace BndrScoreRecorder
                 AnalyzeResultTextBox.AppendText(Music.ToJsonString(analyzedMusic));
                 AnalyzeResultTextBox.AppendText("\r\n");
 
+                // Try to get registerd music
+                Music registeredMusic = musicDao.selectById(analyzedMusic.id);
+                if (registeredMusic == null)
+                {
+                    logger.Info("This is new regist music.");
+                } else
+                {
+                    logger.Info("This is registered music.");
+                    // Load title from DB
+                    analyzedMusic.title = registeredMusic.title;
+                    analyzedMusic.difficult = registeredMusic.difficult;
+                    analyzedMusic.level = registeredMusic.level;
+                }
+
                 //TODO: confirm regist data
-                using (RegistScoreConfirmForm confirmForm = new RegistScoreConfirmForm(ref analyzedMusic))
+                using (RegistScoreConfirmForm confirmForm = new RegistScoreConfirmForm(ref analyzedMusic, ref registeredMusic))
                 {
                     if (DialogResult.OK == confirmForm.ShowDialog())
                     {

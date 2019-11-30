@@ -41,7 +41,7 @@ namespace BndrScoreRecorder.common
         public Music selectById(string id)
         {
             // return value
-            Music music = new Music();
+            Music music = null;
 
             logger.Info("Music dao select by id start.");
             logger.Info("Id = " + id);
@@ -58,30 +58,40 @@ namespace BndrScoreRecorder.common
                 {
                     // Section.1 - select M_MUSIC
                     // SQL
-                    command.CommandText = "SELECT title, level FROM M_MUSIC WHERE id = @id";
+                    command.CommandText = "SELECT title, difficult, level FROM M_MUSIC WHERE id = @id";
 
                     // query to log
                     logger.Info(command.CommandText);
 
                     // prepared statement
-                    command.Parameters.AddWithValue("id", music.id);
+                    command.Parameters.AddWithValue("id", id);
 
                     // check music is still exists?
                     using (SqliteDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read() == true)
                         {
-                            music.id = id;
-                            music.title = reader.GetString(0);
-                            music.level = reader.GetInt32(1);
+                            music = new Music
+                            {
+                                id = id,
+                                title = reader.GetString(0),
+                                difficult = reader.GetString(1),
+                                level = reader.GetInt32(2)
+                            };
                         }
                     }
                     // clear parameters
                     command.Parameters.Clear();
 
+                    // if no selected record, return null
+                    if (music == null)
+                    {
+                        return music;
+                    }
+
                     // Section.2 - select T_SCORE_RECORD
                     // SQL
-                    command.CommandText = "SELECT id, perfect, great, good, bad, miss, max_combo, ex_score, image_file_path FROM T_SCORE_RECORD WHERE music_id = @id ORDER BY insert_date;";
+                    command.CommandText = "SELECT id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, image_file_path FROM T_SCORE_RECORD WHERE music_id = @id ORDER BY insert_date;";
 
                     // query to log
                     logger.Info(command.CommandText);
@@ -103,9 +113,10 @@ namespace BndrScoreRecorder.common
                             scoreReuslt.good = reader.GetInt64(3);
                             scoreReuslt.bad = reader.GetInt64(4);
                             scoreReuslt.miss = reader.GetInt64(5);
-                            scoreReuslt.maxCombo = reader.GetInt64(6);
-                            scoreReuslt.exScore = reader.GetInt64(7);
-                            scoreReuslt.imageFilePath = reader.GetString(8);
+                            scoreReuslt.totalNotes = reader.GetInt64(6);
+                            scoreReuslt.maxCombo = reader.GetInt64(7);
+                            scoreReuslt.exScore = reader.GetInt64(8);
+                            scoreReuslt.imageFilePath = reader.GetString(9);
 
                             music.scoreResultList.Add(scoreReuslt);
                         }
@@ -213,13 +224,14 @@ namespace BndrScoreRecorder.common
                         logger.Info("Music master data is exists, update music master data.");
 
                         // SQL
-                        command.CommandText = "UPDATE M_MUSIC SET title = @title, level = @level, update_date = datetime('now', 'localtime') WHERE id = @id;";
+                        command.CommandText = "UPDATE M_MUSIC SET title = @title, difficult = @difficult, level = @level, update_date = datetime('now', 'localtime') WHERE id = @id;";
 
                         // query to log
                         logger.Info(command.CommandText);
 
                         // prepared statement
                         command.Parameters.AddWithValue("id", music.id);
+                        command.Parameters.AddWithValue("difficult", music.difficult);
                         command.Parameters.AddWithValue("title", music.title);
                         command.Parameters.AddWithValue("level", music.level);
 
@@ -233,13 +245,14 @@ namespace BndrScoreRecorder.common
                         logger.Info("Music master data is exists, insert music master data.");
 
                         // SQL
-                        command.CommandText = "INSERT INTO M_MUSIC(id, title, level, insert_date, update_date) VALUES (@id, @title, @level, datetime('now', 'localtime'), datetime('now', 'localtime'));";
+                        command.CommandText = "INSERT INTO M_MUSIC(id, title, difficult, level, insert_date, update_date) VALUES (@id, @title, @difficult, @level, datetime('now', 'localtime'), datetime('now', 'localtime'));";
 
                         // query to log
                         logger.Info(command.CommandText);
 
                         // prepared statement
                         command.Parameters.AddWithValue("id", music.id);
+                        command.Parameters.AddWithValue("difficult", music.difficult);
                         command.Parameters.AddWithValue("title", music.title);
                         command.Parameters.AddWithValue("level", music.level);
 
@@ -255,7 +268,7 @@ namespace BndrScoreRecorder.common
                     logger.Info("Section 2. score data insert start.");
 
                     // SQL
-                    command.CommandText = "INSERT INTO T_SCORE_RECORD(music_id, perfect, great, good, bad, miss, max_combo, ex_score, image_file_path, insert_date, update_date) VALUES (@music_id, @perfect, @great, @good, @bad, @miss, @max_combo, @ex_score, @image_file_path, datetime('now', 'localtime'), datetime('now', 'localtime'));";
+                    command.CommandText = "INSERT INTO T_SCORE_RECORD(music_id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, image_file_path, insert_date, update_date) VALUES (@music_id, @perfect, @great, @good, @bad, @miss, @total_notes, @max_combo, @ex_score, @image_file_path, datetime('now', 'localtime'), datetime('now', 'localtime'));";
 
                     // query to log
                     logger.Info(command.CommandText);
@@ -269,9 +282,10 @@ namespace BndrScoreRecorder.common
                         command.Parameters.AddWithValue("good", scoreResult.good);
                         command.Parameters.AddWithValue("bad", scoreResult.bad);
                         command.Parameters.AddWithValue("miss", scoreResult.miss);
-                        command.Parameters.AddWithValue("image_file_path", scoreResult.imageFilePath);
+                        command.Parameters.AddWithValue("total_notes", scoreResult.totalNotes);
                         command.Parameters.AddWithValue("max_combo", scoreResult.maxCombo);
                         command.Parameters.AddWithValue("ex_score", scoreResult.exScore);
+                        command.Parameters.AddWithValue("image_file_path", scoreResult.imageFilePath);
 
                         // execute
                         command.ExecuteNonQuery();

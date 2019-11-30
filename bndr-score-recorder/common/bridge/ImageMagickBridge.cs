@@ -30,9 +30,12 @@ namespace BndrScoreRecorder.common.tesseract
                 // create process
                 logger.Info("ImageMagick ext path = " + pathImageMagickExe);
                 process.StartInfo.FileName = pathImageMagickExe;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardInput = false;
+                if (IS_VISIBLE_WINDOW == true)
+                {
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.RedirectStandardInput = false;
+                }
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 // arguments
                 process.StartInfo.Arguments = 
@@ -48,7 +51,10 @@ namespace BndrScoreRecorder.common.tesseract
                 process.Start();
 
                 // get starndard output
-                standardOutputMessage = process.StandardOutput.ReadToEnd();
+                if (IS_VISIBLE_WINDOW == true)
+                {
+                    standardOutputMessage = process.StandardOutput.ReadToEnd();
+                }
 
                 // wait
                 process.WaitForExit();

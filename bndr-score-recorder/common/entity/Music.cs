@@ -27,12 +27,17 @@ namespace BndrScoreRecorder.common.entity
 
         // 難易度種別 : CodeMaster.DifficultCodeMaster
         [DataMember]
-        public int difficultCodes;
+        public string difficult;
 
         // ScoreData
         [DataMember]
         public List<ScoreResult> scoreResultList = new List<ScoreResult>();
 
+        /// <summary>
+        /// 楽曲データ、スコアデータをJSON化する。
+        /// </summary>
+        /// <param name="music">対象オブジェクト</param>
+        /// <returns>JSON文字列</returns>
         public static string ToJsonString(Music music)
         {
             using (var memoryStream = new MemoryStream())
@@ -47,13 +52,13 @@ namespace BndrScoreRecorder.common.entity
         }
 
         /// <summary>
-        /// 曲名文字列とLevelからIDを生成する
+        /// 曲名文字列と難易度文字列からIDを生成する。
         /// </summary>
         public void CreateIdFromTitle()
         {
             using (SHA512CryptoServiceProvider provider = new SHA512CryptoServiceProvider())
             {
-                byte[] bytes = provider.ComputeHash(Encoding.UTF8.GetBytes(title + level.ToString()));
+                byte[] bytes = provider.ComputeHash(Encoding.UTF8.GetBytes(title + difficult));
                 StringBuilder stringBuilder = new StringBuilder();
                 foreach (byte b in bytes)
                 {

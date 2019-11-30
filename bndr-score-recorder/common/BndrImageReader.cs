@@ -50,6 +50,11 @@ namespace BndrScoreRecorder.common
             if (DEBUG_MODE == true)
             {
                 logger.Info("Copy screen shot file. Destination path = " + scrennShotImageFileDestPath);
+                if (File.Exists(scrennShotImageFileDestPath) == true)
+                {
+                    logger.Info("Overwrite copy file.");
+                    File.Delete(scrennShotImageFileDestPath);
+                }
                 File.Copy(screenshotImageFilePath, scrennShotImageFileDestPath);
             } else
             {
@@ -74,6 +79,13 @@ namespace BndrScoreRecorder.common
                 SUFFIX_CROPNAME_TITLE,
                 "840x40+615+70");
             logger.Info("Title = " + titleString);
+
+            // Difficult code read
+            string difficultString = OcrReader.ReadFromImageFileJapaneseLang(
+                scrennShotImageFileDestPath,
+                SUFFIX_CROPNAME_TITLE,
+                "140x35+470+70");
+            logger.Info("Difficult = " + difficultString);
 
             // Score read
             string scoreString = OcrReader.ReadFromImageFileOnlyNumber(
@@ -103,6 +115,7 @@ namespace BndrScoreRecorder.common
             Music analyzedMusic = new Music
             {
                 title = titleString,
+                difficult = difficultString,
                 level = int.Parse(levelString)
             };
             analyzedMusic.CreateIdFromTitle();

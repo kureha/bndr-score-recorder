@@ -42,11 +42,15 @@
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.MusicGroupBox = new System.Windows.Forms.GroupBox();
+            this.DifficultTextBox = new System.Windows.Forms.TextBox();
+            this.DifficultLabel = new System.Windows.Forms.Label();
+            this.MusicMessageTextBox = new System.Windows.Forms.TextBox();
             this.IdTextBox = new System.Windows.Forms.TextBox();
             this.IdLabel = new System.Windows.Forms.Label();
             this.LevelTextBox = new System.Windows.Forms.TextBox();
             this.LevelLabel = new System.Windows.Forms.Label();
             this.ScoreGroupBox = new System.Windows.Forms.GroupBox();
+            this.ScoreMessageTextBox = new System.Windows.Forms.TextBox();
             this.TotalNotesTextBox = new System.Windows.Forms.TextBox();
             this.TotalNotesLabel = new System.Windows.Forms.Label();
             this.ScreenshotPictureBox = new System.Windows.Forms.PictureBox();
@@ -179,6 +183,9 @@
             // 
             // MusicGroupBox
             // 
+            this.MusicGroupBox.Controls.Add(this.DifficultTextBox);
+            this.MusicGroupBox.Controls.Add(this.DifficultLabel);
+            this.MusicGroupBox.Controls.Add(this.MusicMessageTextBox);
             this.MusicGroupBox.Controls.Add(this.IdTextBox);
             this.MusicGroupBox.Controls.Add(this.IdLabel);
             this.MusicGroupBox.Controls.Add(this.LevelTextBox);
@@ -187,14 +194,41 @@
             this.MusicGroupBox.Controls.Add(this.TitleLabel);
             this.MusicGroupBox.Location = new System.Drawing.Point(12, 34);
             this.MusicGroupBox.Name = "MusicGroupBox";
-            this.MusicGroupBox.Size = new System.Drawing.Size(860, 100);
+            this.MusicGroupBox.Size = new System.Drawing.Size(860, 168);
             this.MusicGroupBox.TabIndex = 13;
             this.MusicGroupBox.TabStop = false;
             this.MusicGroupBox.Text = "基本データ";
             // 
+            // DifficultTextBox
+            // 
+            this.DifficultTextBox.Location = new System.Drawing.Point(68, 43);
+            this.DifficultTextBox.Name = "DifficultTextBox";
+            this.DifficultTextBox.Size = new System.Drawing.Size(786, 19);
+            this.DifficultTextBox.TabIndex = 19;
+            // 
+            // DifficultLabel
+            // 
+            this.DifficultLabel.AutoSize = true;
+            this.DifficultLabel.Location = new System.Drawing.Point(16, 46);
+            this.DifficultLabel.Name = "DifficultLabel";
+            this.DifficultLabel.Size = new System.Drawing.Size(46, 12);
+            this.DifficultLabel.TabIndex = 18;
+            this.DifficultLabel.Text = "Difficult";
+            this.DifficultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // MusicMessageTextBox
+            // 
+            this.MusicMessageTextBox.Location = new System.Drawing.Point(6, 118);
+            this.MusicMessageTextBox.Multiline = true;
+            this.MusicMessageTextBox.Name = "MusicMessageTextBox";
+            this.MusicMessageTextBox.ReadOnly = true;
+            this.MusicMessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.MusicMessageTextBox.Size = new System.Drawing.Size(846, 37);
+            this.MusicMessageTextBox.TabIndex = 17;
+            // 
             // IdTextBox
             // 
-            this.IdTextBox.Location = new System.Drawing.Point(149, 68);
+            this.IdTextBox.Location = new System.Drawing.Point(149, 93);
             this.IdTextBox.Name = "IdTextBox";
             this.IdTextBox.ReadOnly = true;
             this.IdTextBox.Size = new System.Drawing.Size(705, 19);
@@ -203,7 +237,7 @@
             // IdLabel
             // 
             this.IdLabel.AutoSize = true;
-            this.IdLabel.Location = new System.Drawing.Point(6, 71);
+            this.IdLabel.Location = new System.Drawing.Point(6, 96);
             this.IdLabel.Name = "IdLabel";
             this.IdLabel.Size = new System.Drawing.Size(137, 12);
             this.IdLabel.TabIndex = 15;
@@ -212,7 +246,7 @@
             // 
             // LevelTextBox
             // 
-            this.LevelTextBox.Location = new System.Drawing.Point(68, 43);
+            this.LevelTextBox.Location = new System.Drawing.Point(68, 68);
             this.LevelTextBox.Name = "LevelTextBox";
             this.LevelTextBox.Size = new System.Drawing.Size(786, 19);
             this.LevelTextBox.TabIndex = 14;
@@ -220,7 +254,7 @@
             // LevelLabel
             // 
             this.LevelLabel.AutoSize = true;
-            this.LevelLabel.Location = new System.Drawing.Point(30, 46);
+            this.LevelLabel.Location = new System.Drawing.Point(30, 71);
             this.LevelLabel.Name = "LevelLabel";
             this.LevelLabel.Size = new System.Drawing.Size(32, 12);
             this.LevelLabel.TabIndex = 13;
@@ -229,6 +263,7 @@
             // 
             // ScoreGroupBox
             // 
+            this.ScoreGroupBox.Controls.Add(this.ScoreMessageTextBox);
             this.ScoreGroupBox.Controls.Add(this.TotalNotesTextBox);
             this.ScoreGroupBox.Controls.Add(this.TotalNotesLabel);
             this.ScoreGroupBox.Controls.Add(this.ScreenshotPictureBox);
@@ -246,12 +281,22 @@
             this.ScoreGroupBox.Controls.Add(this.GoodTextBox);
             this.ScoreGroupBox.Controls.Add(this.MissLabel);
             this.ScoreGroupBox.Controls.Add(this.GreatTextBox);
-            this.ScoreGroupBox.Location = new System.Drawing.Point(12, 140);
+            this.ScoreGroupBox.Location = new System.Drawing.Point(12, 208);
             this.ScoreGroupBox.Name = "ScoreGroupBox";
-            this.ScoreGroupBox.Size = new System.Drawing.Size(860, 380);
+            this.ScoreGroupBox.Size = new System.Drawing.Size(860, 427);
             this.ScoreGroupBox.TabIndex = 14;
             this.ScoreGroupBox.TabStop = false;
             this.ScoreGroupBox.Text = "スコアデータ";
+            // 
+            // ScoreMessageTextBox
+            // 
+            this.ScoreMessageTextBox.Location = new System.Drawing.Point(8, 380);
+            this.ScoreMessageTextBox.Multiline = true;
+            this.ScoreMessageTextBox.Name = "ScoreMessageTextBox";
+            this.ScoreMessageTextBox.ReadOnly = true;
+            this.ScoreMessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ScoreMessageTextBox.Size = new System.Drawing.Size(846, 37);
+            this.ScoreMessageTextBox.TabIndex = 18;
             // 
             // TotalNotesTextBox
             // 
@@ -317,7 +362,7 @@
             // 
             // RegistButton
             // 
-            this.RegistButton.Location = new System.Drawing.Point(12, 526);
+            this.RegistButton.Location = new System.Drawing.Point(12, 641);
             this.RegistButton.Name = "RegistButton";
             this.RegistButton.Size = new System.Drawing.Size(75, 23);
             this.RegistButton.TabIndex = 15;
@@ -327,7 +372,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(93, 526);
+            this.CancelButton.Location = new System.Drawing.Point(93, 641);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 16;
@@ -339,7 +384,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 561);
+            this.ClientSize = new System.Drawing.Size(884, 671);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.RegistButton);
             this.Controls.Add(this.ScoreGroupBox);
@@ -387,5 +432,9 @@
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.TextBox TotalNotesTextBox;
         private System.Windows.Forms.Label TotalNotesLabel;
+        private System.Windows.Forms.TextBox MusicMessageTextBox;
+        private System.Windows.Forms.TextBox ScoreMessageTextBox;
+        private System.Windows.Forms.TextBox DifficultTextBox;
+        private System.Windows.Forms.Label DifficultLabel;
     }
 }

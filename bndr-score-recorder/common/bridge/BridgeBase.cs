@@ -13,5 +13,8 @@ namespace BndrScoreRecorder.common.bridge
 
         // process arg spliter
         protected static readonly string ARG_SPLIT_CHAR = " ";
+
+        // is window is visible?
+        protected static readonly bool IS_VISIBLE_WINDOW = false;
     }
 }
