@@ -391,7 +391,7 @@
             this.Controls.Add(this.MusicGroupBox);
             this.Controls.Add(this.ConfirmMessageLabel);
             this.Name = "RegistScoreConfirmForm";
-            this.Text = "RegistScoreConfirmForm";
+            this.Text = "登録確認";
             this.MusicGroupBox.ResumeLayout(false);
             this.MusicGroupBox.PerformLayout();
             this.ScoreGroupBox.ResumeLayout(false);

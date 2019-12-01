@@ -39,6 +39,58 @@ namespace BndrScoreRecorder.common
         }
 
         /// <summary>
+        /// 楽曲一覧を検索し、返却する。スコアデータは含まれない。
+        /// </summary>
+        /// <returns>楽曲一覧</returns>
+        public List<Music> selectMusicList()
+        {
+            List<Music> musicList = new List<Music>();
+
+            logger.Info("Music dao select music list start.");
+
+            // database access section
+            using (SqliteConnection connection = new SqliteConnection(builder.ToString()))
+            {
+                // connection open
+                connection.Open();
+
+                // enable transaction
+                using (SqliteTransaction transaction = connection.BeginTransaction())
+                using (SqliteCommand command = connection.CreateCommand())
+                {
+                    // Section.1 - select M_MUSIC
+                    // SQL
+                    command.CommandText = "SELECT id, title, difficult, level FROM M_MUSIC ORDER BY level desc";
+
+                    // query to log
+                    logger.Info(command.CommandText);
+
+                    // check music is still exists?
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read() == true)
+                        {
+                            Music music = new Music
+                            {
+                                id = reader.GetString(0),
+                                title = reader.GetString(1),
+                                difficult = reader.GetString(2),
+                                level = reader.GetInt32(3)
+                            };
+                            musicList.Add(music);
+                        }
+                    }
+                    // clear parameters
+                    command.Parameters.Clear();
+                }
+            }
+
+            logger.Info("Music dao select music list end.");
+
+            return musicList;
+        }
+
+        /// <summary>
         /// IDをもとに楽曲マスタと、それに紐づくスコアデータを検索
         /// </summary>
         /// <param name="id">楽曲マスタのID</param>
