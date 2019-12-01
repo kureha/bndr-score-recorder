@@ -261,7 +261,14 @@ namespace BndrScoreRecorder
                 }
 
                 // Try to get registerd music by Hashed OCR Data
+                logger.Info("Try to get music by Hashed OCR Data.");
                 Music registeredMusic = musicDao.selectByHashedOcrData(analyzedMusic.hashedOcrData);
+                if (registeredMusic == null)
+                {
+                    logger.Info("Try to get OCR readed music by title & level & difficult");
+                    registeredMusic = musicDao.selectByTitleDifficultLevel(analyzedMusic.title, analyzedMusic.level, analyzedMusic.difficult);
+                }
+
                 if (registeredMusic == null)
                 {
                     logger.Info("This is new regist music.");
@@ -282,7 +289,31 @@ namespace BndrScoreRecorder
                 {
                     if (DialogResult.OK == confirmForm.ShowDialog())
                     {
-                        logger.Info("DialogResult is ok, regist score data.");
+                        logger.Info("DialogResult is ok.");
+
+                        if (registeredMusic == null)
+                        {
+                            logger.Info("Registered music is null. final check user inputed date (update or insert).");
+                            // Check db master from title, difficult, level - if matched, update data.
+                            registeredMusic = musicDao.selectByTitleDifficultLevel(analyzedMusic.title, analyzedMusic.level, analyzedMusic.difficult);
+                            if (registeredMusic == null)
+                            {
+                                // Insert
+                                logger.Info("User inputed date is not matched to database. Execute insert.");
+                            }
+                            else
+                            {
+                                // Update
+                                logger.Info("User inputed date is matched to database. Execute update.");
+                                // Attach data value
+                                analyzedMusic.id = registeredMusic.id;
+                                analyzedMusic.hashedOcrDataList = registeredMusic.hashedOcrDataList;
+                            }
+                        } else
+                        {
+                            logger.Info("Registered music is not null, update execute.");
+                        }
+
                         musicDao.InsertOrReplace(analyzedMusic);
                     }
                     else

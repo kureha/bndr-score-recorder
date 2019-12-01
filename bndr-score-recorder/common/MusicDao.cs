@@ -91,7 +91,7 @@ namespace BndrScoreRecorder.common
         }
 
         /// <summary>
-        /// IDをもとに楽曲マスタと、それに紐づくOCRデータ、および、スコアデータを検索
+        /// OCRデータをもとに楽曲マスタと、それに紐づくOCRデータ、および、スコアデータを検索
         /// </summary>
         /// <param name="musicId">楽曲マスタのID</param>
         /// <returns>IDに一致するMusicオブジェクト</returns>
@@ -152,6 +152,74 @@ namespace BndrScoreRecorder.common
             }
 
             logger.Info("Music dao select by id end.");
+
+            return music;
+        }
+
+        /// <summary>
+        /// 曲名、Level、難易度をもとに楽曲マスタと、それに紐づくOCRデータ、および、スコアデータを検索
+        /// </summary>
+        /// <param name="musicId">楽曲マスタのID</param>
+        /// <returns>IDに一致するMusicオブジェクト</returns>
+        public Music selectByTitleDifficultLevel(string title, int level, string difficult)
+        {
+            // return value
+            Music music = null;
+
+            // Music id value
+            int? musicId = null;
+
+            logger.Info("Music dao select by title & level & difficult start.");
+            logger.Info("Title = " + title + ", Level = " + level + ", Difficult = " + difficult);
+
+            // database access section
+            using (SqliteConnection connection = new SqliteConnection(builder.ToString()))
+            {
+                // connection open
+                connection.Open();
+
+                // enable transaction
+                using (SqliteTransaction transaction = connection.BeginTransaction())
+                using (SqliteCommand command = connection.CreateCommand())
+                {
+                    // Select Music ID from Hashed OCR Data
+                    // SQL
+                    command.CommandText = "SELECT id, title, level, difficult FROM M_MUSIC WHERE title = @title AND level = @level AND difficult = @difficult";
+
+                    // query to log
+                    logger.Info(command.CommandText);
+
+                    // prepared statement
+                    command.Parameters.AddWithValue("title", title);
+                    command.Parameters.AddWithValue("level", title);
+                    command.Parameters.AddWithValue("difficult", title);
+
+                    // check music is still exists?
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read() == true)
+                        {
+                            musicId = reader.GetInt32(0);
+                            logger.Info("Selected music id = " + musicId);
+                        }
+                    }
+                    // clear parameters
+                    command.Parameters.Clear();
+                }
+            }
+
+            // if no selected record, return null
+            if (musicId == null)
+            {
+                logger.Info("Music ID is not selected, return null.");
+            }
+            else
+            {
+                logger.Info("Music ID is selected, search data. Call another function.");
+                music = selectByMusicId(musicId);
+            }
+
+            logger.Info("Music dao select by title & level & difficult end.");
 
             return music;
         }
