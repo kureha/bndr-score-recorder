@@ -46,8 +46,10 @@ namespace BndrScoreRecorder.common
             logger.Info("Screenshot dest directory path = " + screenshotDestDirPath);
             if (Directory.Exists(screenshotDestDirPath) == true)
             {
-                logger.Info("Target directory is still exists, delete derectory.");
-                Directory.Delete(screenshotDestDirPath, true);
+                // logger.Info("Target directory is still exists, delete derectory.");
+                // Directory.Delete(screenshotDestDirPath, true);
+                logger.Info("Target directory is still exists, skip regist.");
+                return null;
             }
             Directory.CreateDirectory(screenshotDestDirPath);
 
@@ -58,8 +60,10 @@ namespace BndrScoreRecorder.common
                 logger.Info("Copy screen shot file. Destination path = " + scrennShotImageFileDestPath);
                 if (File.Exists(scrennShotImageFileDestPath) == true)
                 {
-                    logger.Info("Overwrite copy file.");
-                    File.Delete(scrennShotImageFileDestPath);
+                    // logger.Info("Overwrite copy file.");
+                    // File.Delete(scrennShotImageFileDestPath);
+                    logger.Info("Target file is still exists, skip regist.");
+                    return null;
                 }
                 File.Copy(screenshotImageFilePath, scrennShotImageFileDestPath);
             } else

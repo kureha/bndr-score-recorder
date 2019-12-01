@@ -62,6 +62,9 @@ namespace BndrScoreRecorder
         {
             // Setup columns
             DataGridViewTextBoxColumn column;
+
+            // DataSource clear
+            ScoreDataGridView.DataSource = null;
             
             // EX Score
             column = new DataGridViewTextBoxColumn();
@@ -210,6 +213,13 @@ namespace BndrScoreRecorder
                 logger.Info("Analyze target file = " + filePath);
                 Music analyzedMusic = BndrImageReader.AnalyzeBndrImage(filePath, dataFolderPath);
 
+                // If skip regist, goto next loop
+                if (analyzedMusic == null)
+                {
+                    logger.Info("Regist music skipped, goto next file.");
+                    continue;
+                }
+
                 // Try to get registerd music
                 Music registeredMusic = musicDao.selectById(analyzedMusic.id);
                 if (registeredMusic == null)
@@ -251,7 +261,10 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ExecuteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Analyze score
             AnalyzeScore();
+            // Refresh music tree view
+            BuildMusicTreeView();
         }
 
         /// <summary>

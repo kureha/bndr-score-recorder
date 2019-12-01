@@ -146,6 +146,7 @@
             this.ScoreDataGridView.AllowUserToOrderColumns = true;
             this.ScoreDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ScoreDataGridView.Location = new System.Drawing.Point(257, 45);
+            this.ScoreDataGridView.MultiSelect = false;
             this.ScoreDataGridView.Name = "ScoreDataGridView";
             this.ScoreDataGridView.ReadOnly = true;
             this.ScoreDataGridView.RowTemplate.Height = 21;

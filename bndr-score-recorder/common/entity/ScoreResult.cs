@@ -94,11 +94,18 @@ namespace BndrScoreRecorder.common.entity
 
             logger.Info("RawString convert to RawList success. List size = " + rawScoreList.Count);
 
-            scoreResult.perfect = ExtractScore(rawScoreArray[LINE_NUM_PERFECT]);
-            scoreResult.great = ExtractScore(rawScoreArray[LINE_NUM_GREAT]);
-            scoreResult.good = ExtractScore(rawScoreArray[LINE_NUM_GOOD]);
-            scoreResult.bad = ExtractScore(rawScoreArray[LINE_NUM_BAD]);
-            scoreResult.miss = ExtractScore(rawScoreArray[LINE_NUM_MISS]);
+            // insert data if line is enable
+            try
+            {
+                scoreResult.perfect = ExtractScore(rawScoreArray[LINE_NUM_PERFECT]);
+                scoreResult.great = ExtractScore(rawScoreArray[LINE_NUM_GREAT]);
+                scoreResult.good = ExtractScore(rawScoreArray[LINE_NUM_GOOD]);
+                scoreResult.bad = ExtractScore(rawScoreArray[LINE_NUM_BAD]);
+                scoreResult.miss = ExtractScore(rawScoreArray[LINE_NUM_MISS]);
+            } catch (IndexOutOfRangeException)
+            {
+                logger.Error("RawString is not containes all data.");
+            }
 
             // calculate ex score
             scoreResult.exScore = scoreResult.perfect * 2 + scoreResult.great;
