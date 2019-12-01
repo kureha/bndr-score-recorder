@@ -148,7 +148,7 @@ namespace BndrScoreRecorder.common
 
                     // Section.2 - select T_SCORE_RECORD
                     // SQL
-                    command.CommandText = "SELECT id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, image_file_path FROM T_SCORE_RECORD WHERE music_id = @id ORDER BY insert_date;";
+                    command.CommandText = "SELECT id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, image_file_path FROM T_SCORE_RECORD WHERE music_id = @id ORDER BY update_date desc;";
 
                     // query to log
                     logger.Info(command.CommandText);

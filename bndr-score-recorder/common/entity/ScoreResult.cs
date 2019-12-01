@@ -31,41 +31,41 @@ namespace BndrScoreRecorder.common.entity
         [DataMember]
         public string id;
 
-        // perfect
+        // ex score
         [DataMember]
-        public long perfect;
-
-        // great
-        [DataMember]
-        public long great;
-
-        // good
-        [DataMember]
-        public long good;
-
-        // bad
-        [DataMember]
-        public long bad;
-
-        // miss
-        [DataMember]
-        public long miss;
-
-        // total notes
-        [DataMember]
-        public long totalNotes;
+        public long exScore { set; get; }
 
         // max combo
         [DataMember]
-        public long maxCombo;
+        public long maxCombo { set; get; }
+
+        // perfect
+        [DataMember]
+        public long perfect { set; get; }
+
+        // great
+        [DataMember]
+        public long great { set; get; }
+
+        // good
+        [DataMember]
+        public long good { set; get; }
+
+        // bad
+        [DataMember]
+        public long bad { set; get; }
+
+        // miss
+        [DataMember]
+        public long miss { set; get; }
+
+        // total notes
+        [DataMember]
+        public long totalNotes { set; get; }
 
         // score
         [DataMember]
-        public long score;
-
-        // ex score
-        [DataMember]
-        public long exScore;
+        public long score { set; get; }
 
         // rank code : CodeMaster.RankCodeMaster
         [DataMember]

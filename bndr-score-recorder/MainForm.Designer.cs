@@ -40,10 +40,10 @@
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MusicListGroupBox = new System.Windows.Forms.GroupBox();
             this.MusicTreeView = new System.Windows.Forms.TreeView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ScoreDataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.MusicListGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -137,26 +137,27 @@
             this.MusicTreeView.Name = "MusicTreeView";
             this.MusicTreeView.Size = new System.Drawing.Size(227, 498);
             this.MusicTreeView.TabIndex = 0;
+            this.MusicTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.MusicTreeView_AfterSelect);
             // 
-            // dataGridView1
+            // ScoreDataGridView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(257, 45);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 21;
-            this.dataGridView1.Size = new System.Drawing.Size(795, 504);
-            this.dataGridView1.TabIndex = 2;
+            this.ScoreDataGridView.AllowUserToAddRows = false;
+            this.ScoreDataGridView.AllowUserToDeleteRows = false;
+            this.ScoreDataGridView.AllowUserToOrderColumns = true;
+            this.ScoreDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ScoreDataGridView.Location = new System.Drawing.Point(257, 45);
+            this.ScoreDataGridView.Name = "ScoreDataGridView";
+            this.ScoreDataGridView.ReadOnly = true;
+            this.ScoreDataGridView.RowTemplate.Height = 21;
+            this.ScoreDataGridView.Size = new System.Drawing.Size(795, 504);
+            this.ScoreDataGridView.TabIndex = 2;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 561);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.ScoreDataGridView);
             this.Controls.Add(this.MusicListGroupBox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -165,7 +166,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.MusicListGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,7 +186,7 @@
         private System.Windows.Forms.ToolStripMenuItem InfoToolStripMenuItem;
         private System.Windows.Forms.GroupBox MusicListGroupBox;
         private System.Windows.Forms.TreeView MusicTreeView;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView ScoreDataGridView;
     }
 }
 

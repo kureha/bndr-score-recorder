@@ -51,7 +51,73 @@ namespace BndrScoreRecorder
             InitializeComponent();
 
             // Build music tree
+            InitializeDataGridView();
             BuildMusicTreeView();
+        }
+
+        /// <summary>
+        /// DataGridViewを初期化。
+        /// </summary>
+        private void InitializeDataGridView()
+        {
+            // Setup columns
+            DataGridViewTextBoxColumn column;
+            
+            // EX Score
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "exScore";
+            column.HeaderText = "EX Score";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
+
+            // MAX Combo
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "maxCombo";
+            column.HeaderText = "Max Combo";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
+
+            // Perfect
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "perfect";
+            column.HeaderText = "Perfect";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
+
+            // Perfect
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "great";
+            column.HeaderText = "Great";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
+
+            // Perfect
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "good";
+            column.HeaderText = "Good";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
+
+            // Perfect
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "bad";
+            column.HeaderText = "Bad";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
+
+            // Perfect
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "miss";
+            column.HeaderText = "Miss";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
+
+            // Total Notes
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "totalNotes";
+            column.HeaderText = "Total Notes";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
         }
 
         /// <summary>
@@ -69,6 +135,7 @@ namespace BndrScoreRecorder
 
             MusicDao musicDao = new MusicDao(databaseFilePath);
             List<Music> musicList = musicDao.selectMusicList();
+            List<int> levelList = new List<int>();
 
             logger.Info("Load music data from database end.");
 
@@ -81,6 +148,7 @@ namespace BndrScoreRecorder
                 {
                     logger.Info("Insert level list = " + music.level);
                     targetLevelNode = new TreeNode(music.level.ToString());
+                    levelList.Add(music.level);
                     targetLevelNode.Tag = music.level;
                     MusicTreeView.Nodes.Add(targetLevelNode);
                 }
@@ -184,6 +252,51 @@ namespace BndrScoreRecorder
         private void ExecuteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AnalyzeScore();
+        }
+
+        /// <summary>
+        /// 楽曲が選択された際、そのスコアを隣のViewに表示する。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MusicTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            logger.Info("DataGridView attach start.");
+
+            // Get selected node
+            TreeNode selectedNode = MusicTreeView.SelectedNode;
+
+            // Extract music id from tree node tag
+            string musicId = null;
+            try
+            {
+                musicId = (string)selectedNode.Tag;
+            } catch (Exception)
+            {
+                musicId = null;
+            }
+
+            // If null or empty, abort this function
+            if (musicId == null || musicId.Length == 0)
+            {
+                logger.Error("Music id is null or empty.");
+                return;
+            } else
+            {
+                logger.Info("Music id = " + musicId);
+            }
+
+            // Load from database
+            logger.Info("Load music data from database start.");
+            MusicDao musicDao = new MusicDao(databaseFilePath);
+            Music targetMusic = musicDao.selectById(musicId);
+            logger.Info(Music.ToJsonString(targetMusic));
+            logger.Info("Load music data from database end.");
+
+            // Attach to datagridview
+            ScoreDataGridView.DataSource = targetMusic.scoreResultList;
+
+            logger.Info("DataGridView attach end.");
         }
     }
 }
