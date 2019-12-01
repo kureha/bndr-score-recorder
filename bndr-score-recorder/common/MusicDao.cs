@@ -72,7 +72,7 @@ namespace BndrScoreRecorder.common
                         {
                             Music music = new Music
                             {
-                                id = reader.GetString(0),
+                                id = reader.GetInt32(0),
                                 title = reader.GetString(1),
                                 difficult = reader.GetString(2),
                                 level = reader.GetInt32(3)
@@ -91,17 +91,90 @@ namespace BndrScoreRecorder.common
         }
 
         /// <summary>
-        /// IDをもとに楽曲マスタと、それに紐づくスコアデータを検索
+        /// IDをもとに楽曲マスタと、それに紐づくOCRデータ、および、スコアデータを検索
         /// </summary>
-        /// <param name="id">楽曲マスタのID</param>
+        /// <param name="musicId">楽曲マスタのID</param>
         /// <returns>IDに一致するMusicオブジェクト</returns>
-        public Music selectById(string id)
+        public Music selectByHashedOcrData(string hashedOcrData)
         {
             // return value
             Music music = null;
 
-            logger.Info("Music dao select by id start.");
-            logger.Info("Id = " + id);
+            // Music id value
+            int? musicId = null;
+
+            logger.Info("Music dao select by Hashed OCR Data start.");
+            logger.Info("Hashed OCR Dat = " + hashedOcrData);
+
+            // database access section
+            using (SqliteConnection connection = new SqliteConnection(builder.ToString()))
+            {
+                // connection open
+                connection.Open();
+
+                // enable transaction
+                using (SqliteTransaction transaction = connection.BeginTransaction())
+                using (SqliteCommand command = connection.CreateCommand())
+                {
+                    // Select Music ID from Hashed OCR Data
+                    // SQL
+                    command.CommandText = "SELECT music_id, hashed_ocr_data FROM T_OCRREAD_MUSIC_LINK WHERE hashed_ocr_data = @hashed_ocr_data";
+
+                    // query to log
+                    logger.Info(command.CommandText);
+
+                    // prepared statement
+                    command.Parameters.AddWithValue("hashed_ocr_data", hashedOcrData);
+
+                    // check music is still exists?
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read() == true)
+                        {
+                            musicId = reader.GetInt32(0);
+                            logger.Info("Selected music id = " + musicId);
+                        }
+                    }
+                    // clear parameters
+                    command.Parameters.Clear();
+                }
+            }
+
+            // if no selected record, return null
+            if (musicId == null)
+            {
+                logger.Info("Music ID is not selected, return null.");
+            }
+            else
+            {
+                logger.Info("Music ID is selected, search data. Call another function.");
+                music = selectByMusicId(musicId);
+            }
+
+            logger.Info("Music dao select by id end.");
+
+            return music;
+        }
+
+        /// <summary>
+        /// Music IDをもとに楽曲マスタと、それに紐づくOCRデータ、および、スコアデータを検索
+        /// </summary>
+        /// <param name="musicId">楽曲マスタのID</param>
+        /// <returns>IDに一致するMusicオブジェクト</returns>
+        public Music selectByMusicId(int? musicId)
+        {
+            // return value
+            Music music = null;
+
+            logger.Info("Music dao select by music id start.");
+            logger.Info("Id = " + musicId);
+
+            // Null check
+            if (musicId == null)
+            {
+                logger.Info("Music id is null. No data returned.");
+                return music;
+            }
 
             // database access section
             using (SqliteConnection connection = new SqliteConnection(builder.ToString()))
@@ -121,7 +194,7 @@ namespace BndrScoreRecorder.common
                     logger.Info(command.CommandText);
 
                     // prepared statement
-                    command.Parameters.AddWithValue("id", id);
+                    command.Parameters.AddWithValue("id", musicId);
 
                     // check music is still exists?
                     using (SqliteDataReader reader = command.ExecuteReader())
@@ -130,7 +203,7 @@ namespace BndrScoreRecorder.common
                         {
                             music = new Music
                             {
-                                id = id,
+                                id = musicId,
                                 title = reader.GetString(0),
                                 difficult = reader.GetString(1),
                                 level = reader.GetInt32(2)
@@ -146,7 +219,28 @@ namespace BndrScoreRecorder.common
                         return music;
                     }
 
-                    // Section.2 - select T_SCORE_RECORD
+                    // Section.2 - hashed OCR data list
+                    // SQL
+                    command.CommandText = "SELECT MM.id, TOML.hashed_ocr_data FROM M_MUSIC MM INNER JOIN T_OCRREAD_MUSIC_LINK TOML ON MM.id = TOML.music_id WHERE MM.id = @id;";
+
+                    // query to log
+                    logger.Info(command.CommandText);
+
+                    // prepared statement
+                    command.Parameters.AddWithValue("id", musicId);
+
+                    // check music is still exists?
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read() == true)
+                        {
+                            music.hashedOcrDataList.Add(reader.GetString(1));
+                        }
+                    }
+                    // clear parameters
+                    command.Parameters.Clear();
+
+                    // Section.3 - select T_SCORE_RECORD
                     // SQL
                     command.CommandText = "SELECT id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, image_file_path FROM T_SCORE_RECORD WHERE music_id = @id ORDER BY update_date desc;";
 
@@ -183,7 +277,7 @@ namespace BndrScoreRecorder.common
                 }
             }
 
-            logger.Info("Music dao select by id end.");
+            logger.Info("Music dao select by music id end.");
 
             return music;
         }
@@ -265,39 +359,18 @@ namespace BndrScoreRecorder.common
                     /** Section.1 - Music data **/
                     logger.Info("Section.1 music data insert/replace start.");
 
-                    // check file is exists
-                    command.CommandText = "SELECT * FROM M_MUSIC WHERE id = @id";
-
-                    // query to log
-                    logger.Info(command.CommandText);
-
-                    // prepared statement
-                    command.Parameters.AddWithValue("id", music.id);
-
-                    // check music is still exists?
-                    bool isMusicExists = false;
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    // If music.id == null -> insert, else -> update
+                    if (music.id == null)
                     {
-                        while (reader.Read() == true)
-                        {
-                            isMusicExists = true;
-                        }
-                    }
-                    // clear parameters
-                    command.Parameters.Clear();
-
-                    if (isMusicExists == true)
-                    {
-                        logger.Info("Music master data is exists, update music master data.");
+                        logger.Info("Music master data is exists, insert music master data.");
 
                         // SQL
-                        command.CommandText = "UPDATE M_MUSIC SET title = @title, difficult = @difficult, level = @level, update_date = datetime('now', 'localtime') WHERE id = @id;";
+                        command.CommandText = "INSERT INTO M_MUSIC(title, difficult, level, insert_date, update_date) VALUES (@title, @difficult, @level, datetime('now', 'localtime'), datetime('now', 'localtime'));";
 
                         // query to log
                         logger.Info(command.CommandText);
 
                         // prepared statement
-                        command.Parameters.AddWithValue("id", music.id);
                         command.Parameters.AddWithValue("difficult", music.difficult);
                         command.Parameters.AddWithValue("title", music.title);
                         command.Parameters.AddWithValue("level", music.level);
@@ -307,12 +380,43 @@ namespace BndrScoreRecorder.common
 
                         // clear parameters
                         command.Parameters.Clear();
-                    } else
-                    {
-                        logger.Info("Music master data is exists, insert music master data.");
+
+                        logger.Info("Get music id.");
 
                         // SQL
-                        command.CommandText = "INSERT INTO M_MUSIC(id, title, difficult, level, insert_date, update_date) VALUES (@id, @title, @difficult, @level, datetime('now', 'localtime'), datetime('now', 'localtime'));";
+                        command.CommandText = "SELECT id FROM M_MUSIC WHERE rowid = last_insert_rowid();";
+
+                        // query to log
+                        logger.Info(command.CommandText);
+
+                        // check music is still exists?
+                        using (SqliteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read() == true)
+                            {
+                                music.id = reader.GetInt32(0);
+                            }
+                        }
+
+                        // Inserted Music id check
+                        if (music.id == null)
+                        {
+                            logger.Error("Can't get inserted music id!");
+                            result = false;
+                            return result;
+                        } else
+                        {
+                            logger.Info("Inserted music id = " + music.id);
+                        }
+
+                        // clear parameters
+                        command.Parameters.Clear();
+                    } else
+                    {
+                        logger.Info("Music master data is exists, update music master data. Music id = " + music.id);
+
+                        // SQL
+                        command.CommandText = "UPDATE M_MUSIC SET title = @title, difficult = @difficult, level = @level, update_date = datetime('now', 'localtime') WHERE id = @id;";
 
                         // query to log
                         logger.Info(command.CommandText);
@@ -356,10 +460,41 @@ namespace BndrScoreRecorder.common
 
                         // execute
                         command.ExecuteNonQuery();
+
+                        // clear parameters
+                        command.Parameters.Clear();
                     }
 
                     /** Section.2 - Score data**/
                     logger.Info("Section 2. score data insert end.");
+
+                    /** Section.3 Update Hashed OCR data **/
+                    logger.Info("Section 3. hashed ocr data insert start.");
+
+                    if (music.hashedOcrDataList.Contains(music.hashedOcrData) == true)
+                    {
+                        logger.Info("No need to insert hashed ocr data.");
+                    } else
+                    {
+                        // SQL
+                        command.CommandText = "INSERT INTO T_OCRREAD_MUSIC_LINK(music_id, hashed_ocr_data) VALUES (@music_id, @hashed_ocr_data);";
+
+                        // query to log
+                        logger.Info(command.CommandText);
+
+                        // prepared statement
+                        command.Parameters.AddWithValue("music_id", music.id);
+                        command.Parameters.AddWithValue("hashed_ocr_data", music.hashedOcrData);
+
+                        // execute
+                        command.ExecuteNonQuery();
+
+                        // clear parameters
+                        command.Parameters.Clear();
+
+                        // update music object
+                        music.hashedOcrDataList.Add(music.hashedOcrData);
+                    }
 
                     // commit
                     transaction.Commit();

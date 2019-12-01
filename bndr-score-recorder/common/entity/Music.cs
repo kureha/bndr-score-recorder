@@ -15,7 +15,15 @@ namespace BndrScoreRecorder.common.entity
     {
         // id
         [DataMember]
-        public string id;
+        public int? id;
+
+        // ハッシュ化OCRデータリスト
+        [DataMember]
+        public List<string> hashedOcrDataList = new List<string>();
+
+        // 読み取ったデータの生ハッシュ化OCRデータ
+        [DataMember]
+        public string hashedOcrData;
 
         // 曲名
         [DataMember]
@@ -54,7 +62,7 @@ namespace BndrScoreRecorder.common.entity
         /// <summary>
         /// 曲名文字列と難易度文字列からIDを生成する。
         /// </summary>
-        public void CreateIdFromTitle()
+        public void CreateHashedOcrDataFromTitleAndDifficult()
         {
             using (SHA512CryptoServiceProvider provider = new SHA512CryptoServiceProvider())
             {
@@ -64,7 +72,7 @@ namespace BndrScoreRecorder.common.entity
                 {
                     stringBuilder.Append(b.ToString("x2"));
                 }
-                id = stringBuilder.ToString();
+                hashedOcrData = stringBuilder.ToString();
             }
         }
     }

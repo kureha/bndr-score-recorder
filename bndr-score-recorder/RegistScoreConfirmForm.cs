@@ -99,7 +99,7 @@ namespace BndrScoreRecorder
             TitleTextBox.Text = music.title;
             DifficultTextBox.Text = music.difficult;
             LevelTextBox.Text = music.level.ToString();
-            IdTextBox.Text = music.id;
+            IdTextBox.Text = music.id.ToString();
 
             // attache data (score record)
             if (music.scoreResultList.Count > 0)

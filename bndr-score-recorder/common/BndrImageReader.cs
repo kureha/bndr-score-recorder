@@ -151,7 +151,7 @@ namespace BndrScoreRecorder.common
 
             logger.Info("OCR read section end.");
 
-            // create return value start
+            // Create return value start
             logger.Info("Music score result creation start.");
             Music analyzedMusic = new Music
             {
@@ -159,7 +159,9 @@ namespace BndrScoreRecorder.common
                 difficult = difficultString,
                 level = int.Parse(levelString)
             };
-            analyzedMusic.CreateIdFromTitle();
+
+            // Create Hashed OCR Data
+            analyzedMusic.CreateHashedOcrDataFromTitleAndDifficult();
 
             analyzedMusic.scoreResultList.Add(ScoreResult.Parse(scoreString, scrennShotImageFileDestPath.Replace(destDirPath, string.Empty)));
             analyzedMusic.scoreResultList[0].maxCombo = int.Parse(maxComboString);

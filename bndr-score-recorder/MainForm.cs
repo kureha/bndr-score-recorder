@@ -31,6 +31,9 @@ namespace BndrScoreRecorder
         // setting object
         private Setting setting;
 
+        // level tree node prefix
+        private static readonly string PREFIX_LEVEL_TREE_NODE = "LEVEL_";
+
         /// <summary>
         /// 初期化。
         /// </summary>
@@ -188,7 +191,7 @@ namespace BndrScoreRecorder
                     logger.Info("Insert level list = " + music.level);
                     targetLevelNode = new TreeNode(music.level.ToString());
                     levelList.Add(music.level);
-                    targetLevelNode.Tag = music.level;
+                    targetLevelNode.Tag = PREFIX_LEVEL_TREE_NODE + music.level;
                     MusicTreeView.Nodes.Add(targetLevelNode);
                 }
 
@@ -257,8 +260,8 @@ namespace BndrScoreRecorder
                     continue;
                 }
 
-                // Try to get registerd music
-                Music registeredMusic = musicDao.selectById(analyzedMusic.id);
+                // Try to get registerd music by Hashed OCR Data
+                Music registeredMusic = musicDao.selectByHashedOcrData(analyzedMusic.hashedOcrData);
                 if (registeredMusic == null)
                 {
                     logger.Info("This is new regist music.");
@@ -267,9 +270,11 @@ namespace BndrScoreRecorder
                 {
                     logger.Info("This is registered music.");
                     // Load title from DB
+                    analyzedMusic.id = registeredMusic.id;
                     analyzedMusic.title = registeredMusic.title;
                     analyzedMusic.difficult = registeredMusic.difficult;
                     analyzedMusic.level = registeredMusic.level;
+                    analyzedMusic.hashedOcrDataList = registeredMusic.hashedOcrDataList;
                 }
 
                 // Confirm data
@@ -341,19 +346,19 @@ namespace BndrScoreRecorder
             TreeNode selectedNode = MusicTreeView.SelectedNode;
 
             // Extract music id from tree node tag
-            string musicId = null;
+            int? musicId;
             try
             {
-                musicId = (string)selectedNode.Tag;
+                musicId = (int?)selectedNode.Tag;
             } catch (Exception)
             {
                 musicId = null;
             }
 
             // If null or empty, abort this function
-            if (musicId == null || musicId.Length == 0)
+            if (musicId == null)
             {
-                logger.Error("Music id is null or empty.");
+                logger.Error("Music id is null.");
                 return;
             } else
             {
@@ -363,7 +368,7 @@ namespace BndrScoreRecorder
             // Load from database
             logger.Info("Load music data from database start.");
             MusicDao musicDao = new MusicDao(databaseFilePath);
-            Music targetMusic = musicDao.selectById(musicId);
+            Music targetMusic = musicDao.selectByMusicId(musicId);
             logger.Info(Music.ToJsonString(targetMusic));
             logger.Info("Load music data from database end.");
 
