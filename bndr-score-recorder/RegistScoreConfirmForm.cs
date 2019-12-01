@@ -275,13 +275,7 @@ namespace BndrScoreRecorder
                     music.scoreResultList[0].miss = int.Parse(MissTextBox.Text);
                     music.scoreResultList[0].maxCombo = int.Parse(MaxComboTextBox.Text);
 
-                    music.scoreResultList[0].exScore = music.scoreResultList[0].perfect * 2 + music.scoreResultList[0].great;
-                    music.scoreResultList[0].totalNotes =
-                        music.scoreResultList[0].perfect
-                        + music.scoreResultList[0].great
-                        + music.scoreResultList[0].good
-                        + music.scoreResultList[0].bad
-                        + music.scoreResultList[0].miss;
+                    music.scoreResultList[0].CalculateInfos();
                 }
             } catch (FormatException)
             {

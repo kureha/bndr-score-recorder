@@ -112,6 +112,13 @@ namespace BndrScoreRecorder
             column.DataPropertyName = column.Name;
             ScoreDataGridView.Columns.Add(column);
 
+            // Clear Type
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "clearType";
+            column.HeaderText = "Clear Type";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
+
             // MAX Combo
             column = new DataGridViewTextBoxColumn();
             column.Name = "maxCombo";

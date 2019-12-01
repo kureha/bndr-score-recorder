@@ -26,6 +26,11 @@ namespace BndrScoreRecorder.common.entity
         // initialize count value
         public static readonly long ERROR_COUNT = -1;
 
+        // clear type define
+        public static readonly string CLEAR_TYPE_FULL_COMBO = "FULL COMBO";
+        public static readonly string CLEAR_TYPE_HARD_CLEAR = "HARD CLEAR";
+        public static readonly string CLEAR_TYPE_NORMAL_CLEAR = "NORMAL CLEAR";
+        public static readonly string CLEAR_TYPE_EASY_CLEAR = "EASY CLEAR";
 
         // id
         [DataMember]
@@ -74,6 +79,10 @@ namespace BndrScoreRecorder.common.entity
         // screenshot image file path
         public string imageFilePath;
 
+        // clear type
+        [DataMember]
+        public string clearType { set; get; }
+
         /// <summary>
         /// 文字列をもとにScoreResultを生成する。
         /// </summary>
@@ -107,21 +116,51 @@ namespace BndrScoreRecorder.common.entity
                 logger.Error("RawString is not containes all data.");
             }
 
-            // calculate ex score
-            scoreResult.exScore = scoreResult.perfect * 2 + scoreResult.great;
-
-            // calculate total notes
-            scoreResult.totalNotes = scoreResult.perfect
-                + scoreResult.great
-                + scoreResult.good
-                + scoreResult.bad
-                + scoreResult.miss;
-
             // image file path
             scoreResult.imageFilePath = imageFilePath;
 
+            // calculate ex score, total notes, clear type
+            scoreResult.CalculateInfos();
+
             // result
             return scoreResult;
+        }
+
+        /// <summary>
+        /// EX Score, Total notes, Clear typeを計算する。
+        /// </summary>
+        public void CalculateInfos()
+        {
+            // If data is invalid, nothing to do.
+            if (IsValidScore() == false)
+            {
+                return;
+            }
+
+            // ex score
+            exScore = perfect * 2 + great;
+
+            // total notes
+            totalNotes = perfect + great + good + bad + miss;
+
+            // clear type
+            if ((good + bad + miss) == 0)
+            {
+                clearType = CLEAR_TYPE_FULL_COMBO;
+            }
+            else if ((bad + miss) <= 10)
+            {
+                clearType = CLEAR_TYPE_HARD_CLEAR;
+            }
+            else if ((bad + miss) <= 20)
+            {
+                clearType = CLEAR_TYPE_NORMAL_CLEAR;
+            }
+            else
+            {
+                clearType = CLEAR_TYPE_EASY_CLEAR;
+            }
+
         }
 
         /// <summary>

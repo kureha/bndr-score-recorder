@@ -337,6 +337,8 @@ namespace BndrScoreRecorder.common
                             scoreReuslt.exScore = reader.GetInt64(8);
                             scoreReuslt.imageFilePath = reader.GetString(9);
 
+                            scoreReuslt.CalculateInfos();
+
                             music.scoreResultList.Add(scoreReuslt);
                         }
                     }
