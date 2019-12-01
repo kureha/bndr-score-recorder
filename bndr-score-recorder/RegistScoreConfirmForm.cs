@@ -230,11 +230,16 @@ namespace BndrScoreRecorder
                             if (scoreResult.totalNotes != registeredScoreResult.totalNotes)
                             {
                                 scoreResultMessageBuilder.AppendLine("登録済みデータと合計ノーツ数が異なっています。読み取り異常がないか確認してください。");
-                                PerfectTextBox.BackColor = Color.Pink;
-                                GreatTextBox.BackColor = Color.Pink;
-                                GoodTextBox.BackColor = Color.Pink;
-                                BadTextBox.BackColor = Color.Pink;
-                                MissTextBox.BackColor = Color.Pink;
+                                PerfectTextBox.BackColor = Color.Red;
+                                PerfectTextBox.ForeColor = Color.White;
+                                GreatTextBox.BackColor = Color.Red;
+                                GreatTextBox.ForeColor = Color.White;
+                                GoodTextBox.BackColor = Color.Red;
+                                GoodTextBox.ForeColor = Color.White;
+                                BadTextBox.BackColor = Color.Red;
+                                BadTextBox.ForeColor = Color.White;
+                                MissTextBox.BackColor = Color.Red;
+                                MissTextBox.ForeColor = Color.White;
                                 break;
                             }
                         }
