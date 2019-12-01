@@ -25,6 +25,12 @@ namespace BndrScoreRecorder
         // sqlite database path
         private string databaseFilePath;
 
+        // setting json file path
+        private string settingFilePath;
+
+        // setting object
+        private Setting setting;
+
         /// <summary>
         /// 初期化。
         /// </summary>
@@ -35,7 +41,7 @@ namespace BndrScoreRecorder
             // Initialize log4net
             log4net.Config.BasicConfigurator.Configure();
 
-            // create screenshot data folder path
+            // Create screenshot data folder path
             dataFolderPath = System.Windows.Forms.Application.StartupPath
                 + Path.DirectorySeparatorChar 
                 + "data";
@@ -44,7 +50,37 @@ namespace BndrScoreRecorder
                 + Path.DirectorySeparatorChar 
                 + "bndr-score-recorder.db";
 
-            // enable development mode
+            settingFilePath = dataFolderPath
+                + Path.DirectorySeparatorChar
+                + "application-settings.json";
+
+            // Read settings from file
+            logger.Info("Read settings from file. setting file path = " + settingFilePath);
+            setting = Setting.ParseFromFile(settingFilePath);
+
+            if (setting == null)
+            {
+                logger.Info("Create new setting file.");
+                MessageBox.Show("初期設定が必要です。");
+                
+                setting = new Setting();
+                logger.Info("Initializing setting object complete.");
+
+                using (SettingForm settingForm = new SettingForm(ref setting))
+                {
+                    if (settingForm.ShowDialog() == DialogResult.OK)
+                    {
+                        Setting.SaveToFile(setting, settingFilePath);
+                        MessageBox.Show("設定を保存しました。");
+                    } else
+                    {
+                        MessageBox.Show("初期設定が実施されませんでした。終了します。");
+                        Application.Exit();
+                    }
+                }
+            }
+
+            // Enable development mode
             BndrImageReader.DEBUG_MODE = true;
 
             // Initialize component
@@ -212,7 +248,7 @@ namespace BndrScoreRecorder
             foreach (string filePath in screenshotFilePathList)
             {
                 logger.Info("Analyze target file = " + filePath);
-                Music analyzedMusic = BndrImageReader.AnalyzeBndrImage(filePath, dataFolderPath, analyzeAllFile);
+                Music analyzedMusic = BndrImageReader.AnalyzeBndrImage(setting, filePath, dataFolderPath, analyzeAllFile);
 
                 // If skip regist, goto next loop
                 if (analyzedMusic == null)
@@ -256,7 +292,7 @@ namespace BndrScoreRecorder
         }
 
         /// <summary>
-        /// スコア解析実行呼び出し
+        /// スコア解析実行を呼び出す。
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -266,14 +302,30 @@ namespace BndrScoreRecorder
             AnalyzeScore(false);
             // Refresh music tree view
             BuildMusicTreeView();
+            // Show complete message
+            MessageBox.Show("楽曲の解析がすべて完了しました。");
         }
 
+        /// <summary>
+        /// 全曲のスコア解析実行を呼び出す。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExecuteAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Analyze score
-            AnalyzeScore(true);
-            // Refresh music tree view
-            BuildMusicTreeView();
+            if (MessageBox.Show("対象フォルダ内全てのファイルに対し、強制的に全データの解析を行います。場合によっては二重にスコアが登録される可能性もあります。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                // Analyze score
+                AnalyzeScore(true);
+                // Refresh music tree view
+                BuildMusicTreeView();
+                // Show complete message
+                MessageBox.Show("楽曲の解析がすべて完了しました。");
+            } else
+            {
+                MessageBox.Show("実行をキャンセルしました。");
+            }
+            
         }
 
         /// <summary>
@@ -319,6 +371,23 @@ namespace BndrScoreRecorder
             ScoreDataGridView.DataSource = targetMusic.scoreResultList;
 
             logger.Info("DataGridView attach end.");
+        }
+
+        /// <summary>
+        /// 設定を行うフォームを開く。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SetupStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SettingForm settingForm = new SettingForm(ref setting))
+            {
+                if (settingForm.ShowDialog() == DialogResult.OK)
+                {
+                    Setting.SaveToFile(setting, settingFilePath);
+                    MessageBox.Show("設定を保存しました。");
+                }
+            }
         }
     }
 }

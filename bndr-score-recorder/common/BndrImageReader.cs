@@ -25,12 +25,20 @@ namespace BndrScoreRecorder.common
         /// <summary>
         /// 画像ファイルを解析し、Musicオブジェクトを返却する。
         /// </summary>
+        /// <param name="setting">Exeのパス等が格納されたSettingおbジェクト</param>
         /// <param name="screenshotImageFilePath">解析したい画像ファイルのパス</param>
         /// <param name="destDirPath">アプリケーションのデータ格納先ディレクトリパス</param>
         /// <param name="analyzeAllFile">true:全ファイルを解析、false:既に解析済みファイルがあればスキップ</param>
         /// <returns>Musicオブジェクト</returns>
-        internal static Music AnalyzeBndrImage(string screenshotImageFilePath, string destDirPath, bool analyzeAllFile)
+        internal static Music AnalyzeBndrImage(Setting setting, string screenshotImageFilePath, string destDirPath, bool analyzeAllFile)
         {
+            // Check setting object
+            if (setting == null)
+            {
+                logger.Error("Setting object is null!");
+                return null;
+            }
+
             // File path check
             logger.Info("Screenshot image file = " + screenshotImageFilePath);
             if (File.Exists(screenshotImageFilePath) == false)
@@ -98,6 +106,8 @@ namespace BndrScoreRecorder.common
 
             // Title read
             string titleString = OcrReader.ReadFromImageFileJapaneseLang(
+                setting.pathImageMagickConvertExe,
+                setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_TITLE,
                 "840x40+615+70");
@@ -105,6 +115,8 @@ namespace BndrScoreRecorder.common
 
             // Difficult code read
             string difficultString = OcrReader.ReadFromImageFileJapaneseLang(
+                setting.pathImageMagickConvertExe,
+                setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_TITLE,
                 "140x35+470+70");
@@ -112,6 +124,8 @@ namespace BndrScoreRecorder.common
 
             // Score read
             string scoreString = OcrReader.ReadFromImageFileOnlyNumber(
+                setting.pathImageMagickConvertExe,
+                setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_SCORE,
                 "125x250+1440+450");
@@ -119,6 +133,8 @@ namespace BndrScoreRecorder.common
 
             // Max combo read
             string maxComboString = OcrReader.ReadFromImageFileOnlyNumber(
+                setting.pathImageMagickConvertExe,
+                setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_MAXCOMBO,
                 "120x40+1650+595");
@@ -126,6 +142,8 @@ namespace BndrScoreRecorder.common
 
             // Level read
             string levelString = OcrReader.ReadFromImageFileOnlyNumber(
+                setting.pathImageMagickConvertExe,
+                setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_LEVEL,
                 "70x45+1615+65");

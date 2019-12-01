@@ -25,9 +25,9 @@ namespace BndrScoreRecorder.common
         /// <param name="outputSuffix">画像出力ファイル名の末尾追加文字列</param>
         /// <param name="cropValue">有効なImageMagick Cropオプション値</param>
         /// <returns>画像から読み取った文字列</returns>
-        internal static string ReadFromImageFile(string filePath, string outputSuffix, string cropValue)
+        internal static string ReadFromImageFile(string imageMagickConvertExePath, string tesseractExePath, string filePath, string outputSuffix, string cropValue)
         {
-            return ReadFromImageFile(filePath, outputSuffix, cropValue, MODE_ALL);
+            return ReadFromImageFile(imageMagickConvertExePath, tesseractExePath, filePath, outputSuffix, cropValue, MODE_ALL);
         }
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace BndrScoreRecorder.common
         /// <param name="outputSuffix">画像出力ファイル名の末尾追加文字列</param>
         /// <param name="cropValue">有効なImageMagick Cropオプション値</param>
         /// <returns>画像から読み取った文字列</returns>
-        internal static string ReadFromImageFileJapaneseLang(string filePath, string outputSuffix, string cropValue)
+        internal static string ReadFromImageFileJapaneseLang(string imageMagickConvertExePath, string tesseractExePath, string filePath, string outputSuffix, string cropValue)
         {
-            return ReadFromImageFile(filePath, outputSuffix, cropValue, MODE_JAPANESE_LANG);
+            return ReadFromImageFile(imageMagickConvertExePath, tesseractExePath, filePath, outputSuffix, cropValue, MODE_JAPANESE_LANG);
         }
 
         /// <summary>
@@ -51,9 +51,9 @@ namespace BndrScoreRecorder.common
         /// <param name="outputSuffix">画像出力ファイル名の末尾追加文字列</param>
         /// <param name="cropValue">有効なImageMagick Cropオプション値</param>
         /// <returns>画像から読み取った文字列</returns>
-        internal static string ReadFromImageFileOnlyNumber(string filePath, string outputSuffix, string cropValue)
+        internal static string ReadFromImageFileOnlyNumber(string imageMagickConvertExePath, string tesseractExePath, string filePath, string outputSuffix, string cropValue)
         {
-            return ReadFromImageFile(filePath, outputSuffix, cropValue, MODE_ONLY_NUMBER);
+            return ReadFromImageFile(imageMagickConvertExePath, tesseractExePath, filePath, outputSuffix, cropValue, MODE_ONLY_NUMBER);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace BndrScoreRecorder.common
         /// <param name="cropValue">有効なImageMagick Cropオプション値</param>
         /// <param name="mode">Mode値</param>
         /// <returns>画像から読み取った文字列</returns>
-        private static string ReadFromImageFile(string filePath, string outputSuffix, string cropValue, string mode)
+        private static string ReadFromImageFile(string imageMagickConvertExePath, string tesseractExePath, string filePath, string outputSuffix, string cropValue, string mode)
         {
             // return value
             string result = string.Empty;
@@ -93,7 +93,7 @@ namespace BndrScoreRecorder.common
             // crop image
             logger.Info("ImageMagick convert start");
             standardOutput = ImageMagickBridge.CropExecute(
-                @"C:\ImageMagick\convert.exe",
+                imageMagickConvertExePath,
                 filePath,
                 imageMagickOutputFilePath,
                 cropValue);
@@ -122,14 +122,14 @@ namespace BndrScoreRecorder.common
             if (mode == MODE_ALL)
             {
                 standardOutput = TesseractBridge.ReadExecute(
-                    @"C:\Program Files\Tesseract-OCR\tesseract.exe",
+                    tesseractExePath,
                     imageMagickOutputFilePath,
                     tesseractOutputFilePath
                     );
             }
             else if (mode == MODE_JAPANESE_LANG) {
                 standardOutput = TesseractBridge.ReadJapaneseLangExecute(
-                    @"C:\Program Files\Tesseract-OCR\tesseract.exe",
+                    tesseractExePath,
                     imageMagickOutputFilePath,
                     tesseractOutputFilePath
                     );
@@ -137,7 +137,7 @@ namespace BndrScoreRecorder.common
             else if (mode == MODE_ONLY_NUMBER)
             {
                 standardOutput = TesseractBridge.ReadOnlyNumberExecute(
-                    @"C:\Program Files\Tesseract-OCR\tesseract.exe",
+                    tesseractExePath,
                     imageMagickOutputFilePath,
                     tesseractOutputFilePath
                     );
