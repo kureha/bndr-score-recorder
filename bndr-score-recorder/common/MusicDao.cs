@@ -506,6 +506,7 @@ namespace BndrScoreRecorder.common
 
                     logger.Info("Section 1. music data insert/replace end.");
 
+                    /** Section.2 - Score data**/
                     logger.Info("Section 2. score data insert start.");
 
                     // SQL
@@ -535,7 +536,6 @@ namespace BndrScoreRecorder.common
                         command.Parameters.Clear();
                     }
 
-                    /** Section.2 - Score data**/
                     logger.Info("Section 2. score data insert end.");
 
                     /** Section.3 Update Hashed OCR data **/
