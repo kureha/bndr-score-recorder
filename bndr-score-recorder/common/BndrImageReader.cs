@@ -27,8 +27,9 @@ namespace BndrScoreRecorder.common
         /// </summary>
         /// <param name="screenshotImageFilePath">解析したい画像ファイルのパス</param>
         /// <param name="destDirPath">アプリケーションのデータ格納先ディレクトリパス</param>
-        /// <returns></returns>
-        internal static Music AnalyzeBndrImage(string screenshotImageFilePath, string destDirPath)
+        /// <param name="analyzeAllFile">true:全ファイルを解析、false:既に解析済みファイルがあればスキップ</param>
+        /// <returns>Musicオブジェクト</returns>
+        internal static Music AnalyzeBndrImage(string screenshotImageFilePath, string destDirPath, bool analyzeAllFile)
         {
             // File path check
             logger.Info("Screenshot image file = " + screenshotImageFilePath);
@@ -46,10 +47,16 @@ namespace BndrScoreRecorder.common
             logger.Info("Screenshot dest directory path = " + screenshotDestDirPath);
             if (Directory.Exists(screenshotDestDirPath) == true)
             {
-                // logger.Info("Target directory is still exists, delete derectory.");
-                // Directory.Delete(screenshotDestDirPath, true);
-                logger.Info("Target directory is still exists, skip regist.");
-                return null;
+                if (analyzeAllFile == true)
+                {
+                    logger.Info("Target directory is still exists, delete derectory.");
+                    Directory.Delete(screenshotDestDirPath, true);
+                }
+                else
+                {
+                    logger.Info("Target directory is still exists, skip regist.");
+                    return null;
+                }
             }
             Directory.CreateDirectory(screenshotDestDirPath);
 
@@ -60,10 +67,16 @@ namespace BndrScoreRecorder.common
                 logger.Info("Copy screen shot file. Destination path = " + scrennShotImageFileDestPath);
                 if (File.Exists(scrennShotImageFileDestPath) == true)
                 {
-                    // logger.Info("Overwrite copy file.");
-                    // File.Delete(scrennShotImageFileDestPath);
-                    logger.Info("Target file is still exists, skip regist.");
-                    return null;
+                    if (analyzeAllFile == true)
+                    {
+                        logger.Info("Overwrite copy file.");
+                        File.Delete(scrennShotImageFileDestPath);
+                    }
+                    else
+                    {
+                        logger.Info("Target file is still exists, skip regist.");
+                        return null;
+                    }
                 }
                 File.Copy(screenshotImageFilePath, scrennShotImageFileDestPath);
             } else

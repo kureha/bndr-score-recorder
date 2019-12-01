@@ -168,11 +168,12 @@ namespace BndrScoreRecorder
         }
 
         /// <summary>
-        /// 特定フォルダ内の画像すべてに対して解析を行う。
+        /// 特定フォルダ内の画像に対して解析を行う。
         /// </summary>
-        private void AnalyzeScore()
+        /// <param name="analyzeAllFile">true:全ファイルを解析、false:既に解析済みファイルがあればスキップ</param>
+        private void AnalyzeScore(bool analyzeAllFile)
         {
-            logger.Info("Analyze score start.");
+            logger.Info("Analyze score start. Analyze all file flag = " + analyzeAllFile);
 
             // Select target folder
             string selectedPath;
@@ -211,7 +212,7 @@ namespace BndrScoreRecorder
             foreach (string filePath in screenshotFilePathList)
             {
                 logger.Info("Analyze target file = " + filePath);
-                Music analyzedMusic = BndrImageReader.AnalyzeBndrImage(filePath, dataFolderPath);
+                Music analyzedMusic = BndrImageReader.AnalyzeBndrImage(filePath, dataFolderPath, analyzeAllFile);
 
                 // If skip regist, goto next loop
                 if (analyzedMusic == null)
@@ -262,7 +263,15 @@ namespace BndrScoreRecorder
         private void ExecuteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Analyze score
-            AnalyzeScore();
+            AnalyzeScore(false);
+            // Refresh music tree view
+            BuildMusicTreeView();
+        }
+
+        private void ExecuteAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Analyze score
+            AnalyzeScore(true);
             // Refresh music tree view
             BuildMusicTreeView();
         }

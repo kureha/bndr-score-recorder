@@ -41,6 +41,7 @@
             this.MusicListGroupBox = new System.Windows.Forms.GroupBox();
             this.MusicTreeView = new System.Windows.Forms.TreeView();
             this.ScoreDataGridView = new System.Windows.Forms.DataGridView();
+            this.ExecuteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.MusicListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).BeginInit();
@@ -89,7 +90,8 @@
             // 
             this.AnalyzeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SetupStripMenuItem,
-            this.ExecuteToolStripMenuItem});
+            this.ExecuteToolStripMenuItem,
+            this.ExecuteAllToolStripMenuItem});
             this.AnalyzeToolStripMenuItem.Name = "AnalyzeToolStripMenuItem";
             this.AnalyzeToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.AnalyzeToolStripMenuItem.Text = "スコア解析";
@@ -97,13 +99,13 @@
             // SetupStripMenuItem
             // 
             this.SetupStripMenuItem.Name = "SetupStripMenuItem";
-            this.SetupStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.SetupStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SetupStripMenuItem.Text = "初期設定";
             // 
             // ExecuteToolStripMenuItem
             // 
             this.ExecuteToolStripMenuItem.Name = "ExecuteToolStripMenuItem";
-            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExecuteToolStripMenuItem.Text = "解析実行";
             this.ExecuteToolStripMenuItem.Click += new System.EventHandler(this.ExecuteToolStripMenuItem_Click);
             // 
@@ -153,6 +155,13 @@
             this.ScoreDataGridView.Size = new System.Drawing.Size(795, 504);
             this.ScoreDataGridView.TabIndex = 2;
             // 
+            // ExecuteAllToolStripMenuItem
+            // 
+            this.ExecuteAllToolStripMenuItem.Name = "ExecuteAllToolStripMenuItem";
+            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExecuteAllToolStripMenuItem.Text = "全件解析実行";
+            this.ExecuteAllToolStripMenuItem.Click += new System.EventHandler(this.ExecuteAllToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -188,6 +197,7 @@
         private System.Windows.Forms.GroupBox MusicListGroupBox;
         private System.Windows.Forms.TreeView MusicTreeView;
         private System.Windows.Forms.DataGridView ScoreDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ExecuteAllToolStripMenuItem;
     }
 }
 
