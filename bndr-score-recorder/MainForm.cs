@@ -417,7 +417,7 @@ namespace BndrScoreRecorder
         }
 
         /// <summary>
-        /// 設定を行うフォームを開く。
+        /// 環境設定を行うフォームを開く。
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -429,6 +429,40 @@ namespace BndrScoreRecorder
                 {
                     Setting.SaveToFile(setting, settingFilePath);
                     MessageBox.Show("設定を保存しました。");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 画像切り抜き設定を行うフォームを開く
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CropImagePositionAndSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // File name
+            string fileName;
+
+            // Select file
+            using(OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = System.Windows.Forms.Application.StartupPath;
+                openFileDialog.Title = "切り取りに使用するファイルを選択してください";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileName = openFileDialog.FileName;
+                } else
+                {
+                    return;
+                }
+            }
+
+            // Open ImageCropPoint form
+            using(ImageCropPointForm imageCropPointForm = new ImageCropPointForm(fileName, ref setting))
+            {
+                if (imageCropPointForm.ShowDialog() == DialogResult.OK)
+                {
+                    logger.Info("画像切り取りの設定が完了。");
                 }
             }
         }

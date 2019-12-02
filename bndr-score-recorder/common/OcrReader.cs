@@ -57,6 +57,21 @@ namespace BndrScoreRecorder.common
         }
 
         /// <summary>
+        /// ImageMagick出力用の名称を生成する。
+        /// </summary>
+        /// <param name="filePath">ファイルパス</param>
+        /// <param name="outputSuffix"画像出力ファイル名の末尾追加文字列></param>
+        /// <returns></returns>
+        public static string CreateImageMagickOutputFilePath(string filePath, string outputSuffix)
+        {
+            return Path.GetDirectoryName(filePath) +
+                Path.DirectorySeparatorChar +
+                Path.GetFileNameWithoutExtension(filePath) +
+                outputSuffix +
+                Path.GetExtension(filePath);
+        }
+
+        /// <summary>
         /// 画像から文字を読み取る内部メソッド。直接呼出し不可。
         /// </summary>
         /// <param name="filePath">ファイルパス</param>
@@ -81,12 +96,7 @@ namespace BndrScoreRecorder.common
             }
 
             // create text from argument filepath
-            string imageMagickOutputFilePath = 
-                Path.GetDirectoryName(filePath) +
-                Path.DirectorySeparatorChar + 
-                Path.GetFileNameWithoutExtension(filePath) +
-                outputSuffix +
-                Path.GetExtension(filePath);
+            string imageMagickOutputFilePath = CreateImageMagickOutputFilePath(filePath, outputSuffix);
 
             logger.Info("ImageMagick 0utput file path = " + imageMagickOutputFilePath);
 

@@ -95,6 +95,12 @@
     <Compile Include="common\OcrReader.cs" />
     <Compile Include="common\Setting.cs" />
     <Compile Include="common\bridge\TesseractBridge.cs" />
+    <Compile Include="ImageCropPointForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageCropPointForm.Designer.cs">
+      <DependentUpon>ImageCropPointForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     <Compile Include="SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ImageCropPointForm.resx">
+      <DependentUpon>ImageCropPointForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

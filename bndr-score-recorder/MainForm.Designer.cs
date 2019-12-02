@@ -43,6 +43,7 @@
             this.MusicListGroupBox = new System.Windows.Forms.GroupBox();
             this.MusicTreeView = new System.Windows.Forms.TreeView();
             this.ScoreDataGridView = new System.Windows.Forms.DataGridView();
+            this.CropImagePositionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.MusicListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).BeginInit();
@@ -93,7 +94,8 @@
             this.ExecuteToolStripMenuItem,
             this.ExecuteAllToolStripMenuItem,
             this.AnalyzeToolStripSeparator01,
-            this.SetupStripMenuItem});
+            this.SetupStripMenuItem,
+            this.CropImagePositionAndSizeToolStripMenuItem});
             this.AnalyzeToolStripMenuItem.Name = "AnalyzeToolStripMenuItem";
             this.AnalyzeToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.AnalyzeToolStripMenuItem.Text = "スコア解析";
@@ -101,26 +103,26 @@
             // ExecuteToolStripMenuItem
             // 
             this.ExecuteToolStripMenuItem.Name = "ExecuteToolStripMenuItem";
-            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExecuteToolStripMenuItem.Text = "解析実行";
             this.ExecuteToolStripMenuItem.Click += new System.EventHandler(this.ExecuteToolStripMenuItem_Click);
             // 
             // ExecuteAllToolStripMenuItem
             // 
             this.ExecuteAllToolStripMenuItem.Name = "ExecuteAllToolStripMenuItem";
-            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExecuteAllToolStripMenuItem.Text = "全件解析実行";
             this.ExecuteAllToolStripMenuItem.Click += new System.EventHandler(this.ExecuteAllToolStripMenuItem_Click);
             // 
             // AnalyzeToolStripSeparator01
             // 
             this.AnalyzeToolStripSeparator01.Name = "AnalyzeToolStripSeparator01";
-            this.AnalyzeToolStripSeparator01.Size = new System.Drawing.Size(143, 6);
+            this.AnalyzeToolStripSeparator01.Size = new System.Drawing.Size(177, 6);
             // 
             // SetupStripMenuItem
             // 
             this.SetupStripMenuItem.Name = "SetupStripMenuItem";
-            this.SetupStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.SetupStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SetupStripMenuItem.Text = "初期設定";
             this.SetupStripMenuItem.Click += new System.EventHandler(this.SetupStripMenuItem_Click);
             // 
@@ -170,6 +172,13 @@
             this.ScoreDataGridView.Size = new System.Drawing.Size(895, 504);
             this.ScoreDataGridView.TabIndex = 2;
             // 
+            // CropImagePositionAndSizeToolStripMenuItem
+            // 
+            this.CropImagePositionAndSizeToolStripMenuItem.Name = "CropImagePositionAndSizeToolStripMenuItem";
+            this.CropImagePositionAndSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CropImagePositionAndSizeToolStripMenuItem.Text = "画像切り取り設定";
+            this.CropImagePositionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.CropImagePositionAndSizeToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -207,6 +216,7 @@
         private System.Windows.Forms.DataGridView ScoreDataGridView;
         private System.Windows.Forms.ToolStripMenuItem ExecuteAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator AnalyzeToolStripSeparator01;
+        private System.Windows.Forms.ToolStripMenuItem CropImagePositionAndSizeToolStripMenuItem;
     }
 }
 
