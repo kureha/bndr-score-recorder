@@ -26,10 +26,6 @@ namespace BndrScoreRecorder.common.entity
         [DataMember]
         public int height;
 
-        // Is default flag
-        [DataMember]
-        public bool isDefault;
-
         // ImageMagick's option separater
         private const string OPTION_IMAGEMAGICK_RANGE_SEPARATOR = "x";
         private const string OPTION_IMAGEMAGICK_POSITION_SEPARATOR = "+";

@@ -89,6 +89,7 @@
     <Compile Include="common\bridge\BridgeBase.cs" />
     <Compile Include="common\bridge\ImageMagickBridge.cs" />
     <Compile Include="common\CodeMaster.cs" />
+    <Compile Include="common\entity\BndrOcrSetting.cs" />
     <Compile Include="common\entity\Music.cs" />
     <Compile Include="common\entity\OcrSetting.cs" />
     <Compile Include="common\entity\ScoreResult.cs" />
