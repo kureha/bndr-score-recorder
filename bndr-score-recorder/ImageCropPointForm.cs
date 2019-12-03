@@ -143,8 +143,14 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void CropPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            WidthNumericUpDown.Value = e.X - PositionXNumericUpDown.Value;
-            HeightNumericUpDown.Value = e.Y - PositionYNumericUpDown.Value;
+            try
+            {
+                WidthNumericUpDown.Value = e.X - PositionXNumericUpDown.Value;
+                HeightNumericUpDown.Value = e.Y - PositionYNumericUpDown.Value;
+            } catch (Exception)
+            {
+
+            }
         }
     }
 }

@@ -51,6 +51,7 @@
             this.CropPictureBox = new System.Windows.Forms.PictureBox();
             this.AbortButton = new System.Windows.Forms.Button();
             this.TryCropButton = new System.Windows.Forms.Button();
+            this.SelectOcrSettingListBox = new System.Windows.Forms.ListBox();
             this.PointGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).BeginInit();
@@ -73,7 +74,7 @@
             this.PointGroupBox.Controls.Add(this.WidthLabel);
             this.PointGroupBox.Controls.Add(this.PositionYLabel);
             this.PointGroupBox.Controls.Add(this.PositionXLabel);
-            this.PointGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.PointGroupBox.Location = new System.Drawing.Point(12, 106);
             this.PointGroupBox.Name = "PointGroupBox";
             this.PointGroupBox.Size = new System.Drawing.Size(330, 73);
             this.PointGroupBox.TabIndex = 0;
@@ -177,7 +178,7 @@
             this.ExpectedGroupBox.Controls.Add(this.CropResultPictureBoxLabel);
             this.ExpectedGroupBox.Controls.Add(this.ExpectedLabel);
             this.ExpectedGroupBox.Controls.Add(this.textBox1);
-            this.ExpectedGroupBox.Location = new System.Drawing.Point(12, 120);
+            this.ExpectedGroupBox.Location = new System.Drawing.Point(12, 214);
             this.ExpectedGroupBox.Name = "ExpectedGroupBox";
             this.ExpectedGroupBox.Size = new System.Drawing.Size(330, 404);
             this.ExpectedGroupBox.TabIndex = 1;
@@ -251,7 +252,7 @@
             // 
             // RegistButton
             // 
-            this.RegistButton.Location = new System.Drawing.Point(12, 530);
+            this.RegistButton.Location = new System.Drawing.Point(12, 624);
             this.RegistButton.Name = "RegistButton";
             this.RegistButton.Size = new System.Drawing.Size(75, 23);
             this.RegistButton.TabIndex = 2;
@@ -297,7 +298,7 @@
             // 
             // AbortButton
             // 
-            this.AbortButton.Location = new System.Drawing.Point(94, 530);
+            this.AbortButton.Location = new System.Drawing.Point(94, 624);
             this.AbortButton.Name = "AbortButton";
             this.AbortButton.Size = new System.Drawing.Size(75, 23);
             this.AbortButton.TabIndex = 4;
@@ -307,7 +308,7 @@
             // 
             // TryCropButton
             // 
-            this.TryCropButton.Location = new System.Drawing.Point(12, 91);
+            this.TryCropButton.Location = new System.Drawing.Point(12, 185);
             this.TryCropButton.Name = "TryCropButton";
             this.TryCropButton.Size = new System.Drawing.Size(330, 23);
             this.TryCropButton.TabIndex = 5;
@@ -315,11 +316,21 @@
             this.TryCropButton.UseVisualStyleBackColor = true;
             this.TryCropButton.Click += new System.EventHandler(this.TryCropButton_Click);
             // 
+            // SelectOcrSettingListBox
+            // 
+            this.SelectOcrSettingListBox.FormattingEnabled = true;
+            this.SelectOcrSettingListBox.ItemHeight = 12;
+            this.SelectOcrSettingListBox.Location = new System.Drawing.Point(12, 12);
+            this.SelectOcrSettingListBox.Name = "SelectOcrSettingListBox";
+            this.SelectOcrSettingListBox.Size = new System.Drawing.Size(330, 88);
+            this.SelectOcrSettingListBox.TabIndex = 6;
+            // 
             // ImageCropPointForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.SelectOcrSettingListBox);
             this.Controls.Add(this.TryCropButton);
             this.Controls.Add(this.AbortButton);
             this.Controls.Add(this.CropPictureGroupBox);
@@ -370,5 +381,6 @@
         private System.Windows.Forms.NumericUpDown PositionYNumericUpDown;
         private System.Windows.Forms.NumericUpDown PositionXNumericUpDown;
         private System.Windows.Forms.Button TryCropButton;
+        private System.Windows.Forms.ListBox SelectOcrSettingListBox;
     }
 }
