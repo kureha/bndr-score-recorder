@@ -29,38 +29,38 @@
         private void InitializeComponent()
         {
             this.PointGroupBox = new System.Windows.Forms.GroupBox();
-            this.PositionXLabel = new System.Windows.Forms.Label();
-            this.PositionYLabel = new System.Windows.Forms.Label();
+            this.HeightNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.WidthNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.PositionYNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.PositionXNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.HeightLabel = new System.Windows.Forms.Label();
             this.WidthLabel = new System.Windows.Forms.Label();
+            this.PositionYLabel = new System.Windows.Forms.Label();
+            this.PositionXLabel = new System.Windows.Forms.Label();
             this.ExpectedGroupBox = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.ExpectedLabel = new System.Windows.Forms.Label();
-            this.CropResultPictureBoxLabel = new System.Windows.Forms.Label();
-            this.CropResultPictureBox = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.CropResultTextLabel = new System.Windows.Forms.Label();
             this.CropResultTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.CropResultPictureBox = new System.Windows.Forms.PictureBox();
+            this.CropResultPictureBoxLabel = new System.Windows.Forms.Label();
+            this.ExpectedLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.RegistButton = new System.Windows.Forms.Button();
             this.CropPictureGroupBox = new System.Windows.Forms.GroupBox();
             this.CropPicturePanel = new System.Windows.Forms.Panel();
             this.CropPictureBox = new System.Windows.Forms.PictureBox();
             this.AbortButton = new System.Windows.Forms.Button();
-            this.PositionXNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.PositionYNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.WidthNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.HeightNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.TryCropButton = new System.Windows.Forms.Button();
             this.PointGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PositionYNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PositionXNumericUpDown)).BeginInit();
             this.ExpectedGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CropResultPictureBox)).BeginInit();
             this.CropPictureGroupBox.SuspendLayout();
             this.CropPicturePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CropPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PositionXNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PositionYNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // PointGroupBox
@@ -80,25 +80,53 @@
             this.PointGroupBox.TabStop = false;
             this.PointGroupBox.Text = "Position x Size";
             // 
-            // PositionXLabel
+            // HeightNumericUpDown
             // 
-            this.PositionXLabel.AutoSize = true;
-            this.PositionXLabel.Location = new System.Drawing.Point(6, 21);
-            this.PositionXLabel.Name = "PositionXLabel";
-            this.PositionXLabel.Size = new System.Drawing.Size(57, 12);
-            this.PositionXLabel.TabIndex = 0;
-            this.PositionXLabel.Text = "Position X";
-            this.PositionXLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.HeightNumericUpDown.Location = new System.Drawing.Point(219, 43);
+            this.HeightNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.HeightNumericUpDown.Name = "HeightNumericUpDown";
+            this.HeightNumericUpDown.Size = new System.Drawing.Size(88, 19);
+            this.HeightNumericUpDown.TabIndex = 7;
             // 
-            // PositionYLabel
+            // WidthNumericUpDown
             // 
-            this.PositionYLabel.AutoSize = true;
-            this.PositionYLabel.Location = new System.Drawing.Point(6, 46);
-            this.PositionYLabel.Name = "PositionYLabel";
-            this.PositionYLabel.Size = new System.Drawing.Size(57, 12);
-            this.PositionYLabel.TabIndex = 1;
-            this.PositionYLabel.Text = "Position Y";
-            this.PositionYLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.WidthNumericUpDown.Location = new System.Drawing.Point(219, 18);
+            this.WidthNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.WidthNumericUpDown.Name = "WidthNumericUpDown";
+            this.WidthNumericUpDown.Size = new System.Drawing.Size(88, 19);
+            this.WidthNumericUpDown.TabIndex = 6;
+            // 
+            // PositionYNumericUpDown
+            // 
+            this.PositionYNumericUpDown.Location = new System.Drawing.Point(69, 43);
+            this.PositionYNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.PositionYNumericUpDown.Name = "PositionYNumericUpDown";
+            this.PositionYNumericUpDown.Size = new System.Drawing.Size(88, 19);
+            this.PositionYNumericUpDown.TabIndex = 5;
+            // 
+            // PositionXNumericUpDown
+            // 
+            this.PositionXNumericUpDown.Location = new System.Drawing.Point(69, 18);
+            this.PositionXNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.PositionXNumericUpDown.Name = "PositionXNumericUpDown";
+            this.PositionXNumericUpDown.Size = new System.Drawing.Size(88, 19);
+            this.PositionXNumericUpDown.TabIndex = 4;
             // 
             // HeightLabel
             // 
@@ -120,6 +148,26 @@
             this.WidthLabel.Text = "Width";
             this.WidthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // PositionYLabel
+            // 
+            this.PositionYLabel.AutoSize = true;
+            this.PositionYLabel.Location = new System.Drawing.Point(6, 46);
+            this.PositionYLabel.Name = "PositionYLabel";
+            this.PositionYLabel.Size = new System.Drawing.Size(57, 12);
+            this.PositionYLabel.TabIndex = 1;
+            this.PositionYLabel.Text = "Position Y";
+            this.PositionYLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // PositionXLabel
+            // 
+            this.PositionXLabel.AutoSize = true;
+            this.PositionXLabel.Location = new System.Drawing.Point(6, 21);
+            this.PositionXLabel.Name = "PositionXLabel";
+            this.PositionXLabel.Size = new System.Drawing.Size(57, 12);
+            this.PositionXLabel.TabIndex = 0;
+            this.PositionXLabel.Text = "Position X";
+            this.PositionXLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // ExpectedGroupBox
             // 
             this.ExpectedGroupBox.Controls.Add(this.label1);
@@ -136,42 +184,14 @@
             this.ExpectedGroupBox.TabStop = false;
             this.ExpectedGroupBox.Text = "試験出力";
             // 
-            // textBox1
+            // label1
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 30);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(318, 57);
-            this.textBox1.TabIndex = 0;
-            // 
-            // ExpectedLabel
-            // 
-            this.ExpectedLabel.AutoSize = true;
-            this.ExpectedLabel.Location = new System.Drawing.Point(4, 15);
-            this.ExpectedLabel.Name = "ExpectedLabel";
-            this.ExpectedLabel.Size = new System.Drawing.Size(153, 12);
-            this.ExpectedLabel.TabIndex = 1;
-            this.ExpectedLabel.Text = "画像から期待される出力内容：";
-            // 
-            // CropResultPictureBoxLabel
-            // 
-            this.CropResultPictureBoxLabel.AutoSize = true;
-            this.CropResultPictureBoxLabel.Location = new System.Drawing.Point(4, 90);
-            this.CropResultPictureBoxLabel.Name = "CropResultPictureBoxLabel";
-            this.CropResultPictureBoxLabel.Size = new System.Drawing.Size(69, 12);
-            this.CropResultPictureBoxLabel.TabIndex = 2;
-            this.CropResultPictureBoxLabel.Text = "切り取り結果";
-            // 
-            // CropResultPictureBox
-            // 
-            this.CropResultPictureBox.Location = new System.Drawing.Point(6, 105);
-            this.CropResultPictureBox.Name = "CropResultPictureBox";
-            this.CropResultPictureBox.Size = new System.Drawing.Size(318, 155);
-            this.CropResultPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CropResultPictureBox.TabIndex = 3;
-            this.CropResultPictureBox.TabStop = false;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 377);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(262, 12);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "結果が期待したものであれば、Registを押してください。";
             // 
             // CropResultTextLabel
             // 
@@ -192,14 +212,42 @@
             this.CropResultTextBox.Size = new System.Drawing.Size(318, 96);
             this.CropResultTextBox.TabIndex = 4;
             // 
-            // label1
+            // CropResultPictureBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 377);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 12);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "結果が期待したものであれば、Registを押してください。";
+            this.CropResultPictureBox.Location = new System.Drawing.Point(6, 105);
+            this.CropResultPictureBox.Name = "CropResultPictureBox";
+            this.CropResultPictureBox.Size = new System.Drawing.Size(318, 155);
+            this.CropResultPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CropResultPictureBox.TabIndex = 3;
+            this.CropResultPictureBox.TabStop = false;
+            // 
+            // CropResultPictureBoxLabel
+            // 
+            this.CropResultPictureBoxLabel.AutoSize = true;
+            this.CropResultPictureBoxLabel.Location = new System.Drawing.Point(4, 90);
+            this.CropResultPictureBoxLabel.Name = "CropResultPictureBoxLabel";
+            this.CropResultPictureBoxLabel.Size = new System.Drawing.Size(69, 12);
+            this.CropResultPictureBoxLabel.TabIndex = 2;
+            this.CropResultPictureBoxLabel.Text = "切り取り結果";
+            // 
+            // ExpectedLabel
+            // 
+            this.ExpectedLabel.AutoSize = true;
+            this.ExpectedLabel.Location = new System.Drawing.Point(4, 15);
+            this.ExpectedLabel.Name = "ExpectedLabel";
+            this.ExpectedLabel.Size = new System.Drawing.Size(153, 12);
+            this.ExpectedLabel.TabIndex = 1;
+            this.ExpectedLabel.Text = "画像から期待される出力内容：";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 30);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(318, 57);
+            this.textBox1.TabIndex = 0;
             // 
             // RegistButton
             // 
@@ -213,6 +261,9 @@
             // 
             // CropPictureGroupBox
             // 
+            this.CropPictureGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CropPictureGroupBox.Controls.Add(this.CropPicturePanel);
             this.CropPictureGroupBox.Location = new System.Drawing.Point(348, 12);
             this.CropPictureGroupBox.Name = "CropPictureGroupBox";
@@ -223,6 +274,9 @@
             // 
             // CropPicturePanel
             // 
+            this.CropPicturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CropPicturePanel.AutoScroll = true;
             this.CropPicturePanel.Controls.Add(this.CropPictureBox);
             this.CropPicturePanel.Location = new System.Drawing.Point(6, 18);
@@ -251,54 +305,6 @@
             this.AbortButton.UseVisualStyleBackColor = true;
             this.AbortButton.Click += new System.EventHandler(this.AbortButton_Click);
             // 
-            // PositionXNumericUpDown
-            // 
-            this.PositionXNumericUpDown.Location = new System.Drawing.Point(69, 18);
-            this.PositionXNumericUpDown.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.PositionXNumericUpDown.Name = "PositionXNumericUpDown";
-            this.PositionXNumericUpDown.Size = new System.Drawing.Size(88, 19);
-            this.PositionXNumericUpDown.TabIndex = 4;
-            // 
-            // PositionYNumericUpDown
-            // 
-            this.PositionYNumericUpDown.Location = new System.Drawing.Point(69, 43);
-            this.PositionYNumericUpDown.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.PositionYNumericUpDown.Name = "PositionYNumericUpDown";
-            this.PositionYNumericUpDown.Size = new System.Drawing.Size(88, 19);
-            this.PositionYNumericUpDown.TabIndex = 5;
-            // 
-            // WidthNumericUpDown
-            // 
-            this.WidthNumericUpDown.Location = new System.Drawing.Point(219, 18);
-            this.WidthNumericUpDown.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.WidthNumericUpDown.Name = "WidthNumericUpDown";
-            this.WidthNumericUpDown.Size = new System.Drawing.Size(88, 19);
-            this.WidthNumericUpDown.TabIndex = 6;
-            // 
-            // HeightNumericUpDown
-            // 
-            this.HeightNumericUpDown.Location = new System.Drawing.Point(219, 43);
-            this.HeightNumericUpDown.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.HeightNumericUpDown.Name = "HeightNumericUpDown";
-            this.HeightNumericUpDown.Size = new System.Drawing.Size(88, 19);
-            this.HeightNumericUpDown.TabIndex = 7;
-            // 
             // TryCropButton
             // 
             this.TryCropButton.Location = new System.Drawing.Point(12, 91);
@@ -324,6 +330,10 @@
             this.Text = "画像切り取り設定";
             this.PointGroupBox.ResumeLayout(false);
             this.PointGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PositionYNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PositionXNumericUpDown)).EndInit();
             this.ExpectedGroupBox.ResumeLayout(false);
             this.ExpectedGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CropResultPictureBox)).EndInit();
@@ -331,10 +341,6 @@
             this.CropPicturePanel.ResumeLayout(false);
             this.CropPicturePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CropPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PositionXNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PositionYNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }

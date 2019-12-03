@@ -58,12 +58,15 @@ namespace BndrScoreRecorder
             }
 
             // Setting default OCR setting
-            foreach(OcrSetting ocrSetting in setting.ocrSettingList)
+            if (setting.ocrSettingList != null)
             {
-                if (ocrSetting.isDefault == true)
+                foreach (OcrSetting ocrSetting in setting.ocrSettingList)
                 {
-                    setting.defaultOcrSetting = ocrSetting;
-                    break;
+                    if (ocrSetting.isDefault == true)
+                    {
+                        setting.defaultOcrSetting = ocrSetting;
+                        break;
+                    }
                 }
             }
 

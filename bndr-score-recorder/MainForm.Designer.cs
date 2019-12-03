@@ -38,12 +38,12 @@
             this.ExecuteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AnalyzeToolStripSeparator01 = new System.Windows.Forms.ToolStripSeparator();
             this.SetupStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CropImagePositionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MusicListGroupBox = new System.Windows.Forms.GroupBox();
             this.MusicTreeView = new System.Windows.Forms.TreeView();
             this.ScoreDataGridView = new System.Windows.Forms.DataGridView();
-            this.CropImagePositionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.MusicListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).BeginInit();
@@ -103,28 +103,35 @@
             // ExecuteToolStripMenuItem
             // 
             this.ExecuteToolStripMenuItem.Name = "ExecuteToolStripMenuItem";
-            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.ExecuteToolStripMenuItem.Text = "解析実行";
             this.ExecuteToolStripMenuItem.Click += new System.EventHandler(this.ExecuteToolStripMenuItem_Click);
             // 
             // ExecuteAllToolStripMenuItem
             // 
             this.ExecuteAllToolStripMenuItem.Name = "ExecuteAllToolStripMenuItem";
-            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.ExecuteAllToolStripMenuItem.Text = "全件解析実行";
             this.ExecuteAllToolStripMenuItem.Click += new System.EventHandler(this.ExecuteAllToolStripMenuItem_Click);
             // 
             // AnalyzeToolStripSeparator01
             // 
             this.AnalyzeToolStripSeparator01.Name = "AnalyzeToolStripSeparator01";
-            this.AnalyzeToolStripSeparator01.Size = new System.Drawing.Size(177, 6);
+            this.AnalyzeToolStripSeparator01.Size = new System.Drawing.Size(159, 6);
             // 
             // SetupStripMenuItem
             // 
             this.SetupStripMenuItem.Name = "SetupStripMenuItem";
-            this.SetupStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SetupStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.SetupStripMenuItem.Text = "初期設定";
             this.SetupStripMenuItem.Click += new System.EventHandler(this.SetupStripMenuItem_Click);
+            // 
+            // CropImagePositionAndSizeToolStripMenuItem
+            // 
+            this.CropImagePositionAndSizeToolStripMenuItem.Name = "CropImagePositionAndSizeToolStripMenuItem";
+            this.CropImagePositionAndSizeToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.CropImagePositionAndSizeToolStripMenuItem.Text = "画像切り取り設定";
+            this.CropImagePositionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.CropImagePositionAndSizeToolStripMenuItem_Click);
             // 
             // HelpToolStripMenuItem
             // 
@@ -142,6 +149,8 @@
             // 
             // MusicListGroupBox
             // 
+            this.MusicListGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.MusicListGroupBox.Controls.Add(this.MusicTreeView);
             this.MusicListGroupBox.Location = new System.Drawing.Point(12, 27);
             this.MusicListGroupBox.Name = "MusicListGroupBox";
@@ -152,6 +161,8 @@
             // 
             // MusicTreeView
             // 
+            this.MusicTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.MusicTreeView.Location = new System.Drawing.Point(6, 18);
             this.MusicTreeView.Name = "MusicTreeView";
             this.MusicTreeView.Size = new System.Drawing.Size(227, 498);
@@ -163,6 +174,9 @@
             this.ScoreDataGridView.AllowUserToAddRows = false;
             this.ScoreDataGridView.AllowUserToDeleteRows = false;
             this.ScoreDataGridView.AllowUserToOrderColumns = true;
+            this.ScoreDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ScoreDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ScoreDataGridView.Location = new System.Drawing.Point(257, 45);
             this.ScoreDataGridView.MultiSelect = false;
@@ -171,13 +185,6 @@
             this.ScoreDataGridView.RowTemplate.Height = 21;
             this.ScoreDataGridView.Size = new System.Drawing.Size(895, 504);
             this.ScoreDataGridView.TabIndex = 2;
-            // 
-            // CropImagePositionAndSizeToolStripMenuItem
-            // 
-            this.CropImagePositionAndSizeToolStripMenuItem.Name = "CropImagePositionAndSizeToolStripMenuItem";
-            this.CropImagePositionAndSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.CropImagePositionAndSizeToolStripMenuItem.Text = "画像切り取り設定";
-            this.CropImagePositionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.CropImagePositionAndSizeToolStripMenuItem_Click);
             // 
             // MainForm
             // 

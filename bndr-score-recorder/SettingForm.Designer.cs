@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.SettingGroupBox = new System.Windows.Forms.GroupBox();
-            this.ImageMagickConvertLabel = new System.Windows.Forms.Label();
-            this.TesseractLabel = new System.Windows.Forms.Label();
-            this.ImageMagickConvertPathTextBox = new System.Windows.Forms.TextBox();
-            this.TesseractPathTextBox = new System.Windows.Forms.TextBox();
-            this.ImageMagickConvertPathSelectButton = new System.Windows.Forms.Button();
             this.TesseractPathSelectButton = new System.Windows.Forms.Button();
+            this.ImageMagickConvertPathSelectButton = new System.Windows.Forms.Button();
+            this.TesseractPathTextBox = new System.Windows.Forms.TextBox();
+            this.ImageMagickConvertPathTextBox = new System.Windows.Forms.TextBox();
+            this.TesseractLabel = new System.Windows.Forms.Label();
+            this.ImageMagickConvertLabel = new System.Windows.Forms.Label();
             this.RegistButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.SettingGroupBox.SuspendLayout();
@@ -42,6 +42,8 @@
             // 
             // SettingGroupBox
             // 
+            this.SettingGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SettingGroupBox.Controls.Add(this.TesseractPathSelectButton);
             this.SettingGroupBox.Controls.Add(this.ImageMagickConvertPathSelectButton);
             this.SettingGroupBox.Controls.Add(this.TesseractPathTextBox);
@@ -55,15 +57,45 @@
             this.SettingGroupBox.TabStop = false;
             this.SettingGroupBox.Text = "依存実行ファイルのパス設定";
             // 
-            // ImageMagickConvertLabel
+            // TesseractPathSelectButton
             // 
-            this.ImageMagickConvertLabel.AutoSize = true;
-            this.ImageMagickConvertLabel.Location = new System.Drawing.Point(6, 21);
-            this.ImageMagickConvertLabel.Name = "ImageMagickConvertLabel";
-            this.ImageMagickConvertLabel.Size = new System.Drawing.Size(141, 12);
-            this.ImageMagickConvertLabel.TabIndex = 1;
-            this.ImageMagickConvertLabel.Text = "ImageMagick (convert.exe)";
-            this.ImageMagickConvertLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TesseractPathSelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TesseractPathSelectButton.Location = new System.Drawing.Point(695, 41);
+            this.TesseractPathSelectButton.Name = "TesseractPathSelectButton";
+            this.TesseractPathSelectButton.Size = new System.Drawing.Size(75, 23);
+            this.TesseractPathSelectButton.TabIndex = 6;
+            this.TesseractPathSelectButton.Text = "Browse";
+            this.TesseractPathSelectButton.UseVisualStyleBackColor = true;
+            this.TesseractPathSelectButton.Click += new System.EventHandler(this.TesseractPathSelectButton_Click);
+            // 
+            // ImageMagickConvertPathSelectButton
+            // 
+            this.ImageMagickConvertPathSelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImageMagickConvertPathSelectButton.Location = new System.Drawing.Point(695, 16);
+            this.ImageMagickConvertPathSelectButton.Name = "ImageMagickConvertPathSelectButton";
+            this.ImageMagickConvertPathSelectButton.Size = new System.Drawing.Size(75, 23);
+            this.ImageMagickConvertPathSelectButton.TabIndex = 5;
+            this.ImageMagickConvertPathSelectButton.Text = "Browse";
+            this.ImageMagickConvertPathSelectButton.UseVisualStyleBackColor = true;
+            this.ImageMagickConvertPathSelectButton.Click += new System.EventHandler(this.ImageMagickConvertPathSelectButton_Click);
+            // 
+            // TesseractPathTextBox
+            // 
+            this.TesseractPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TesseractPathTextBox.Location = new System.Drawing.Point(153, 43);
+            this.TesseractPathTextBox.Name = "TesseractPathTextBox";
+            this.TesseractPathTextBox.Size = new System.Drawing.Size(536, 19);
+            this.TesseractPathTextBox.TabIndex = 4;
+            // 
+            // ImageMagickConvertPathTextBox
+            // 
+            this.ImageMagickConvertPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImageMagickConvertPathTextBox.Location = new System.Drawing.Point(153, 18);
+            this.ImageMagickConvertPathTextBox.Name = "ImageMagickConvertPathTextBox";
+            this.ImageMagickConvertPathTextBox.Size = new System.Drawing.Size(536, 19);
+            this.ImageMagickConvertPathTextBox.TabIndex = 3;
             // 
             // TesseractLabel
             // 
@@ -75,39 +107,15 @@
             this.TesseractLabel.Text = "Tesseract";
             this.TesseractLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // ImageMagickConvertPathTextBox
+            // ImageMagickConvertLabel
             // 
-            this.ImageMagickConvertPathTextBox.Location = new System.Drawing.Point(153, 18);
-            this.ImageMagickConvertPathTextBox.Name = "ImageMagickConvertPathTextBox";
-            this.ImageMagickConvertPathTextBox.Size = new System.Drawing.Size(536, 19);
-            this.ImageMagickConvertPathTextBox.TabIndex = 3;
-            // 
-            // TesseractPathTextBox
-            // 
-            this.TesseractPathTextBox.Location = new System.Drawing.Point(153, 43);
-            this.TesseractPathTextBox.Name = "TesseractPathTextBox";
-            this.TesseractPathTextBox.Size = new System.Drawing.Size(536, 19);
-            this.TesseractPathTextBox.TabIndex = 4;
-            // 
-            // ImageMagickConvertPathSelectButton
-            // 
-            this.ImageMagickConvertPathSelectButton.Location = new System.Drawing.Point(695, 16);
-            this.ImageMagickConvertPathSelectButton.Name = "ImageMagickConvertPathSelectButton";
-            this.ImageMagickConvertPathSelectButton.Size = new System.Drawing.Size(75, 23);
-            this.ImageMagickConvertPathSelectButton.TabIndex = 5;
-            this.ImageMagickConvertPathSelectButton.Text = "Browse";
-            this.ImageMagickConvertPathSelectButton.UseVisualStyleBackColor = true;
-            this.ImageMagickConvertPathSelectButton.Click += new System.EventHandler(this.ImageMagickConvertPathSelectButton_Click);
-            // 
-            // TesseractPathSelectButton
-            // 
-            this.TesseractPathSelectButton.Location = new System.Drawing.Point(695, 41);
-            this.TesseractPathSelectButton.Name = "TesseractPathSelectButton";
-            this.TesseractPathSelectButton.Size = new System.Drawing.Size(75, 23);
-            this.TesseractPathSelectButton.TabIndex = 6;
-            this.TesseractPathSelectButton.Text = "Browse";
-            this.TesseractPathSelectButton.UseVisualStyleBackColor = true;
-            this.TesseractPathSelectButton.Click += new System.EventHandler(this.TesseractPathSelectButton_Click);
+            this.ImageMagickConvertLabel.AutoSize = true;
+            this.ImageMagickConvertLabel.Location = new System.Drawing.Point(6, 21);
+            this.ImageMagickConvertLabel.Name = "ImageMagickConvertLabel";
+            this.ImageMagickConvertLabel.Size = new System.Drawing.Size(141, 12);
+            this.ImageMagickConvertLabel.TabIndex = 1;
+            this.ImageMagickConvertLabel.Text = "ImageMagick (convert.exe)";
+            this.ImageMagickConvertLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // RegistButton
             // 

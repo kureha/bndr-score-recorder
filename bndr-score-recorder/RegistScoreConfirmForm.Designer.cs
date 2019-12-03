@@ -166,6 +166,8 @@
             // 
             // TitleTextBox
             // 
+            this.TitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleTextBox.Location = new System.Drawing.Point(68, 18);
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.Size = new System.Drawing.Size(786, 19);
@@ -183,6 +185,8 @@
             // 
             // MusicGroupBox
             // 
+            this.MusicGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MusicGroupBox.Controls.Add(this.DifficultTextBox);
             this.MusicGroupBox.Controls.Add(this.DifficultLabel);
             this.MusicGroupBox.Controls.Add(this.MusicMessageTextBox);
@@ -201,6 +205,8 @@
             // 
             // DifficultTextBox
             // 
+            this.DifficultTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DifficultTextBox.Location = new System.Drawing.Point(68, 43);
             this.DifficultTextBox.Name = "DifficultTextBox";
             this.DifficultTextBox.Size = new System.Drawing.Size(786, 19);
@@ -218,6 +224,8 @@
             // 
             // MusicMessageTextBox
             // 
+            this.MusicMessageTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MusicMessageTextBox.Location = new System.Drawing.Point(6, 118);
             this.MusicMessageTextBox.Multiline = true;
             this.MusicMessageTextBox.Name = "MusicMessageTextBox";
@@ -228,6 +236,8 @@
             // 
             // IdTextBox
             // 
+            this.IdTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.IdTextBox.Location = new System.Drawing.Point(149, 93);
             this.IdTextBox.Name = "IdTextBox";
             this.IdTextBox.ReadOnly = true;
@@ -246,6 +256,8 @@
             // 
             // LevelTextBox
             // 
+            this.LevelTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LevelTextBox.Location = new System.Drawing.Point(68, 68);
             this.LevelTextBox.Name = "LevelTextBox";
             this.LevelTextBox.Size = new System.Drawing.Size(786, 19);
@@ -263,6 +275,9 @@
             // 
             // ScoreGroupBox
             // 
+            this.ScoreGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ScoreGroupBox.Controls.Add(this.ScoreMessageTextBox);
             this.ScoreGroupBox.Controls.Add(this.TotalNotesTextBox);
             this.ScoreGroupBox.Controls.Add(this.TotalNotesLabel);
@@ -290,6 +305,8 @@
             // 
             // ScoreMessageTextBox
             // 
+            this.ScoreMessageTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ScoreMessageTextBox.Location = new System.Drawing.Point(8, 380);
             this.ScoreMessageTextBox.Multiline = true;
             this.ScoreMessageTextBox.Name = "ScoreMessageTextBox";
@@ -318,6 +335,9 @@
             // 
             // ScreenshotPictureBox
             // 
+            this.ScreenshotPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenshotPictureBox.Location = new System.Drawing.Point(181, 18);
             this.ScreenshotPictureBox.Name = "ScreenshotPictureBox";
             this.ScreenshotPictureBox.Size = new System.Drawing.Size(662, 356);
@@ -362,6 +382,7 @@
             // 
             // RegistButton
             // 
+            this.RegistButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.RegistButton.Location = new System.Drawing.Point(12, 641);
             this.RegistButton.Name = "RegistButton";
             this.RegistButton.Size = new System.Drawing.Size(75, 23);
@@ -372,6 +393,7 @@
             // 
             // CancelButton
             // 
+            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CancelButton.Location = new System.Drawing.Point(93, 641);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
