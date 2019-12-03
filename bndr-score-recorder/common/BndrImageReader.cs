@@ -14,10 +14,10 @@ namespace BndrScoreRecorder.common
         private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // crop path suffix
-        private static readonly string SUFFIX_CROPNAME_TITLE = ".title";
-        private static readonly string SUFFIX_CROPNAME_SCORE = ".score";
-        private static readonly string SUFFIX_CROPNAME_MAXCOMBO = ".maxcombo";
-        private static readonly string SUFFIX_CROPNAME_LEVEL = ".level";
+        private const string SUFFIX_CROPNAME_TITLE = ".title";
+        private const string SUFFIX_CROPNAME_SCORE = ".score";
+        private const string SUFFIX_CROPNAME_MAXCOMBO = ".maxcombo";
+        private const string SUFFIX_CROPNAME_LEVEL = ".level";
 
         // debug mode (dry run for files)
         public static bool DEBUG_MODE = false;

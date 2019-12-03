@@ -17,11 +17,11 @@ namespace BndrScoreRecorder.common.entity
         private static readonly string[] CHAR_RAW_SCORE_LIST_SPLITER = { "\n" };
 
         // line number define
-        private static readonly int LINE_NUM_PERFECT = 0;
-        private static readonly int LINE_NUM_GREAT = 1;
-        private static readonly int LINE_NUM_GOOD = 2;
-        private static readonly int LINE_NUM_BAD = 3;
-        private static readonly int LINE_NUM_MISS = 4;
+        private const int LINE_NUM_PERFECT = 0;
+        private const int LINE_NUM_GREAT = 1;
+        private const int LINE_NUM_GOOD = 2;
+        private const int LINE_NUM_BAD = 3;
+        private const int LINE_NUM_MISS = 4;
 
         // initialize count value
         public static readonly long ERROR_COUNT = -1;

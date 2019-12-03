@@ -30,7 +30,7 @@ namespace BndrScoreRecorder
         private Setting setting;
 
         // Crop output suffix
-        private static readonly string SUFFIX_CROPNAME_TEST = ".test";
+        private const string SUFFIX_CROPNAME_TEST = ".test";
 
         public ImageCropPointForm(string imageFilePath, ref Setting setting)
         {

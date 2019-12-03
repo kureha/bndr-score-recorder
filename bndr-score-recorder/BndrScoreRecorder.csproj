@@ -90,10 +90,11 @@
     <Compile Include="common\bridge\ImageMagickBridge.cs" />
     <Compile Include="common\CodeMaster.cs" />
     <Compile Include="common\entity\Music.cs" />
+    <Compile Include="common\entity\OcrSetting.cs" />
     <Compile Include="common\entity\ScoreResult.cs" />
     <Compile Include="common\MusicDao.cs" />
     <Compile Include="common\OcrReader.cs" />
-    <Compile Include="common\Setting.cs" />
+    <Compile Include="common\entity\Setting.cs" />
     <Compile Include="common\bridge\TesseractBridge.cs" />
     <Compile Include="ImageCropPointForm.cs">
       <SubType>Form</SubType>

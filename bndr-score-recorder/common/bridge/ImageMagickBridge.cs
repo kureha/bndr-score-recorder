@@ -9,7 +9,7 @@ namespace BndrScoreRecorder.common.tesseract
 {
     public class ImageMagickBridge : bridge.BridgeBase
     {
-        private static readonly string OPTION_CROP = "-crop";
+        private const string OPTION_CROP = "-crop";
 
         /// <summary>
         /// ImageMagickを使用した画像切り出しを実施

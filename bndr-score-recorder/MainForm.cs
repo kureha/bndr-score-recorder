@@ -32,7 +32,7 @@ namespace BndrScoreRecorder
         private Setting setting;
 
         // level tree node prefix
-        private static readonly string PREFIX_LEVEL_TREE_NODE = "LEVEL_";
+        private const string PREFIX_LEVEL_TREE_NODE = "LEVEL_";
 
         /// <summary>
         /// 初期化。

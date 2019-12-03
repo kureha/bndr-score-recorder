@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BndrScoreRecorder.common.entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,13 @@ namespace BndrScoreRecorder
         // ImageMagick Convert Exe path
         [DataMember]
         public string pathImageMagickConvertExe;
+
+        // OCR Reader Settings
+        [DataMember]
+        public List<OcrSetting> ocrSettingList = new List<OcrSetting>();
+
+        // Default ocr setting
+        public OcrSetting defaultOcrSetting;
 
         /// <summary>
         /// JSON形式のファイルから設定を読み込み格納する。エラー時はNullが返却。
@@ -47,6 +55,16 @@ namespace BndrScoreRecorder
             } catch (Exception)
             {
 
+            }
+
+            // Setting default OCR setting
+            foreach(OcrSetting ocrSetting in setting.ocrSettingList)
+            {
+                if (ocrSetting.isDefault == true)
+                {
+                    setting.defaultOcrSetting = ocrSetting;
+                    break;
+                }
             }
 
             return setting;
