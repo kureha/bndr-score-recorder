@@ -324,6 +324,7 @@
             this.SelectOcrSettingListBox.Name = "SelectOcrSettingListBox";
             this.SelectOcrSettingListBox.Size = new System.Drawing.Size(330, 88);
             this.SelectOcrSettingListBox.TabIndex = 6;
+            this.SelectOcrSettingListBox.SelectedIndexChanged += new System.EventHandler(this.SelectOcrSettingListBox_SelectedIndexChanged);
             // 
             // ImageCropPointForm
             // 

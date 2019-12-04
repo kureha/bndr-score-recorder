@@ -32,6 +32,20 @@ namespace BndrScoreRecorder
         // Crop output suffix
         private const string SUFFIX_CROPNAME_TEST = ".test";
 
+        // ListBox's item Define
+        private static readonly string LIST_ITEM_OCR_TITLE = "1.タイトル切り抜き座標設定";
+        private static readonly string LIST_ITEM_OCR_DIFFICULT = "2.難易度切り抜き座標設定";
+        private static readonly string LIST_ITEM_OCR_SCORE = "3.スコア切り抜き座標設定";
+        private static readonly string LIST_ITEM_OCR_MAX_COMBO = "4.MAX COMBO切り抜き座標設定";
+        private static readonly string LIST_ITEM_OCR_LEVEL = "5.LEVEL切り抜き座標設定";
+
+        // ListBox's item index define
+        private const int LIST_INDEX_OCR_TITLE = 0;
+        private const int LIST_INDEX_OCR_DIFFICULT = 1;
+        private const int LIST_INDEX_OCR_SCORE = 2;
+        private const int LIST_INDEX_OCR_MAX_COMBO = 3;
+        private const int LIST_INDEX_OCR_LEVEL = 4;
+
         public ImageCropPointForm(string imageFilePath, ref Setting setting)
         {
             // Create log4net instance
@@ -67,12 +81,66 @@ namespace BndrScoreRecorder
 
             InitializeComponent();
 
+            // Initialize select list box
+            InitializeSelectOcrSettingListBox();
+
             // Attach to variables
             this.imageFilePath = imageFilePath;
             this.setting = setting;
 
             // Show image
             CropPictureBox.ImageLocation = imageFilePath;
+        }
+
+        /// <summary>
+        /// SettingOcrSelectListBoxを初期化する
+        /// </summary>
+        private void InitializeSelectOcrSettingListBox()
+        {
+            // Add items
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_TITLE);
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_DIFFICULT);
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_SCORE);
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_MAX_COMBO);
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_LEVEL);
+
+            // Init
+            SelectOcrSettingListBox.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// SettingOcrSelectListBoxを選択した際、対応する内容を画面に設定する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectOcrSettingListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int positionX;
+            int positionY;
+            int width;
+            int height;
+            switch(SelectOcrSettingListBox.SelectedIndex)
+            {
+                case LIST_INDEX_OCR_TITLE:
+                    // Title
+                    break;
+
+                case LIST_INDEX_OCR_DIFFICULT:
+                    //Difficult
+                    break;
+
+                case LIST_INDEX_OCR_MAX_COMBO:
+                    // Max combo
+                    break;
+
+                case LIST_INDEX_OCR_SCORE:
+                    // Score
+                    break;
+
+                case LIST_INDEX_OCR_LEVEL:
+                    // Level
+                    break;
+            }
         }
 
         /// <summary>
