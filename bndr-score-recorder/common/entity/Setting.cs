@@ -58,8 +58,13 @@ namespace BndrScoreRecorder
             }
 
             // Setting default OCR setting
-            if (setting.bndrOcrSettingList != null)
+            if (setting.bndrOcrSettingList == null || setting.bndrOcrSettingList.Count == 0)
             {
+                // If no setting, create new instance.
+                setting.defaultBndrOcrSetting = new BndrOcrSetting();
+            } else
+            {
+                // Else, load default setting
                 foreach (BndrOcrSetting bndrOcrSetting in setting.bndrOcrSettingList)
                 {
                     if (bndrOcrSetting.isDefault == true)
@@ -67,6 +72,12 @@ namespace BndrScoreRecorder
                         setting.defaultBndrOcrSetting = bndrOcrSetting;
                         break;
                     }
+                }
+
+                // If setting dosen't contain defualt setting, use first index
+                if (setting.defaultBndrOcrSetting == null)
+                {
+                    setting.defaultBndrOcrSetting = setting.bndrOcrSettingList[0];
                 }
             }
 

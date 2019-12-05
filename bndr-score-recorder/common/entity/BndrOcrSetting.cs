@@ -35,6 +35,19 @@ namespace BndrScoreRecorder.common.entity
         public bool isDefault;
 
         /// <summary>
+        /// コンストラクタ。すべての設定を初期化する。
+        /// </summary>
+        public BndrOcrSetting()
+        {
+            TitleOcrSetting = new OcrSetting();
+            DifficultOcrSetting = new OcrSetting();
+            ScoreOcrSetting = new OcrSetting();
+            MaxComboOcrSetting = new OcrSetting();
+            LevelOcrSetting = new OcrSetting();
+            isDefault = false;
+        }
+
+        /// <summary>
         /// Title OCR Optionを取得。
         /// </summary>
         /// <returns>有効なImageMagick Cropオプション値</returns>

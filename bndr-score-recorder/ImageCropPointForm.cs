@@ -1,4 +1,5 @@
 ﻿using BndrScoreRecorder.common;
+using BndrScoreRecorder.common.entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,10 +47,16 @@ namespace BndrScoreRecorder
         private const int LIST_INDEX_OCR_MAX_COMBO = 3;
         private const int LIST_INDEX_OCR_LEVEL = 4;
 
+        // Use for drag flag
+        private bool isMouseDown = false;
+
         public ImageCropPointForm(string imageFilePath, ref Setting setting)
         {
             // Create log4net instance
             logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+            // Attach setting
+            this.setting = setting;
 
             // Create screenshot data folder path
             workDirectoryPath = System.Windows.Forms.Application.StartupPath
@@ -81,66 +88,137 @@ namespace BndrScoreRecorder
 
             InitializeComponent();
 
-            // Initialize select list box
-            InitializeSelectOcrSettingListBox();
-
             // Attach to variables
             this.imageFilePath = imageFilePath;
-            this.setting = setting;
+
+            // Initialize select list box
+            InitializeSelectOcrSettingListBox();
 
             // Show image
             CropPictureBox.ImageLocation = imageFilePath;
         }
 
         /// <summary>
-        /// SettingOcrSelectListBoxを初期化する
+        /// SettingOcrSelectListBoxを初期化する。
         /// </summary>
         private void InitializeSelectOcrSettingListBox()
         {
             // Add items
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_TITLE);
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_DIFFICULT);
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_SCORE);
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_MAX_COMBO);
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_LEVEL);
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_TITLE + " [" + setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption() + "]");
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_DIFFICULT + " [" + setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption() + "]");
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_SCORE + " [" + setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption() + "]");
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_MAX_COMBO + " [" + setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption() + "]");
+            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_LEVEL + " [" + setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption() + "]");
 
             // Init
             SelectOcrSettingListBox.SelectedIndex = 0;
         }
 
         /// <summary>
-        /// SettingOcrSelectListBoxを選択した際、対応する内容を画面に設定する
+        /// SettingOcrSelectListBoxに設定の内容を反映する。
+        /// </summary>
+        private void ChangeApplyToSelectOcrSettingListBox()
+        {
+            // Change items
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_TITLE] = LIST_ITEM_OCR_TITLE + " [" + setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption() + "]";
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_DIFFICULT] = LIST_ITEM_OCR_DIFFICULT + " [" + setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption() + "]";
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_SCORE] = LIST_ITEM_OCR_SCORE + " [" + setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption() + "]";
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_MAX_COMBO] = LIST_ITEM_OCR_MAX_COMBO + " [" + setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption() + "]";
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_LEVEL] = LIST_ITEM_OCR_LEVEL + " [" + setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption() + "]";
+        }
+
+        /// <summary>
+        /// SettingOcrSelectListBoxを選択した際、対応する内容を画面に設定する。
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectOcrSettingListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void LoadSettingButton_Click(object sender, EventArgs e)
         {
-            int positionX;
-            int positionY;
-            int width;
-            int height;
-            switch(SelectOcrSettingListBox.SelectedIndex)
+            OcrSetting targetOcrSettiong;
+            switch (SelectOcrSettingListBox.SelectedIndex)
             {
                 case LIST_INDEX_OCR_TITLE:
                     // Title
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.TitleOcrSetting;
                     break;
 
                 case LIST_INDEX_OCR_DIFFICULT:
                     //Difficult
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.DifficultOcrSetting;
                     break;
 
                 case LIST_INDEX_OCR_MAX_COMBO:
                     // Max combo
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.MaxComboOcrSetting;
                     break;
 
                 case LIST_INDEX_OCR_SCORE:
                     // Score
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.ScoreOcrSetting;
                     break;
 
                 case LIST_INDEX_OCR_LEVEL:
                     // Level
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.LevelOcrSetting;
+                    break;
+                default:
+                    // Default
+                    targetOcrSettiong = new OcrSetting();
                     break;
             }
+            PositionXNumericUpDown.Value = targetOcrSettiong.positionX;
+            PositionYNumericUpDown.Value = targetOcrSettiong.positionY;
+            WidthNumericUpDown.Value = targetOcrSettiong.width;
+            HeightNumericUpDown.Value = targetOcrSettiong.height;
+        }
+
+        /// <summary>
+        /// 画面で設定した内容を、対象のOcrSettingオブジェクトに戻す。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveSettingButton_Click(object sender, EventArgs e)
+        {
+            OcrSetting targetOcrSettiong;
+            int targetIndex;
+            switch (SelectOcrSettingListBox.SelectedIndex)
+            {
+                case LIST_INDEX_OCR_TITLE:
+                    // Title
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.TitleOcrSetting;
+                    break;
+
+                case LIST_INDEX_OCR_DIFFICULT:
+                    //Difficult
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.DifficultOcrSetting;
+                    break;
+
+                case LIST_INDEX_OCR_MAX_COMBO:
+                    // Max combo
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.MaxComboOcrSetting;
+                    break;
+
+                case LIST_INDEX_OCR_SCORE:
+                    // Score
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.ScoreOcrSetting;
+                    break;
+
+                case LIST_INDEX_OCR_LEVEL:
+                    // Level
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.LevelOcrSetting;
+                    break;
+                default:
+                    // Default
+                    targetOcrSettiong = new OcrSetting();
+                    break;
+            }
+            targetOcrSettiong.positionX = (int) PositionXNumericUpDown.Value;
+            targetOcrSettiong.positionY = (int) PositionYNumericUpDown.Value;
+            targetOcrSettiong.width = (int)WidthNumericUpDown.Value;
+            targetOcrSettiong.height = (int) HeightNumericUpDown.Value;
+
+            // Apply to control
+            ChangeApplyToSelectOcrSettingListBox();
         }
 
         /// <summary>
@@ -155,7 +233,62 @@ namespace BndrScoreRecorder
             CropResultPictureBox.ImageLocation = null;
 
             // Try to crop file
-            CropResultTextBox.Text = OcrReader.ReadFromImageFile(setting.pathImageMagickConvertExe, setting.pathTesseractExe, workImageFilePath, SUFFIX_CROPNAME_TEST, CreateCropString());
+            switch (SelectOcrSettingListBox.SelectedIndex)
+            {
+                case LIST_INDEX_OCR_TITLE:
+                    // Title
+                    CropResultTextBox.Text = OcrReader.ReadFromImageFileJapaneseLang(
+                        setting.pathImageMagickConvertExe, 
+                        setting.pathTesseractExe, 
+                        workImageFilePath, 
+                        SUFFIX_CROPNAME_TEST, 
+                        CreateCropString());
+                    break;
+
+                case LIST_INDEX_OCR_DIFFICULT:
+                    //Difficult
+                    CropResultTextBox.Text = OcrReader.ReadFromImageFile(
+                        setting.pathImageMagickConvertExe, 
+                        setting.pathTesseractExe, 
+                        workImageFilePath, 
+                        SUFFIX_CROPNAME_TEST, 
+                        CreateCropString());
+                    break;
+
+                case LIST_INDEX_OCR_MAX_COMBO:
+                    // Max Combo
+                    CropResultTextBox.Text = OcrReader.ReadFromImageFileOnlyNumber(
+                        setting.pathImageMagickConvertExe,
+                        setting.pathTesseractExe,
+                        workImageFilePath,
+                        SUFFIX_CROPNAME_TEST,
+                        CreateCropString());
+                    break;
+                case LIST_INDEX_OCR_SCORE:
+                    // Score
+                    CropResultTextBox.Text = OcrReader.ReadFromImageFileOnlyNumber(
+                        setting.pathImageMagickConvertExe,
+                        setting.pathTesseractExe,
+                        workImageFilePath,
+                        SUFFIX_CROPNAME_TEST,
+                        CreateCropString());
+                    break;
+                case LIST_INDEX_OCR_LEVEL:
+                    // Level
+                    CropResultTextBox.Text = OcrReader.ReadFromImageFileOnlyNumber(
+                        setting.pathImageMagickConvertExe,
+                        setting.pathTesseractExe,
+                        workImageFilePath,
+                        SUFFIX_CROPNAME_TEST,
+                        CreateCropString());
+                    break;
+                default:
+                    // Default
+                    break;
+            }
+            // Change line separater
+            CropResultTextBox.Text = CropResultTextBox.Text.Replace("\n", Environment.NewLine);
+            // Attach to picture box
             CropResultPictureBox.ImageLocation = OcrReader.CreateImageMagickOutputFilePath(workImageFilePath, SUFFIX_CROPNAME_TEST);
         }
 
@@ -200,6 +333,8 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void CropPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            isMouseDown = true;
+
             PositionXNumericUpDown.Value = e.X;
             PositionYNumericUpDown.Value = e.Y;
         }
@@ -211,14 +346,20 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void CropPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            try
+            if (isMouseDown == true)
             {
-                WidthNumericUpDown.Value = e.X - PositionXNumericUpDown.Value;
-                HeightNumericUpDown.Value = e.Y - PositionYNumericUpDown.Value;
-            } catch (Exception)
-            {
+                try
+                {
+                    WidthNumericUpDown.Value = e.X - PositionXNumericUpDown.Value;
+                    HeightNumericUpDown.Value = e.Y - PositionYNumericUpDown.Value;
+                }
+                catch (Exception)
+                {
 
+                }
             }
+
+            isMouseDown = false;
         }
     }
 }

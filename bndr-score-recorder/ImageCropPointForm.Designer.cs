@@ -52,6 +52,8 @@
             this.AbortButton = new System.Windows.Forms.Button();
             this.TryCropButton = new System.Windows.Forms.Button();
             this.SelectOcrSettingListBox = new System.Windows.Forms.ListBox();
+            this.SaveSettingButton = new System.Windows.Forms.Button();
+            this.LoadSettingButton = new System.Windows.Forms.Button();
             this.PointGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).BeginInit();
@@ -74,7 +76,7 @@
             this.PointGroupBox.Controls.Add(this.WidthLabel);
             this.PointGroupBox.Controls.Add(this.PositionYLabel);
             this.PointGroupBox.Controls.Add(this.PositionXLabel);
-            this.PointGroupBox.Location = new System.Drawing.Point(12, 106);
+            this.PointGroupBox.Location = new System.Drawing.Point(12, 111);
             this.PointGroupBox.Name = "PointGroupBox";
             this.PointGroupBox.Size = new System.Drawing.Size(330, 73);
             this.PointGroupBox.TabIndex = 0;
@@ -178,7 +180,7 @@
             this.ExpectedGroupBox.Controls.Add(this.CropResultPictureBoxLabel);
             this.ExpectedGroupBox.Controls.Add(this.ExpectedLabel);
             this.ExpectedGroupBox.Controls.Add(this.textBox1);
-            this.ExpectedGroupBox.Location = new System.Drawing.Point(12, 214);
+            this.ExpectedGroupBox.Location = new System.Drawing.Point(12, 219);
             this.ExpectedGroupBox.Name = "ExpectedGroupBox";
             this.ExpectedGroupBox.Size = new System.Drawing.Size(330, 404);
             this.ExpectedGroupBox.TabIndex = 1;
@@ -252,7 +254,7 @@
             // 
             // RegistButton
             // 
-            this.RegistButton.Location = new System.Drawing.Point(12, 624);
+            this.RegistButton.Location = new System.Drawing.Point(12, 629);
             this.RegistButton.Name = "RegistButton";
             this.RegistButton.Size = new System.Drawing.Size(75, 23);
             this.RegistButton.TabIndex = 2;
@@ -298,7 +300,7 @@
             // 
             // AbortButton
             // 
-            this.AbortButton.Location = new System.Drawing.Point(94, 624);
+            this.AbortButton.Location = new System.Drawing.Point(94, 629);
             this.AbortButton.Name = "AbortButton";
             this.AbortButton.Size = new System.Drawing.Size(75, 23);
             this.AbortButton.TabIndex = 4;
@@ -308,7 +310,7 @@
             // 
             // TryCropButton
             // 
-            this.TryCropButton.Location = new System.Drawing.Point(12, 185);
+            this.TryCropButton.Location = new System.Drawing.Point(12, 190);
             this.TryCropButton.Name = "TryCropButton";
             this.TryCropButton.Size = new System.Drawing.Size(330, 23);
             this.TryCropButton.TabIndex = 5;
@@ -322,15 +324,36 @@
             this.SelectOcrSettingListBox.ItemHeight = 12;
             this.SelectOcrSettingListBox.Location = new System.Drawing.Point(12, 12);
             this.SelectOcrSettingListBox.Name = "SelectOcrSettingListBox";
-            this.SelectOcrSettingListBox.Size = new System.Drawing.Size(330, 88);
+            this.SelectOcrSettingListBox.Size = new System.Drawing.Size(330, 64);
             this.SelectOcrSettingListBox.TabIndex = 6;
-            this.SelectOcrSettingListBox.SelectedIndexChanged += new System.EventHandler(this.SelectOcrSettingListBox_SelectedIndexChanged);
+            // 
+            // SaveSettingButton
+            // 
+            this.SaveSettingButton.Location = new System.Drawing.Point(217, 82);
+            this.SaveSettingButton.Name = "SaveSettingButton";
+            this.SaveSettingButton.Size = new System.Drawing.Size(125, 23);
+            this.SaveSettingButton.TabIndex = 8;
+            this.SaveSettingButton.Text = "↑ SAVE";
+            this.SaveSettingButton.UseVisualStyleBackColor = true;
+            this.SaveSettingButton.Click += new System.EventHandler(this.SaveSettingButton_Click);
+            // 
+            // LoadSettingButton
+            // 
+            this.LoadSettingButton.Location = new System.Drawing.Point(12, 82);
+            this.LoadSettingButton.Name = "LoadSettingButton";
+            this.LoadSettingButton.Size = new System.Drawing.Size(125, 23);
+            this.LoadSettingButton.TabIndex = 7;
+            this.LoadSettingButton.Text = "↓ LOAD";
+            this.LoadSettingButton.UseVisualStyleBackColor = true;
+            this.LoadSettingButton.Click += new System.EventHandler(this.LoadSettingButton_Click);
             // 
             // ImageCropPointForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.SaveSettingButton);
+            this.Controls.Add(this.LoadSettingButton);
             this.Controls.Add(this.SelectOcrSettingListBox);
             this.Controls.Add(this.TryCropButton);
             this.Controls.Add(this.AbortButton);
@@ -383,5 +406,7 @@
         private System.Windows.Forms.NumericUpDown PositionXNumericUpDown;
         private System.Windows.Forms.Button TryCropButton;
         private System.Windows.Forms.ListBox SelectOcrSettingListBox;
+        private System.Windows.Forms.Button SaveSettingButton;
+        private System.Windows.Forms.Button LoadSettingButton;
     }
 }
