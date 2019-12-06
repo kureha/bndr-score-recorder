@@ -26,6 +26,7 @@ namespace BndrScoreRecorder
         public List<BndrOcrSetting> bndrOcrSettingList = new List<BndrOcrSetting>();
 
         // Default bndr ocr setting
+        [DataMember]
         public BndrOcrSetting defaultBndrOcrSetting;
 
         /// <summary>

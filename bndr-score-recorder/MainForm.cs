@@ -462,6 +462,7 @@ namespace BndrScoreRecorder
             {
                 if (imageCropPointForm.ShowDialog() == DialogResult.OK)
                 {
+                    Setting.SaveToFile(setting, settingFilePath);
                     logger.Info("画像切り取りの設定が完了。");
                 }
             }
