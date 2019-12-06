@@ -25,17 +25,84 @@ namespace BndrScoreRecorder.common
         {
             logger.Info("Dao datasource string = " + dataSourcePath);
 
-            if (File.Exists(dataSourcePath) == false)
-            {
-                string errorMessage = "Datasource file not found";
-                logger.Error(errorMessage);
-                throw new FileNotFoundException(errorMessage);
-            }
-
             builder = new SqliteConnectionStringBuilder
             {
                 DataSource = dataSourcePath
             };
+
+            // Check file exists
+            if (File.Exists(dataSourcePath) == false)
+            {
+                logger.Info("Datasource file not found, create new database.");
+
+                // database access section
+                using (SqliteConnection connection = new SqliteConnection(builder.ToString()))
+                {
+                    // connection open
+                    connection.Open();
+
+                    // enable transaction
+                    using (SqliteTransaction transaction = connection.BeginTransaction())
+                    using (SqliteCommand command = connection.CreateCommand())
+                    {
+                        // SQL
+                        command.CommandText = "CREATE TABLE M_MUSIC ("
+                            + "	id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                            + "	title	TEXT,"
+                            + "	difficult	TEXT,"
+                            + "	level	INTEGER,"
+                            + "	insert_date	TEXT,"
+                            + "	update_date	TEXT"
+                            + ")";
+
+                        // query to log
+                        logger.Info(command.CommandText);
+
+                        // execute
+                        command.ExecuteNonQuery();
+
+                        // SQL
+                        command.CommandText = "CREATE TABLE T_OCRREAD_MUSIC_LINK ("
+                            + "	music_id	TEXT NOT NULL,"
+                            + "	hashed_ocr_data	TEXT NOT NULL"
+                            + ")";
+
+                        // query to log
+                        logger.Info(command.CommandText);
+
+                        // execute
+                        command.ExecuteNonQuery();
+
+                        // SQL
+                        command.CommandText = "CREATE TABLE T_SCORE_RECORD ("
+                            + "	id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                            + "	music_id	INTEGER NOT NULL,"
+                            + "	perfect	INTEGER,"
+                            + "	great	INTEGER,"
+                            + "	good	INTEGER,"
+                            + "	bad	INTEGER,"
+                            + "	miss	INTEGER,"
+                            + "	total_notes	INTEGER,"
+                            + "	max_combo	INTEGER,"
+                            + "	ex_score	INTEGER,"
+                            + "	image_file_path	TEXT,"
+                            + "	insert_date	TEXT,"
+                            + "	update_date	TEXT"
+                            + ")";
+
+                        // query to log
+                        logger.Info(command.CommandText);
+
+                        // execute
+                        command.ExecuteNonQuery();
+
+                        // commit
+                    transaction.Commit();
+                    }
+                }
+
+                logger.Info("Create table complete.");
+            }
         }
 
         /// <summary>

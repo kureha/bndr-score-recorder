@@ -94,6 +94,13 @@ namespace BndrScoreRecorder
             // Execute deserialize
             try
             {
+                // Create directory if not exists
+                if (Directory.Exists(Path.GetDirectoryName(jsonFilePath)) == false)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(jsonFilePath));
+                }
+                
+                // Write settings to JSON file
                 using (StreamWriter streamWriter = new StreamWriter(jsonFilePath))
                 using (MemoryStream memoryStream = new MemoryStream())
                 using (StreamReader streamReader = new StreamReader(memoryStream))
