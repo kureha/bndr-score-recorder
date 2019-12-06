@@ -39,6 +39,15 @@ namespace BndrScoreRecorder.common
                 return null;
             }
 
+            // Load ocr setting
+            BndrOcrSetting bndrOcrSetting = setting.defaultBndrOcrSetting;
+
+            if (bndrOcrSetting == null)
+            {
+                logger.Error("Default setting is null!");
+                return null;
+            }
+
             // File path check
             logger.Info("Screenshot image file = " + screenshotImageFilePath);
             if (File.Exists(screenshotImageFilePath) == false)
@@ -110,7 +119,7 @@ namespace BndrScoreRecorder.common
                 setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_TITLE,
-                "840x40+615+70");
+                bndrOcrSetting.getTitleOcrOption());
             logger.Info("Title = " + titleString);
 
             // Difficult code read
@@ -119,7 +128,7 @@ namespace BndrScoreRecorder.common
                 setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_TITLE,
-                "140x35+470+70");
+                bndrOcrSetting.getDifficultOcrOption());
             logger.Info("Difficult = " + difficultString);
 
             // Score read
@@ -128,7 +137,7 @@ namespace BndrScoreRecorder.common
                 setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_SCORE,
-                "125x250+1440+450");
+                bndrOcrSetting.getScoreOcrOption());
             logger.Info("Score = " + scoreString);
 
             // Max combo read
@@ -137,7 +146,7 @@ namespace BndrScoreRecorder.common
                 setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_MAXCOMBO,
-                "120x40+1650+595");
+                bndrOcrSetting.getMaxComboOcrOption());
             logger.Info("Max combo = " + maxComboString);
 
             // Level read
@@ -146,7 +155,7 @@ namespace BndrScoreRecorder.common
                 setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_LEVEL,
-                "70x45+1615+65");
+                bndrOcrSetting.getLevelOcrOption());
             logger.Info("Level = " + levelString);
 
             logger.Info("OCR read section end.");
@@ -156,15 +165,30 @@ namespace BndrScoreRecorder.common
             Music analyzedMusic = new Music
             {
                 title = titleString,
-                difficult = difficultString,
-                level = int.Parse(levelString)
+                difficult = difficultString
             };
+
+            try
+            {
+                analyzedMusic.level = int.Parse(levelString);
+            } catch (FormatException)
+            {
+                analyzedMusic.level = 0;
+            }
 
             // Create Hashed OCR Data
             analyzedMusic.CreateHashedOcrDataFromTitleAndDifficult();
 
             analyzedMusic.scoreResultList.Add(ScoreResult.Parse(scoreString, scrennShotImageFileDestPath.Replace(destDirPath, string.Empty)));
-            analyzedMusic.scoreResultList[0].maxCombo = int.Parse(maxComboString);
+
+            try
+            {
+                analyzedMusic.scoreResultList[0].maxCombo = int.Parse(maxComboString);
+            } catch (FormatException)
+            {
+                analyzedMusic.scoreResultList[0].maxCombo = 0;
+            }
+
             logger.Info("Musc score result creation end.");
 
             return analyzedMusic;
