@@ -36,14 +36,14 @@ namespace BndrScoreRecorder
         // ListBox's item Define
         private static readonly string LIST_ITEM_OCR_TITLE = "1.タイトル切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_DIFFICULT = "2.難易度切り抜き座標設定 [{0}]";
-        private static readonly string LIST_ITEM_OCR_SCORE = "3.スコア切り抜き座標設定 [{0}]";
+        private static readonly string LIST_ITEM_OCR_RESULT_NOTES = "3.ノーツ結果切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_MAX_COMBO = "4.MAX COMBO切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_LEVEL = "5.LEVEL切り抜き座標設定 [{0}]";
 
         // ListBox's item index define
         private const int LIST_INDEX_OCR_TITLE = 0;
         private const int LIST_INDEX_OCR_DIFFICULT = 1;
-        private const int LIST_INDEX_OCR_SCORE = 2;
+        private const int LIST_INDEX_OCR_RESULT_NOTES = 2;
         private const int LIST_INDEX_OCR_MAX_COMBO = 3;
         private const int LIST_INDEX_OCR_LEVEL = 4;
 
@@ -108,8 +108,8 @@ namespace BndrScoreRecorder
                 setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption()));
             SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_DIFFICULT, 
                 setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_SCORE, 
-                setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_RESULT_NOTES, 
+                setting.defaultBndrOcrSetting.ResultNotesOcrSetting.ImageMagickCropOption()));
             SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_MAX_COMBO, 
                 setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption()));
             SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_LEVEL, 
@@ -129,8 +129,8 @@ namespace BndrScoreRecorder
                 setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption()));
             SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_DIFFICULT,
                 setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_SCORE,
-                setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_RESULT_NOTES,
+                setting.defaultBndrOcrSetting.ResultNotesOcrSetting.ImageMagickCropOption()));
             SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_MAX_COMBO,
                 setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption()));
             SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_LEVEL,
@@ -162,9 +162,9 @@ namespace BndrScoreRecorder
                     targetOcrSettiong = setting.defaultBndrOcrSetting.MaxComboOcrSetting;
                     break;
 
-                case LIST_INDEX_OCR_SCORE:
-                    // Score
-                    targetOcrSettiong = setting.defaultBndrOcrSetting.ScoreOcrSetting;
+                case LIST_INDEX_OCR_RESULT_NOTES:
+                    // Result notes
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.ResultNotesOcrSetting;
                     break;
 
                 case LIST_INDEX_OCR_LEVEL:
@@ -208,9 +208,9 @@ namespace BndrScoreRecorder
                     targetOcrSettiong = setting.defaultBndrOcrSetting.MaxComboOcrSetting;
                     break;
 
-                case LIST_INDEX_OCR_SCORE:
-                    // Score
-                    targetOcrSettiong = setting.defaultBndrOcrSetting.ScoreOcrSetting;
+                case LIST_INDEX_OCR_RESULT_NOTES:
+                    // Result notes
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.ResultNotesOcrSetting;
                     break;
 
                 case LIST_INDEX_OCR_LEVEL:
@@ -274,8 +274,8 @@ namespace BndrScoreRecorder
                         SUFFIX_CROPNAME_TEST,
                         CreateCropString());
                     break;
-                case LIST_INDEX_OCR_SCORE:
-                    // Score
+                case LIST_INDEX_OCR_RESULT_NOTES:
+                    // Result notes
                     CropResultTextBox.Text = OcrReader.ReadFromImageFileOnlyNumber(
                         setting.pathImageMagickConvertExe,
                         setting.pathTesseractExe,

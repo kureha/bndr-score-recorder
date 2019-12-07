@@ -70,7 +70,7 @@ namespace BndrScoreRecorder.common.entity
 
         // score
         [DataMember]
-        public long score { set; get; }
+        public long score;
 
         // rank code : CodeMaster.RankCodeMaster
         [DataMember]

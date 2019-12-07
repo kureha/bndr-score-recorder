@@ -137,7 +137,7 @@ namespace BndrScoreRecorder.common
                 setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_SCORE,
-                bndrOcrSetting.getScoreOcrOption());
+                bndrOcrSetting.getResultNotesOcrOption());
             logger.Info("Score = " + scoreString);
 
             // Max combo read

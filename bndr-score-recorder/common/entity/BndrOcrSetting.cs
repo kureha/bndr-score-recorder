@@ -18,9 +18,9 @@ namespace BndrScoreRecorder.common.entity
         [DataMember]
         public OcrSetting DifficultOcrSetting;
 
-        // Score用設定
+        // Result Notes用設定
         [DataMember]
-        public OcrSetting ScoreOcrSetting;
+        public OcrSetting ResultNotesOcrSetting;
 
         // Max Combo用設定
         [DataMember]
@@ -41,7 +41,7 @@ namespace BndrScoreRecorder.common.entity
         {
             TitleOcrSetting = new OcrSetting();
             DifficultOcrSetting = new OcrSetting();
-            ScoreOcrSetting = new OcrSetting();
+            ResultNotesOcrSetting = new OcrSetting();
             MaxComboOcrSetting = new OcrSetting();
             LevelOcrSetting = new OcrSetting();
             isDefault = false;
@@ -78,17 +78,17 @@ namespace BndrScoreRecorder.common.entity
         }
 
         /// <summary>
-        /// Score OCR Optionを取得。
+        /// Result Notes OCR Optionを取得。
         /// </summary>
         /// <returns>有効なImageMagick Cropオプション値</returns>
-        public string getScoreOcrOption()
+        public string getResultNotesOcrOption()
         {
-            if (ScoreOcrSetting == null)
+            if (ResultNotesOcrSetting == null)
             {
                 return string.Empty;
             } else
             {
-                return ScoreOcrSetting.ImageMagickCropOption();
+                return ResultNotesOcrSetting.ImageMagickCropOption();
             }
         }
 
