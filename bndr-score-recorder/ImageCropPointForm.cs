@@ -41,11 +41,11 @@ namespace BndrScoreRecorder
         private static readonly string LIST_ITEM_OCR_LEVEL = "5.LEVEL切り抜き座標設定 [{0}]";
 
         // ListBox's description define
-        private static readonly string DESCRIPTION_OCR_TITLE = "曲名そのものの文字列。日本語を含む。\r\n読み取り結果例：てすと曲名";
-        private static readonly string DESCRIPTION_OCR_DIFFICULT = "難易度の文字列。例えばBASIC、ADVANCE、EXPERT、SPECIAL等。アルファベットのみ。\r\n読み取り結果例：EXPERT";
-        private static readonly string DESCRIPTION_OCR_RESULT_NOTES = "ノーツ結果の数字5行。上の行からPerfect,Great,Good,Bad,Missなど。\r\n読み取り結果例：\r\n500\r\n100\r\n5\r\n3\r\n1";
-        private static readonly string DESCRIPTION_OCR_MAX_COMBO = "MAX COMBOの数字。\r\n読み取り結果例：500";
-        private static readonly string DESCRIPTION_OCR_LEVEL = "LEVELの数字。\r\n読み取り結果例：25";
+        private static readonly string DESCRIPTION_OCR_TITLE = "曲名そのものの文字列。日本語を含む。読み取り結果例：てすと曲名";
+        private static readonly string DESCRIPTION_OCR_DIFFICULT = "難易度の文字列。例えばBASIC、ADVANCE、EXPERT、SPECIAL等。アルファベットのみ。読み取り結果例：EXPERT";
+        private static readonly string DESCRIPTION_OCR_RESULT_NOTES = "ノーツ結果の数字5行。上の行からPerfect,Great,Good,Bad,Miss。読み取り結果例：\r\n500\r\n100\r\n0005\r\n0003\r\n1";
+        private static readonly string DESCRIPTION_OCR_MAX_COMBO = "MAX COMBOの数字。読み取り結果例：0500";
+        private static readonly string DESCRIPTION_OCR_LEVEL = "LEVELの数字。読み取り結果例：25";
 
         // ListBox's item index define
         private const int LIST_INDEX_OCR_TITLE = 0;
@@ -236,7 +236,7 @@ namespace BndrScoreRecorder
             }
             targetOcrSettiong.positionX = (int) PositionXNumericUpDown.Value;
             targetOcrSettiong.positionY = (int) PositionYNumericUpDown.Value;
-            targetOcrSettiong.width = (int)WidthNumericUpDown.Value;
+            targetOcrSettiong.width = (int) WidthNumericUpDown.Value;
             targetOcrSettiong.height = (int) HeightNumericUpDown.Value;
 
             // Apply to control
@@ -467,6 +467,21 @@ namespace BndrScoreRecorder
 
             // Set text
             DescriptionTextBox.Text = message;
+        }
+
+        /// <summary>
+        /// NumericUpDownが変更されたときに、四角形を再描画する。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PositionNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            DrawRectangleInCropPictureBox(
+                new Point((int)PositionXNumericUpDown.Value, (int)PositionYNumericUpDown.Value), 
+                new Point(
+                    (int)(PositionXNumericUpDown.Value + WidthNumericUpDown.Value), 
+                    (int)(PositionYNumericUpDown.Value + HeightNumericUpDown.Value))
+                );
         }
     }
 }

@@ -38,7 +38,7 @@
             this.PositionYLabel = new System.Windows.Forms.Label();
             this.PositionXLabel = new System.Windows.Forms.Label();
             this.ExpectedGroupBox = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.ConfirmMessageLabel = new System.Windows.Forms.Label();
             this.CropResultTextLabel = new System.Windows.Forms.Label();
             this.CropResultTextBox = new System.Windows.Forms.TextBox();
             this.CropResultPictureBox = new System.Windows.Forms.PictureBox();
@@ -95,6 +95,7 @@
             this.HeightNumericUpDown.Name = "HeightNumericUpDown";
             this.HeightNumericUpDown.Size = new System.Drawing.Size(88, 19);
             this.HeightNumericUpDown.TabIndex = 7;
+            this.HeightNumericUpDown.ValueChanged += new System.EventHandler(this.PositionNumericUpDown_ValueChanged);
             // 
             // WidthNumericUpDown
             // 
@@ -107,6 +108,7 @@
             this.WidthNumericUpDown.Name = "WidthNumericUpDown";
             this.WidthNumericUpDown.Size = new System.Drawing.Size(88, 19);
             this.WidthNumericUpDown.TabIndex = 6;
+            this.WidthNumericUpDown.ValueChanged += new System.EventHandler(this.PositionNumericUpDown_ValueChanged);
             // 
             // PositionYNumericUpDown
             // 
@@ -119,6 +121,7 @@
             this.PositionYNumericUpDown.Name = "PositionYNumericUpDown";
             this.PositionYNumericUpDown.Size = new System.Drawing.Size(88, 19);
             this.PositionYNumericUpDown.TabIndex = 5;
+            this.PositionYNumericUpDown.ValueChanged += new System.EventHandler(this.PositionNumericUpDown_ValueChanged);
             // 
             // PositionXNumericUpDown
             // 
@@ -131,6 +134,7 @@
             this.PositionXNumericUpDown.Name = "PositionXNumericUpDown";
             this.PositionXNumericUpDown.Size = new System.Drawing.Size(88, 19);
             this.PositionXNumericUpDown.TabIndex = 4;
+            this.PositionXNumericUpDown.ValueChanged += new System.EventHandler(this.PositionNumericUpDown_ValueChanged);
             // 
             // HeightLabel
             // 
@@ -174,7 +178,7 @@
             // 
             // ExpectedGroupBox
             // 
-            this.ExpectedGroupBox.Controls.Add(this.label1);
+            this.ExpectedGroupBox.Controls.Add(this.ConfirmMessageLabel);
             this.ExpectedGroupBox.Controls.Add(this.CropResultTextLabel);
             this.ExpectedGroupBox.Controls.Add(this.CropResultTextBox);
             this.ExpectedGroupBox.Controls.Add(this.CropResultPictureBox);
@@ -188,14 +192,14 @@
             this.ExpectedGroupBox.TabStop = false;
             this.ExpectedGroupBox.Text = "試験出力";
             // 
-            // label1
+            // ConfirmMessageLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 406);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 12);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "結果が期待したものであれば、Registを押してください。";
+            this.ConfirmMessageLabel.AutoSize = true;
+            this.ConfirmMessageLabel.Location = new System.Drawing.Point(6, 406);
+            this.ConfirmMessageLabel.Name = "ConfirmMessageLabel";
+            this.ConfirmMessageLabel.Size = new System.Drawing.Size(237, 12);
+            this.ConfirmMessageLabel.TabIndex = 6;
+            this.ConfirmMessageLabel.Text = "結果が期待した文字列であれば問題ありません。";
             // 
             // CropResultTextLabel
             // 
@@ -391,7 +395,7 @@
         private System.Windows.Forms.Label PositionYLabel;
         private System.Windows.Forms.Label PositionXLabel;
         private System.Windows.Forms.GroupBox ExpectedGroupBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ConfirmMessageLabel;
         private System.Windows.Forms.Label CropResultTextLabel;
         private System.Windows.Forms.TextBox CropResultTextBox;
         private System.Windows.Forms.PictureBox CropResultPictureBox;
