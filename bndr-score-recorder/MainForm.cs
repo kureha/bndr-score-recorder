@@ -203,7 +203,7 @@ namespace BndrScoreRecorder
                 }
 
                 // MusicNode object
-                TreeNode musicNode = new TreeNode("[" + music.difficult + "] " + music.title);
+                TreeNode musicNode = new TreeNode(String.Format("[{0}] {1}", music.difficult, music.title));
                 musicNode.Tag = music.id;
 
                 // Insert music data to tree node
@@ -372,14 +372,11 @@ namespace BndrScoreRecorder
         }
 
         /// <summary>
-        /// 楽曲が選択された際、そのスコアを隣のViewに表示する。
+        /// TreeViewで選択されているMusicIDを取得する。
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MusicTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        /// <returns>TreeViewで選択されているMusicID。Music以外が選択されているとき、Null。</returns>
+        private int? GetTreeViewSelectedMusicId()
         {
-            logger.Info("DataGridView attach start.");
-
             // Get selected node
             TreeNode selectedNode = MusicTreeView.SelectedNode;
 
@@ -388,15 +385,32 @@ namespace BndrScoreRecorder
             try
             {
                 musicId = (int?)selectedNode.Tag;
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 musicId = null;
             }
 
+            return musicId;
+        }
+
+        /// <summary>
+        /// 楽曲が選択された際、そのスコアを隣のViewに表示する。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MusicTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            logger.Info("DataGridView attach start.");
+
+            // Extract music id from tree node tag
+            int? musicId = GetTreeViewSelectedMusicId();
+
             // If null or empty, abort this function
             if (musicId == null)
             {
-                logger.Error("Music id is null.");
+                logger.Error("Music id is null, selected non music element. Clear data grid view.");
+                ScoreDataGridView.DataSource = null;
                 return;
             } else
             {
@@ -466,6 +480,60 @@ namespace BndrScoreRecorder
                     logger.Info("画像切り取りの設定が完了。");
                 }
             }
+        }
+
+        /// <summary>
+        /// DataGridViewでダブルクリックされた要素を編集する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScoreDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Get selected item
+            ScoreResult scoreResult = null;
+
+            foreach (DataGridViewRow row in ScoreDataGridView.SelectedRows)
+            {
+                scoreResult = (ScoreResult)row.DataBoundItem;
+                break;
+            }
+
+            // If can't selected, no action
+            if (scoreResult == null)
+            {
+                return;
+            }
+
+            // Load id and open window
+            int? musicId = GetTreeViewSelectedMusicId();
+
+            // If can't get music id, no action
+            if (musicId == null)
+            {
+                return;
+            }
+
+            // Get music object from Music ID
+            MusicDao musicDao = new MusicDao(databaseFilePath);
+            Music music = musicDao.selectByMusicId(musicId);
+
+            music.scoreResultList = new List<ScoreResult>();
+            music.scoreResultList.Add(scoreResult);
+
+            using(RegistScoreConfirmForm registScoreConfirmForm = new RegistScoreConfirmForm(ref music, ref music))
+            {
+                if (DialogResult.OK == registScoreConfirmForm.ShowDialog())
+                {
+                    // regist data
+                    musicDao.Replace(music);
+                    MessageBox.Show("スコアデータの修正が完了しました。");
+                } else
+                {
+                    // cancel
+                    return;
+                }
+            }
+
         }
     }
 }
