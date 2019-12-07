@@ -217,7 +217,7 @@ namespace BndrScoreRecorder
         /// 特定フォルダ内の画像に対して解析を行う。
         /// </summary>
         /// <param name="analyzeAllFile">true:全ファイルを解析、false:既に解析済みファイルがあればスキップ</param>
-        private void AnalyzeScore(bool analyzeAllFile)
+        private void AnalyzeScoreFromDirectory(bool analyzeAllFile)
         {
             logger.Info("Analyze score start. Analyze all file flag = " + analyzeAllFile);
 
@@ -325,7 +325,12 @@ namespace BndrScoreRecorder
                     }
                     else
                     {
-                        logger.Info("DialogResult is cancel, skip score data.");
+                        // If canceled, delete work file
+                        string workfileOutputPath = dataFolderPath
+                            + Path.DirectorySeparatorChar
+                            + Path.GetFileNameWithoutExtension(filePath);
+                        logger.Info("DialogResult is cancel, cleanup score data. Directory path = " + workfileOutputPath);
+                        Directory.Delete(workfileOutputPath, true);
                     }
                 }
 
@@ -341,12 +346,18 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ExecuteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Analyze score
-            AnalyzeScore(false);
-            // Refresh music tree view
-            BuildMusicTreeView();
-            // Show complete message
-            MessageBox.Show("楽曲の解析がすべて完了しました。");
+            if (MessageBox.Show("対象フォルダ内ファイルに対し、追加のみを対象に解析を行います。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                // Analyze score
+                AnalyzeScoreFromDirectory(false);
+                // Refresh music tree view
+                BuildMusicTreeView();
+                // Show complete message
+                MessageBox.Show("楽曲の解析がすべて完了しました。");
+            } else
+            {
+                MessageBox.Show("実行をキャンセルしました。");
+            }
         }
 
         /// <summary>
@@ -359,7 +370,7 @@ namespace BndrScoreRecorder
             if (MessageBox.Show("対象フォルダ内全てのファイルに対し、強制的に全データの解析を行います。場合によっては二重にスコアが登録される可能性もあります。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 // Analyze score
-                AnalyzeScore(true);
+                AnalyzeScoreFromDirectory(true);
                 // Refresh music tree view
                 BuildMusicTreeView();
                 // Show complete message
@@ -470,7 +481,7 @@ namespace BndrScoreRecorder
             using(OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = System.Windows.Forms.Application.StartupPath;
-                openFileDialog.Title = "切り取りに使用するファイルを選択してください";
+                openFileDialog.Title = "切り取りの設定でプレビューに使用するファイルを選択してください";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     fileName = openFileDialog.FileName;
@@ -486,6 +497,7 @@ namespace BndrScoreRecorder
                 if (imageCropPointForm.ShowDialog() == DialogResult.OK)
                 {
                     Setting.SaveToFile(setting, settingFilePath);
+                    MessageBox.Show("設定を保存しました。");
                     logger.Info("画像切り取りの設定が完了。");
                 }
             }
