@@ -183,6 +183,7 @@
             this.ScoreDataGridView.Name = "ScoreDataGridView";
             this.ScoreDataGridView.ReadOnly = true;
             this.ScoreDataGridView.RowTemplate.Height = 21;
+            this.ScoreDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.ScoreDataGridView.Size = new System.Drawing.Size(895, 504);
             this.ScoreDataGridView.TabIndex = 2;
             this.ScoreDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ScoreDataGridView_CellDoubleClick);
