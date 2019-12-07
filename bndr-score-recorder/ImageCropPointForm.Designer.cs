@@ -44,8 +44,8 @@
             this.CropResultPictureBox = new System.Windows.Forms.PictureBox();
             this.CropResultPictureBoxLabel = new System.Windows.Forms.Label();
             this.ExpectedLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.RegistButton = new System.Windows.Forms.Button();
+            this.DescriptionTextBox = new System.Windows.Forms.TextBox();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.CropPictureGroupBox = new System.Windows.Forms.GroupBox();
             this.CropPicturePanel = new System.Windows.Forms.Panel();
             this.CropPictureBox = new System.Windows.Forms.PictureBox();
@@ -54,6 +54,7 @@
             this.SelectOcrSettingListBox = new System.Windows.Forms.ListBox();
             this.SaveSettingButton = new System.Windows.Forms.Button();
             this.LoadSettingButton = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.PointGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).BeginInit();
@@ -179,10 +180,10 @@
             this.ExpectedGroupBox.Controls.Add(this.CropResultPictureBox);
             this.ExpectedGroupBox.Controls.Add(this.CropResultPictureBoxLabel);
             this.ExpectedGroupBox.Controls.Add(this.ExpectedLabel);
-            this.ExpectedGroupBox.Controls.Add(this.textBox1);
+            this.ExpectedGroupBox.Controls.Add(this.DescriptionTextBox);
             this.ExpectedGroupBox.Location = new System.Drawing.Point(12, 219);
             this.ExpectedGroupBox.Name = "ExpectedGroupBox";
-            this.ExpectedGroupBox.Size = new System.Drawing.Size(330, 404);
+            this.ExpectedGroupBox.Size = new System.Drawing.Size(330, 421);
             this.ExpectedGroupBox.TabIndex = 1;
             this.ExpectedGroupBox.TabStop = false;
             this.ExpectedGroupBox.Text = "試験出力";
@@ -190,7 +191,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 377);
+            this.label1.Location = new System.Drawing.Point(6, 406);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 12);
             this.label1.TabIndex = 6;
@@ -199,7 +200,7 @@
             // CropResultTextLabel
             // 
             this.CropResultTextLabel.AutoSize = true;
-            this.CropResultTextLabel.Location = new System.Drawing.Point(6, 263);
+            this.CropResultTextLabel.Location = new System.Drawing.Point(6, 292);
             this.CropResultTextLabel.Name = "CropResultTextLabel";
             this.CropResultTextLabel.Size = new System.Drawing.Size(72, 12);
             this.CropResultTextLabel.TabIndex = 5;
@@ -207,7 +208,7 @@
             // 
             // CropResultTextBox
             // 
-            this.CropResultTextBox.Location = new System.Drawing.Point(6, 278);
+            this.CropResultTextBox.Location = new System.Drawing.Point(6, 307);
             this.CropResultTextBox.Multiline = true;
             this.CropResultTextBox.Name = "CropResultTextBox";
             this.CropResultTextBox.ReadOnly = true;
@@ -217,7 +218,7 @@
             // 
             // CropResultPictureBox
             // 
-            this.CropResultPictureBox.Location = new System.Drawing.Point(6, 105);
+            this.CropResultPictureBox.Location = new System.Drawing.Point(6, 134);
             this.CropResultPictureBox.Name = "CropResultPictureBox";
             this.CropResultPictureBox.Size = new System.Drawing.Size(318, 155);
             this.CropResultPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -227,7 +228,7 @@
             // CropResultPictureBoxLabel
             // 
             this.CropResultPictureBoxLabel.AutoSize = true;
-            this.CropResultPictureBoxLabel.Location = new System.Drawing.Point(4, 90);
+            this.CropResultPictureBoxLabel.Location = new System.Drawing.Point(4, 119);
             this.CropResultPictureBoxLabel.Name = "CropResultPictureBoxLabel";
             this.CropResultPictureBoxLabel.Size = new System.Drawing.Size(69, 12);
             this.CropResultPictureBoxLabel.TabIndex = 2;
@@ -242,25 +243,25 @@
             this.ExpectedLabel.TabIndex = 1;
             this.ExpectedLabel.Text = "画像から期待される出力内容：";
             // 
-            // textBox1
+            // DescriptionTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 30);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(318, 57);
-            this.textBox1.TabIndex = 0;
+            this.DescriptionTextBox.Location = new System.Drawing.Point(6, 30);
+            this.DescriptionTextBox.Multiline = true;
+            this.DescriptionTextBox.Name = "DescriptionTextBox";
+            this.DescriptionTextBox.ReadOnly = true;
+            this.DescriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DescriptionTextBox.Size = new System.Drawing.Size(318, 86);
+            this.DescriptionTextBox.TabIndex = 0;
             // 
-            // RegistButton
+            // SaveButton
             // 
-            this.RegistButton.Location = new System.Drawing.Point(12, 629);
-            this.RegistButton.Name = "RegistButton";
-            this.RegistButton.Size = new System.Drawing.Size(75, 23);
-            this.RegistButton.TabIndex = 2;
-            this.RegistButton.Text = "Regist";
-            this.RegistButton.UseVisualStyleBackColor = true;
-            this.RegistButton.Click += new System.EventHandler(this.RegistButton_Click);
+            this.SaveButton.Location = new System.Drawing.Point(12, 646);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(125, 23);
+            this.SaveButton.TabIndex = 2;
+            this.SaveButton.Text = "Save Setting";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.RegistButton_Click);
             // 
             // CropPictureGroupBox
             // 
@@ -300,9 +301,9 @@
             // 
             // AbortButton
             // 
-            this.AbortButton.Location = new System.Drawing.Point(94, 629);
+            this.AbortButton.Location = new System.Drawing.Point(217, 646);
             this.AbortButton.Name = "AbortButton";
-            this.AbortButton.Size = new System.Drawing.Size(75, 23);
+            this.AbortButton.Size = new System.Drawing.Size(125, 23);
             this.AbortButton.TabIndex = 4;
             this.AbortButton.Text = "Abort";
             this.AbortButton.UseVisualStyleBackColor = true;
@@ -326,6 +327,7 @@
             this.SelectOcrSettingListBox.Name = "SelectOcrSettingListBox";
             this.SelectOcrSettingListBox.Size = new System.Drawing.Size(330, 64);
             this.SelectOcrSettingListBox.TabIndex = 6;
+            this.SelectOcrSettingListBox.SelectedIndexChanged += new System.EventHandler(this.SelectOcrSettingListBox_SelectedIndexChanged);
             // 
             // SaveSettingButton
             // 
@@ -358,7 +360,7 @@
             this.Controls.Add(this.TryCropButton);
             this.Controls.Add(this.AbortButton);
             this.Controls.Add(this.CropPictureGroupBox);
-            this.Controls.Add(this.RegistButton);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.ExpectedGroupBox);
             this.Controls.Add(this.PointGroupBox);
             this.Name = "ImageCropPointForm";
@@ -394,8 +396,8 @@
         private System.Windows.Forms.PictureBox CropResultPictureBox;
         private System.Windows.Forms.Label CropResultPictureBoxLabel;
         private System.Windows.Forms.Label ExpectedLabel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button RegistButton;
+        private System.Windows.Forms.TextBox DescriptionTextBox;
+        private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.GroupBox CropPictureGroupBox;
         private System.Windows.Forms.Panel CropPicturePanel;
         private System.Windows.Forms.PictureBox CropPictureBox;
@@ -408,5 +410,6 @@
         private System.Windows.Forms.ListBox SelectOcrSettingListBox;
         private System.Windows.Forms.Button SaveSettingButton;
         private System.Windows.Forms.Button LoadSettingButton;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

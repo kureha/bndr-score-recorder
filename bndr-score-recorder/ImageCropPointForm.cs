@@ -33,12 +33,19 @@ namespace BndrScoreRecorder
         // Crop output suffix
         private const string SUFFIX_CROPNAME_TEST = ".test";
 
-        // ListBox's item Define
+        // ListBox's item define
         private static readonly string LIST_ITEM_OCR_TITLE = "1.タイトル切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_DIFFICULT = "2.難易度切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_RESULT_NOTES = "3.ノーツ結果切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_MAX_COMBO = "4.MAX COMBO切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_LEVEL = "5.LEVEL切り抜き座標設定 [{0}]";
+
+        // ListBox's description define
+        private static readonly string DESCRIPTION_OCR_TITLE = "曲名そのものの文字列。日本語を含む。\r\n読み取り結果例：てすと曲名";
+        private static readonly string DESCRIPTION_OCR_DIFFICULT = "難易度の文字列。例えばBASIC、ADVANCE、EXPERT、SPECIAL等。アルファベットのみ。\r\n読み取り結果例：EXPERT";
+        private static readonly string DESCRIPTION_OCR_RESULT_NOTES = "ノーツ結果の数字5行。上の行からPerfect,Great,Good,Bad,Missなど。\r\n読み取り結果例：\r\n500\r\n100\r\n5\r\n3\r\n1";
+        private static readonly string DESCRIPTION_OCR_MAX_COMBO = "MAX COMBOの数字。\r\n読み取り結果例：500";
+        private static readonly string DESCRIPTION_OCR_LEVEL = "LEVELの数字。\r\n読み取り結果例：25";
 
         // ListBox's item index define
         private const int LIST_INDEX_OCR_TITLE = 0;
@@ -337,7 +344,7 @@ namespace BndrScoreRecorder
         }
 
         /// <summary>
-        /// 切り取りの視点を指定した場合
+        /// 切り取りの始点を指定した場合
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -370,6 +377,53 @@ namespace BndrScoreRecorder
             }
 
             isMouseDown = false;
+        }
+
+        /// <summary>
+        /// SelectOcrSettingListが変更されたとき、その説明を欄に表示する。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectOcrSettingListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Message text
+            string message;
+
+            // Get message by selected index
+            switch (SelectOcrSettingListBox.SelectedIndex)
+            {
+                case LIST_INDEX_OCR_TITLE:
+                    // Title
+                    message = DESCRIPTION_OCR_TITLE;
+                    break;
+
+                case LIST_INDEX_OCR_DIFFICULT:
+                    //Difficult
+                    message = DESCRIPTION_OCR_DIFFICULT;
+                    break;
+
+                case LIST_INDEX_OCR_MAX_COMBO:
+                    // Max combo
+                    message = DESCRIPTION_OCR_MAX_COMBO;
+                    break;
+
+                case LIST_INDEX_OCR_RESULT_NOTES:
+                    // Result notes
+                    message = DESCRIPTION_OCR_RESULT_NOTES;
+                    break;
+
+                case LIST_INDEX_OCR_LEVEL:
+                    // Level
+                    message = DESCRIPTION_OCR_LEVEL;
+                    break;
+                default:
+                    // Default
+                    message = string.Empty;
+                    break;
+            }
+
+            // Set text
+            DescriptionTextBox.Text = message;
         }
     }
 }
