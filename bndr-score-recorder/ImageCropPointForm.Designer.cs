@@ -297,6 +297,7 @@
             this.CropPictureBox.TabIndex = 0;
             this.CropPictureBox.TabStop = false;
             this.CropPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CropPictureBox_MouseDown);
+            this.CropPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CropPictureBox_MouseMove);
             this.CropPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CropPictureBox_MouseUp);
             // 
             // AbortButton

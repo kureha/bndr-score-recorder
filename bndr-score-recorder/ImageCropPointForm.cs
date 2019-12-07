@@ -57,6 +57,10 @@ namespace BndrScoreRecorder
         // Use for drag flag
         private bool isMouseDown = false;
 
+        // Crop range point
+        private Point mouseDownPoint;
+        private Point mouseCurrentPoint;
+
         public ImageCropPointForm(string imageFilePath, ref Setting setting)
         {
             // Create log4net instance
@@ -102,7 +106,8 @@ namespace BndrScoreRecorder
             InitializeSelectOcrSettingListBox();
 
             // Show image
-            CropPictureBox.ImageLocation = imageFilePath;
+            //CropPictureBox.ImageLocation = imageFilePath;
+            CropPictureBox.Image = Image.FromFile(imageFilePath);
         }
 
         /// <summary>
@@ -354,6 +359,44 @@ namespace BndrScoreRecorder
 
             PositionXNumericUpDown.Value = e.X;
             PositionYNumericUpDown.Value = e.Y;
+
+            mouseDownPoint = new Point(e.X, e.Y);
+            mouseCurrentPoint = new Point();
+        }
+
+        /// <summary>
+        /// 切り取り中にマウスを動かした場合
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CropPictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown == false)
+            {
+                return;
+            }
+
+            // Draw rectangle
+            mouseCurrentPoint.X = e.X;
+            mouseCurrentPoint.Y = e.Y;
+
+            DrawRectangleInCropPictureBox(mouseDownPoint, mouseCurrentPoint);
+        }
+
+        /// <summary>
+        /// イメージ上に四角を描画する
+        /// </summary>
+        /// <param name="startPoint"></param>
+        /// <param name="endPoint"></param>
+        private void DrawRectangleInCropPictureBox(Point startPoint, Point endPoint)
+        {
+            using (Pen pen = new Pen(Color.Red))
+            using (Graphics graphics = CropPictureBox.CreateGraphics())
+            {
+                pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                CropPictureBox.Refresh();
+                graphics.DrawRectangle(pen, startPoint.X, startPoint.Y, Math.Abs(startPoint.X - endPoint.X), Math.Abs(startPoint.Y - endPoint.Y));
+            }
         }
 
         /// <summary>
