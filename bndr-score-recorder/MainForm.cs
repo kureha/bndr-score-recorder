@@ -525,7 +525,7 @@ namespace BndrScoreRecorder
                 if (DialogResult.OK == registScoreConfirmForm.ShowDialog())
                 {
                     // regist data
-                    musicDao.Replace(music);
+                    musicDao.InsertOrReplace(music);
                     MessageBox.Show("スコアデータの修正が完了しました。");
                 } else
                 {
