@@ -31,14 +31,13 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExePathSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CropImageRangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainStripSeparator01 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AnalyzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExecuteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExecuteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AnalyzeToolStripSeparator01 = new System.Windows.Forms.ToolStripSeparator();
-            this.SetupStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CropImagePositionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MusicListGroupBox = new System.Windows.Forms.GroupBox();
@@ -73,29 +72,44 @@
             // 
             // ConfigToolStripMenuItem
             // 
+            this.ConfigToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExePathSettingToolStripMenuItem,
+            this.CropImageRangeToolStripMenuItem});
             this.ConfigToolStripMenuItem.Name = "ConfigToolStripMenuItem";
-            this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ConfigToolStripMenuItem.Text = "環境設定";
+            // 
+            // ExePathSettingToolStripMenuItem
+            // 
+            this.ExePathSettingToolStripMenuItem.Name = "ExePathSettingToolStripMenuItem";
+            this.ExePathSettingToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.ExePathSettingToolStripMenuItem.Text = "外部EXEパス設定";
+            this.ExePathSettingToolStripMenuItem.Click += new System.EventHandler(this.ExePathSettingToolStripMenuItem_Click);
+            // 
+            // CropImageRangeToolStripMenuItem
+            // 
+            this.CropImageRangeToolStripMenuItem.Name = "CropImageRangeToolStripMenuItem";
+            this.CropImageRangeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.CropImageRangeToolStripMenuItem.Text = "画像切り抜き座標設定";
+            this.CropImageRangeToolStripMenuItem.Click += new System.EventHandler(this.CropImageRangeToolStripMenuItem_Click);
             // 
             // MainStripSeparator01
             // 
             this.MainStripSeparator01.Name = "MainStripSeparator01";
-            this.MainStripSeparator01.Size = new System.Drawing.Size(119, 6);
+            this.MainStripSeparator01.Size = new System.Drawing.Size(177, 6);
             // 
             // ExitStripMenuItem
             // 
             this.ExitStripMenuItem.Name = "ExitStripMenuItem";
-            this.ExitStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.ExitStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExitStripMenuItem.Text = "終了";
+            this.ExitStripMenuItem.Click += new System.EventHandler(this.ExitStripMenuItem_Click);
             // 
             // AnalyzeToolStripMenuItem
             // 
             this.AnalyzeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExecuteToolStripMenuItem,
-            this.ExecuteAllToolStripMenuItem,
-            this.AnalyzeToolStripSeparator01,
-            this.SetupStripMenuItem,
-            this.CropImagePositionAndSizeToolStripMenuItem});
+            this.ExecuteAllToolStripMenuItem});
             this.AnalyzeToolStripMenuItem.Name = "AnalyzeToolStripMenuItem";
             this.AnalyzeToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.AnalyzeToolStripMenuItem.Text = "スコア解析";
@@ -103,35 +117,16 @@
             // ExecuteToolStripMenuItem
             // 
             this.ExecuteToolStripMenuItem.Name = "ExecuteToolStripMenuItem";
-            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExecuteToolStripMenuItem.Text = "解析実行";
             this.ExecuteToolStripMenuItem.Click += new System.EventHandler(this.ExecuteToolStripMenuItem_Click);
             // 
             // ExecuteAllToolStripMenuItem
             // 
             this.ExecuteAllToolStripMenuItem.Name = "ExecuteAllToolStripMenuItem";
-            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExecuteAllToolStripMenuItem.Text = "全件解析実行";
             this.ExecuteAllToolStripMenuItem.Click += new System.EventHandler(this.ExecuteAllToolStripMenuItem_Click);
-            // 
-            // AnalyzeToolStripSeparator01
-            // 
-            this.AnalyzeToolStripSeparator01.Name = "AnalyzeToolStripSeparator01";
-            this.AnalyzeToolStripSeparator01.Size = new System.Drawing.Size(159, 6);
-            // 
-            // SetupStripMenuItem
-            // 
-            this.SetupStripMenuItem.Name = "SetupStripMenuItem";
-            this.SetupStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.SetupStripMenuItem.Text = "初期設定";
-            this.SetupStripMenuItem.Click += new System.EventHandler(this.SetupStripMenuItem_Click);
-            // 
-            // CropImagePositionAndSizeToolStripMenuItem
-            // 
-            this.CropImagePositionAndSizeToolStripMenuItem.Name = "CropImagePositionAndSizeToolStripMenuItem";
-            this.CropImagePositionAndSizeToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.CropImagePositionAndSizeToolStripMenuItem.Text = "画像切り取り設定";
-            this.CropImagePositionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.CropImagePositionAndSizeToolStripMenuItem_Click);
             // 
             // HelpToolStripMenuItem
             // 
@@ -216,7 +211,6 @@
         private System.Windows.Forms.ToolStripSeparator MainStripSeparator01;
         private System.Windows.Forms.ToolStripMenuItem ExitStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AnalyzeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem SetupStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExecuteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem InfoToolStripMenuItem;
@@ -224,8 +218,8 @@
         private System.Windows.Forms.TreeView MusicTreeView;
         private System.Windows.Forms.DataGridView ScoreDataGridView;
         private System.Windows.Forms.ToolStripMenuItem ExecuteAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator AnalyzeToolStripSeparator01;
-        private System.Windows.Forms.ToolStripMenuItem CropImagePositionAndSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExePathSettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CropImageRangeToolStripMenuItem;
     }
 }
 

@@ -69,7 +69,7 @@ namespace BndrScoreRecorder
                 setting = new Setting();
                 logger.Info("Initializing setting object complete.");
 
-                using (SettingForm settingForm = new SettingForm(ref setting))
+                using (ExePathSettingForm settingForm = new ExePathSettingForm(ref setting))
                 {
                     if (settingForm.ShowDialog() == DialogResult.OK)
                     {
@@ -346,7 +346,7 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ExecuteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("対象フォルダ内ファイルに対し、追加のみを対象に解析を行います。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show("対象フォルダ内の追加ファイルのみ対象に解析を行います。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 // Analyze score
                 AnalyzeScoreFromDirectory(false);
@@ -367,7 +367,7 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ExecuteAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("対象フォルダ内全てのファイルに対し、強制的に全データの解析を行います。場合によっては二重にスコアが登録される可能性もあります。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show("対象フォルダ内の全ファイルに対し、強制的に全データの解析を行います。場合によっては二重にスコアが登録される可能性もあります。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 // Analyze score
                 AnalyzeScoreFromDirectory(true);
@@ -455,9 +455,9 @@ namespace BndrScoreRecorder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SetupStripMenuItem_Click(object sender, EventArgs e)
+        private void ExePathSettingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SettingForm settingForm = new SettingForm(ref setting))
+            using (ExePathSettingForm settingForm = new ExePathSettingForm(ref setting))
             {
                 if (settingForm.ShowDialog() == DialogResult.OK)
                 {
@@ -472,7 +472,7 @@ namespace BndrScoreRecorder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CropImagePositionAndSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CropImageRangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // File name
             string fileName;
@@ -492,7 +492,7 @@ namespace BndrScoreRecorder
             }
 
             // Open ImageCropPoint form
-            using(ImageCropPointForm imageCropPointForm = new ImageCropPointForm(fileName, ref setting))
+            using(ImageCropRangeSettingForm imageCropPointForm = new ImageCropRangeSettingForm(fileName, ref setting))
             {
                 if (imageCropPointForm.ShowDialog() == DialogResult.OK)
                 {
@@ -562,6 +562,16 @@ namespace BndrScoreRecorder
                 }
             }
 
+        }
+
+        /// <summary>
+        /// アプリケーションを終了ボタンを押された場合の処理。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

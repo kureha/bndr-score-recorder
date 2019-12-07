@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace BndrScoreRecorder
 {
-    public partial class ImageCropPointForm : Form
+    public partial class ImageCropRangeSettingForm : Form
     {
         // logger
         private log4net.ILog logger;
@@ -61,7 +61,7 @@ namespace BndrScoreRecorder
         private Point mouseDownPoint;
         private Point mouseCurrentPoint;
 
-        public ImageCropPointForm(string imageFilePath, ref Setting setting)
+        public ImageCropRangeSettingForm(string imageFilePath, ref Setting setting)
         {
             // Create log4net instance
             logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

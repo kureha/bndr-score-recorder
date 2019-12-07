@@ -97,11 +97,11 @@
     <Compile Include="common\OcrReader.cs" />
     <Compile Include="common\entity\Setting.cs" />
     <Compile Include="common\bridge\TesseractBridge.cs" />
-    <Compile Include="ImageCropPointForm.cs">
+    <Compile Include="ImageCropRangeSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImageCropPointForm.Designer.cs">
-      <DependentUpon>ImageCropPointForm.cs</DependentUpon>
+    <Compile Include="ImageCropRangeSettingForm.Designer.cs">
+      <DependentUpon>ImageCropRangeSettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -117,14 +117,14 @@
     <Compile Include="RegistScoreConfirmForm.Designer.cs">
       <DependentUpon>RegistScoreConfirmForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm.cs">
+    <Compile Include="ExePathSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingForm.Designer.cs">
-      <DependentUpon>SettingForm.cs</DependentUpon>
+    <Compile Include="ExePathSettingForm.Designer.cs">
+      <DependentUpon>ExePathSettingForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ImageCropPointForm.resx">
-      <DependentUpon>ImageCropPointForm.cs</DependentUpon>
+    <EmbeddedResource Include="ImageCropRangeSettingForm.resx">
+      <DependentUpon>ImageCropRangeSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -142,8 +142,8 @@
     <EmbeddedResource Include="RegistScoreConfirmForm.resx">
       <DependentUpon>RegistScoreConfirmForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingForm.resx">
-      <DependentUpon>SettingForm.cs</DependentUpon>
+    <EmbeddedResource Include="ExePathSettingForm.resx">
+      <DependentUpon>ExePathSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

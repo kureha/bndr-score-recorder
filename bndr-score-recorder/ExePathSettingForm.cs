@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace BndrScoreRecorder
 {
-    public partial class SettingForm : Form
+    public partial class ExePathSettingForm : Form
     {
         // Setting object
         private Setting setting;
 
-        public SettingForm(ref Setting setting)
+        public ExePathSettingForm(ref Setting setting)
         {
             // Insert ref setting object
             this.setting = setting;

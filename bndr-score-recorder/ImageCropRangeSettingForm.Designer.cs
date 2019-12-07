@@ -1,6 +1,6 @@
 ﻿namespace BndrScoreRecorder
 {
-    partial class ImageCropPointForm
+    partial class ImageCropRangeSettingForm
     {
         /// <summary>
         /// Required designer variable.
