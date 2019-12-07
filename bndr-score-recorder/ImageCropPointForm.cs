@@ -34,11 +34,11 @@ namespace BndrScoreRecorder
         private const string SUFFIX_CROPNAME_TEST = ".test";
 
         // ListBox's item Define
-        private static readonly string LIST_ITEM_OCR_TITLE = "1.タイトル切り抜き座標設定";
-        private static readonly string LIST_ITEM_OCR_DIFFICULT = "2.難易度切り抜き座標設定";
-        private static readonly string LIST_ITEM_OCR_SCORE = "3.スコア切り抜き座標設定";
-        private static readonly string LIST_ITEM_OCR_MAX_COMBO = "4.MAX COMBO切り抜き座標設定";
-        private static readonly string LIST_ITEM_OCR_LEVEL = "5.LEVEL切り抜き座標設定";
+        private static readonly string LIST_ITEM_OCR_TITLE = "1.タイトル切り抜き座標設定 [{0}]";
+        private static readonly string LIST_ITEM_OCR_DIFFICULT = "2.難易度切り抜き座標設定 [{0}]";
+        private static readonly string LIST_ITEM_OCR_SCORE = "3.スコア切り抜き座標設定 [{0}]";
+        private static readonly string LIST_ITEM_OCR_MAX_COMBO = "4.MAX COMBO切り抜き座標設定 [{0}]";
+        private static readonly string LIST_ITEM_OCR_LEVEL = "5.LEVEL切り抜き座標設定 [{0}]";
 
         // ListBox's item index define
         private const int LIST_INDEX_OCR_TITLE = 0;
@@ -104,11 +104,16 @@ namespace BndrScoreRecorder
         private void InitializeSelectOcrSettingListBox()
         {
             // Add items
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_TITLE + " [" + setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption() + "]");
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_DIFFICULT + " [" + setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption() + "]");
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_SCORE + " [" + setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption() + "]");
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_MAX_COMBO + " [" + setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption() + "]");
-            SelectOcrSettingListBox.Items.Add(LIST_ITEM_OCR_LEVEL + " [" + setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption() + "]");
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_TITLE, 
+                setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_DIFFICULT, 
+                setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_SCORE, 
+                setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_MAX_COMBO, 
+                setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_LEVEL, 
+                setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption()));
 
             // Init
             SelectOcrSettingListBox.SelectedIndex = 0;
@@ -120,11 +125,16 @@ namespace BndrScoreRecorder
         private void ChangeApplyToSelectOcrSettingListBox()
         {
             // Change items
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_TITLE] = LIST_ITEM_OCR_TITLE + " [" + setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption() + "]";
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_DIFFICULT] = LIST_ITEM_OCR_DIFFICULT + " [" + setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption() + "]";
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_SCORE] = LIST_ITEM_OCR_SCORE + " [" + setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption() + "]";
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_MAX_COMBO] = LIST_ITEM_OCR_MAX_COMBO + " [" + setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption() + "]";
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_LEVEL] = LIST_ITEM_OCR_LEVEL + " [" + setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption() + "]";
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_TITLE,
+                setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_DIFFICULT,
+                setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_SCORE,
+                setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_MAX_COMBO,
+                setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_LEVEL,
+                setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption()));
         }
 
         /// <summary>
