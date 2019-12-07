@@ -500,10 +500,13 @@ namespace BndrScoreRecorder
         {
             // Get selected item
             ScoreResult scoreResult = null;
+            int selectedRow = 0;
 
-            foreach (DataGridViewRow row in ScoreDataGridView.SelectedRows)
+            // Get selected row
+            foreach(DataGridViewCell cell in ScoreDataGridView.SelectedCells)
             {
-                scoreResult = (ScoreResult)row.DataBoundItem;
+                selectedRow = cell.RowIndex;
+                scoreResult = (ScoreResult)ScoreDataGridView.Rows[selectedRow].DataBoundItem;
                 break;
             }
 
