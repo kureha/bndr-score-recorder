@@ -397,9 +397,7 @@ namespace BndrScoreRecorder
         /// <summary>
         /// 楽曲が選択された際、そのスコアを隣のViewに表示する。
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MusicTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        private void RefreshScoreDataGridView()
         {
             logger.Info("DataGridView attach start.");
 
@@ -412,7 +410,8 @@ namespace BndrScoreRecorder
                 logger.Error("Music id is null, selected non music element. Clear data grid view.");
                 ScoreDataGridView.DataSource = null;
                 return;
-            } else
+            }
+            else
             {
                 logger.Info("Music id = " + musicId);
             }
@@ -428,6 +427,16 @@ namespace BndrScoreRecorder
             ScoreDataGridView.DataSource = targetMusic.scoreResultList;
 
             logger.Info("DataGridView attach end.");
+        }
+
+        /// <summary>
+        /// 楽曲が選択された際、そのスコアを隣のViewに表示する。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MusicTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            RefreshScoreDataGridView();
         }
 
         /// <summary>
@@ -524,8 +533,12 @@ namespace BndrScoreRecorder
             {
                 if (DialogResult.OK == registScoreConfirmForm.ShowDialog())
                 {
-                    // regist data
+                    // Regist data
                     musicDao.InsertOrReplace(music);
+
+                    // Reflesh view
+                    RefreshScoreDataGridView();
+
                     MessageBox.Show("スコアデータの修正が完了しました。");
                 } else
                 {
