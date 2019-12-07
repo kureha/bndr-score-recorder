@@ -41,6 +41,9 @@ namespace BndrScoreRecorder
             + Environment.NewLine + "[StackTrace]"
             + Environment.NewLine + "{1}";
 
+        // Normal exit code
+        private const int EXIT_CODE_NORMAL = 0;
+
         /// <summary>
         /// 初期化。
         /// </summary>
@@ -86,7 +89,7 @@ namespace BndrScoreRecorder
                     } else
                     {
                         MessageBox.Show("初期設定が実施されませんでした。終了します。");
-                        Application.Exit();
+                        Environment.Exit(EXIT_CODE_NORMAL);
                     }
                 }
             }
@@ -602,9 +605,14 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ExitStripMenuItem_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            Environment.Exit(EXIT_CODE_NORMAL);
         }
 
+        /// <summary>
+        /// アプリケーション情報を押された場合の処理。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ApplicationInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using(ApplicationInfoForm applicationInfoForm = new ApplicationInfoForm())
