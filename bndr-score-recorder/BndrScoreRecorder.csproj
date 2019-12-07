@@ -85,6 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationInfoForm.Designer.cs">
+      <DependentUpon>ApplicationInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="common\BndrImageReader.cs" />
     <Compile Include="common\bridge\BridgeBase.cs" />
     <Compile Include="common\bridge\ImageMagickBridge.cs" />
@@ -123,6 +129,9 @@
     <Compile Include="ExePathSettingForm.Designer.cs">
       <DependentUpon>ExePathSettingForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ApplicationInfoForm.resx">
+      <DependentUpon>ApplicationInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageCropRangeSettingForm.resx">
       <DependentUpon>ImageCropRangeSettingForm.cs</DependentUpon>
     </EmbeddedResource>

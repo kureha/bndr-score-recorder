@@ -137,16 +137,25 @@ namespace BndrScoreRecorder
         private void ChangeApplyToSelectOcrSettingListBox()
         {
             // Change items
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_TITLE,
-                setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_DIFFICULT,
-                setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_RESULT_NOTES,
-                setting.defaultBndrOcrSetting.ResultNotesOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_MAX_COMBO,
-                setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_LEVEL,
-                setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_TITLE] = 
+                String.Format(LIST_ITEM_OCR_TITLE,
+                setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption());
+
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_DIFFICULT] = 
+                String.Format(LIST_ITEM_OCR_DIFFICULT,
+                setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption());
+
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_RESULT_NOTES] = 
+                String.Format(LIST_ITEM_OCR_RESULT_NOTES,
+                setting.defaultBndrOcrSetting.ResultNotesOcrSetting.ImageMagickCropOption());
+
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_MAX_COMBO] = 
+                String.Format(LIST_ITEM_OCR_MAX_COMBO,
+                setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption());
+
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_LEVEL] = 
+                String.Format(LIST_ITEM_OCR_LEVEL,
+                setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption());
         }
 
         /// <summary>

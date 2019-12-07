@@ -34,6 +34,13 @@ namespace BndrScoreRecorder
         // level tree node prefix
         private const string PREFIX_LEVEL_TREE_NODE = "LEVEL_";
 
+        // Exception message
+        private static readonly string EXCEPTION_MESSAGE_FORMAT = "予期せぬ例外が発生したため、処理を中断しました。" 
+            + Environment.NewLine + "[Message]" 
+            + Environment.NewLine  + "{0}"
+            + Environment.NewLine + "[StackTrace]"
+            + Environment.NewLine + "{1}";
+
         /// <summary>
         /// 初期化。
         /// </summary>
@@ -73,6 +80,7 @@ namespace BndrScoreRecorder
                 {
                     if (settingForm.ShowDialog() == DialogResult.OK)
                     {
+                        setting.defaultBndrOcrSetting = new BndrOcrSetting();
                         Setting.SaveToFile(setting, settingFilePath);
                         MessageBox.Show("設定を保存しました。");
                     } else
@@ -346,17 +354,24 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ExecuteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("対象フォルダ内の追加ファイルのみ対象に解析を行います。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            try
             {
-                // Analyze score
-                AnalyzeScoreFromDirectory(false);
-                // Refresh music tree view
-                BuildMusicTreeView();
-                // Show complete message
-                MessageBox.Show("楽曲の解析がすべて完了しました。");
-            } else
+                if (MessageBox.Show("対象フォルダ内の追加ファイルのみ対象に解析を行います。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    // Analyze score
+                    AnalyzeScoreFromDirectory(false);
+                    // Refresh music tree view
+                    BuildMusicTreeView();
+                    // Show complete message
+                    MessageBox.Show("楽曲の解析がすべて完了しました。");
+                }
+                else
+                {
+                    MessageBox.Show("実行をキャンセルしました。");
+                }
+            } catch (Exception ex)
             {
-                MessageBox.Show("実行をキャンセルしました。");
+                MessageBox.Show(String.Format(EXCEPTION_MESSAGE_FORMAT, ex.Message, ex.StackTrace));
             }
         }
 
@@ -367,19 +382,27 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ExecuteAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("対象フォルダ内の全ファイルに対し、強制的に全データの解析を行います。場合によっては二重にスコアが登録される可能性もあります。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            try
             {
-                // Analyze score
-                AnalyzeScoreFromDirectory(true);
-                // Refresh music tree view
-                BuildMusicTreeView();
-                // Show complete message
-                MessageBox.Show("楽曲の解析がすべて完了しました。");
-            } else
-            {
-                MessageBox.Show("実行をキャンセルしました。");
+                if (MessageBox.Show("対象フォルダ内の全ファイルに対し、強制的に全データの解析を行います。場合によっては二重にスコアが登録される可能性もあります。よろしいですか？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    // Analyze score
+                    AnalyzeScoreFromDirectory(true);
+                    // Refresh music tree view
+                    BuildMusicTreeView();
+                    // Show complete message
+                    MessageBox.Show("楽曲の解析がすべて完了しました。");
+                }
+                else
+                {
+                    MessageBox.Show("実行をキャンセルしました。");
+                }
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Format(EXCEPTION_MESSAGE_FORMAT, ex.Message, ex.StackTrace));
+            }
+
         }
 
         /// <summary>
@@ -474,32 +497,40 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void CropImageRangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // File name
-            string fileName;
-
-            // Select file
-            using(OpenFileDialog openFileDialog = new OpenFileDialog())
+            try
             {
-                openFileDialog.InitialDirectory = System.Windows.Forms.Application.StartupPath;
-                openFileDialog.Title = "切り取りの設定でプレビューに使用するファイルを選択してください";
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                // File name
+                string fileName;
+
+                // Select file
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    fileName = openFileDialog.FileName;
-                } else
+                    openFileDialog.InitialDirectory = System.Windows.Forms.Application.StartupPath;
+                    openFileDialog.Title = "切り取りの設定でプレビューに使用するファイルを選択してください";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        fileName = openFileDialog.FileName;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                // Open ImageCropPoint form
+                using (ImageCropRangeSettingForm imageCropPointForm = new ImageCropRangeSettingForm(fileName, ref setting))
                 {
-                    return;
+                    if (imageCropPointForm.ShowDialog() == DialogResult.OK)
+                    {
+                        Setting.SaveToFile(setting, settingFilePath);
+                        MessageBox.Show("設定を保存しました。");
+                        logger.Info("画像切り取りの設定が完了。");
+                    }
                 }
             }
-
-            // Open ImageCropPoint form
-            using(ImageCropRangeSettingForm imageCropPointForm = new ImageCropRangeSettingForm(fileName, ref setting))
+            catch (Exception ex)
             {
-                if (imageCropPointForm.ShowDialog() == DialogResult.OK)
-                {
-                    Setting.SaveToFile(setting, settingFilePath);
-                    MessageBox.Show("設定を保存しました。");
-                    logger.Info("画像切り取りの設定が完了。");
-                }
+                MessageBox.Show(String.Format(EXCEPTION_MESSAGE_FORMAT, ex.Message, ex.StackTrace));
             }
         }
 
@@ -572,6 +603,14 @@ namespace BndrScoreRecorder
         private void ExitStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void ApplicationInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using(ApplicationInfoForm applicationInfoForm = new ApplicationInfoForm())
+            {
+                applicationInfoForm.ShowDialog();
+            }
         }
     }
 }

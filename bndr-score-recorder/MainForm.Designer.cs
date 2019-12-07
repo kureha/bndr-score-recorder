@@ -39,7 +39,7 @@
             this.ExecuteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExecuteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ApplicationInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MusicListGroupBox = new System.Windows.Forms.GroupBox();
             this.MusicTreeView = new System.Windows.Forms.TreeView();
             this.ScoreDataGridView = new System.Windows.Forms.DataGridView();
@@ -131,16 +131,17 @@
             // HelpToolStripMenuItem
             // 
             this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.InfoToolStripMenuItem});
+            this.ApplicationInfoToolStripMenuItem});
             this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
             this.HelpToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.HelpToolStripMenuItem.Text = "ヘルプ";
             // 
-            // InfoToolStripMenuItem
+            // ApplicationInfoToolStripMenuItem
             // 
-            this.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem";
-            this.InfoToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.InfoToolStripMenuItem.Text = "アプリケーション情報";
+            this.ApplicationInfoToolStripMenuItem.Name = "ApplicationInfoToolStripMenuItem";
+            this.ApplicationInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ApplicationInfoToolStripMenuItem.Text = "アプリケーション情報";
+            this.ApplicationInfoToolStripMenuItem.Click += new System.EventHandler(this.ApplicationInfoToolStripMenuItem_Click);
             // 
             // MusicListGroupBox
             // 
@@ -213,7 +214,7 @@
         private System.Windows.Forms.ToolStripMenuItem AnalyzeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExecuteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem InfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ApplicationInfoToolStripMenuItem;
         private System.Windows.Forms.GroupBox MusicListGroupBox;
         private System.Windows.Forms.TreeView MusicTreeView;
         private System.Windows.Forms.DataGridView ScoreDataGridView;
