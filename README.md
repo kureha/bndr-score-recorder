@@ -14,6 +14,7 @@
 * OS: Windows10
 * Resolution: Minimum 1280x720
 * External Softwae
+	* [Microsoft .NET Framework 4.7.2+](https://dotnet.microsoft.com/download)
 	* [ImageMagick 7.0.0+](https://imagemagick.org/script/download.php)
 	* [Tesseract at UB Mannheim 5.0.0+](https://github.com/UB-Mannheim/tesseract/wiki)
 
@@ -23,13 +24,14 @@
 配布されたZipフォルダ解凍してください。
 
 * External Software
-	* ImageMagick 7.0.0+
-	<https://imagemagick.org/script/download.php> の下にある「ImageMagick-x.x.x.x-portable-Q16-x64.zip」からダウンロードして適当なフォルダに解凍。
-	プロジェクトでは過去Verの「<https://imagemagick.org/download/binaries/ImageMagick-7.0.9-8-portable-Q16-x64.zip>」を推奨。
-	
-	* Tesseract at UB Mannheim 5.0.0+
-	<https://github.com/UB-Mannheim/tesseract/wiki> からダウンロードしてインストール。
-	プロジェクトでは過去Verの「<https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v5.0.0-alpha.20191030.exe>」を推奨。
+	* Microsoft .NET Framework 4.7.2+  
+	<https://docs.microsoft.com/ja-jp/dotnet/framework/install/on-windows-10> の通りにインストールすれば問題ありません。  
+	* ImageMagick 7.0.0+  
+	<https://imagemagick.org/script/download.php> の下にある「ImageMagick-x.x.x.x-portable-Q16-x64.zip」からダウンロードして適当なフォルダに解凍。  
+	プロジェクトでは過去Verの「<https://imagemagick.org/download/binaries/ImageMagick-7.0.9-8-portable-Q16-x64.zip>」を推奨。  
+	* Tesseract at UB Mannheim 5.0.0+  
+	<https://github.com/UB-Mannheim/tesseract/wiki> からダウンロードしてインストール。  
+	プロジェクトでは過去Verの「<https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v5.0.0-alpha.20191030.exe>」を推奨。  
 
 	
 ## Usage
