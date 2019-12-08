@@ -178,6 +178,13 @@ namespace BndrScoreRecorder
             column.HeaderText = "Total Notes";
             column.DataPropertyName = column.Name;
             ScoreDataGridView.Columns.Add(column);
+
+            // Score
+            column = new DataGridViewTextBoxColumn();
+            column.Name = "score";
+            column.HeaderText = "Score";
+            column.DataPropertyName = column.Name;
+            ScoreDataGridView.Columns.Add(column);
         }
 
         /// <summary>

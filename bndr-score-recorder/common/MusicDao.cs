@@ -85,6 +85,7 @@ namespace BndrScoreRecorder.common
                             + "	total_notes	INTEGER,"
                             + "	max_combo	INTEGER,"
                             + "	ex_score	INTEGER,"
+                            + " score	    INTEGER,"
                             + "	image_file_path	TEXT,"
                             + "	insert_date	TEXT,"
                             + "	update_date	TEXT"
@@ -377,7 +378,7 @@ namespace BndrScoreRecorder.common
 
                     // Section.3 - select T_SCORE_RECORD
                     // SQL
-                    command.CommandText = "SELECT id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, image_file_path FROM T_SCORE_RECORD WHERE music_id = @id ORDER BY update_date desc;";
+                    command.CommandText = "SELECT id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, score, image_file_path FROM T_SCORE_RECORD WHERE music_id = @id ORDER BY update_date desc;";
 
                     // query to log
                     logger.Info(command.CommandText);
@@ -402,7 +403,8 @@ namespace BndrScoreRecorder.common
                             scoreReuslt.totalNotes = reader.GetInt64(6);
                             scoreReuslt.maxCombo = reader.GetInt64(7);
                             scoreReuslt.exScore = reader.GetInt64(8);
-                            scoreReuslt.imageFilePath = reader.GetString(9);
+                            scoreReuslt.score = reader.GetInt64(9);
+                            scoreReuslt.imageFilePath = reader.GetString(10);
 
                             scoreReuslt.CalculateInfos();
 
@@ -584,7 +586,7 @@ namespace BndrScoreRecorder.common
                             logger.Info("Score result data is exists, insert score result data.");
 
                             // SQL
-                            command.CommandText = "INSERT INTO T_SCORE_RECORD(music_id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, image_file_path, insert_date, update_date) VALUES (@music_id, @perfect, @great, @good, @bad, @miss, @total_notes, @max_combo, @ex_score, @image_file_path, datetime('now', 'localtime'), datetime('now', 'localtime'));";
+                            command.CommandText = "INSERT INTO T_SCORE_RECORD(music_id, perfect, great, good, bad, miss, total_notes, max_combo, ex_score, score, image_file_path, insert_date, update_date) VALUES (@music_id, @perfect, @great, @good, @bad, @miss, @total_notes, @max_combo, @ex_score, @score, @image_file_path, datetime('now', 'localtime'), datetime('now', 'localtime'));";
 
                             // query to log
                             logger.Info(command.CommandText);
@@ -599,6 +601,7 @@ namespace BndrScoreRecorder.common
                             command.Parameters.AddWithValue("total_notes", scoreResult.totalNotes);
                             command.Parameters.AddWithValue("max_combo", scoreResult.maxCombo);
                             command.Parameters.AddWithValue("ex_score", scoreResult.exScore);
+                            command.Parameters.AddWithValue("score", scoreResult.score);
                             command.Parameters.AddWithValue("image_file_path", scoreResult.imageFilePath);
 
                             // execute
@@ -611,7 +614,7 @@ namespace BndrScoreRecorder.common
                             logger.Info("Score result data is exists, update Score result data. Score Result id = " + scoreResult.id);
 
                             // SQL
-                            command.CommandText = "UPDATE T_SCORE_RECORD SET perfect = @perfect, great = @great, good = @good, bad = @bad, miss = @miss, total_notes = @total_notes, max_combo = @max_combo, ex_score = @ex_score, image_file_path = @image_file_path WHERE id = @id;";
+                            command.CommandText = "UPDATE T_SCORE_RECORD SET perfect = @perfect, great = @great, good = @good, bad = @bad, miss = @miss, total_notes = @total_notes, max_combo = @max_combo, ex_score = @ex_score, score = @score, image_file_path = @image_file_path WHERE id = @id;";
 
                             // query to log
                             logger.Info(command.CommandText);
@@ -624,6 +627,7 @@ namespace BndrScoreRecorder.common
                             command.Parameters.AddWithValue("total_notes", scoreResult.totalNotes);
                             command.Parameters.AddWithValue("max_combo", scoreResult.maxCombo);
                             command.Parameters.AddWithValue("ex_score", scoreResult.exScore);
+                            command.Parameters.AddWithValue("score", scoreResult.score);
                             command.Parameters.AddWithValue("image_file_path", scoreResult.imageFilePath);
                             command.Parameters.AddWithValue("id", scoreResult.id);
 

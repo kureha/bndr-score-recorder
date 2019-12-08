@@ -29,6 +29,9 @@ namespace BndrScoreRecorder
         // registered music object
         public Music registeredMusic;
 
+        // Initializing frag
+        private bool isInitializing = true;
+
         /// <summary>
         /// 初期化。
         /// </summary>
@@ -36,6 +39,9 @@ namespace BndrScoreRecorder
         /// <param name="refRegisteredMusic">整合性チェックに使用するMusicオブジェクト</param>
         public RegistScoreConfirmForm(ref Music refMusic, ref Music refRegisteredMusic)
         {
+            // Initializing start
+            isInitializing = true;
+
             // Create log4net instance
             logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -64,9 +70,12 @@ namespace BndrScoreRecorder
 
             // Data attached to screen
             DataAttach(music);
+
+            // Initialize complete
+            isInitializing = false;
         }
 
-        /// <summary>
+        /// <summary>PerfectNumericUpDown
         /// 画面にMusicオブジェクトを表示し、必要に応じて警告を発生させる。
         /// </summary>
         /// <param name="music">表示対象のMusicオブジェクト</param>
@@ -84,21 +93,21 @@ namespace BndrScoreRecorder
             LevelTextBox.ForeColor = Color.Black;
             LevelTextBox.BackColor = Color.White;
 
-            PerfectTextBox.ForeColor = Color.Black;
-            PerfectTextBox.BackColor = Color.White;
-            GreatTextBox.ForeColor = Color.Black;
-            GreatTextBox.BackColor = Color.White;
-            GoodTextBox.ForeColor = Color.Black;
-            GoodTextBox.BackColor = Color.White;
-            BadTextBox.ForeColor = Color.Black;
-            BadTextBox.BackColor = Color.White;
-            MissTextBox.ForeColor = Color.Black;
-            MissTextBox.BackColor = Color.White;
+            PerfectNumericUpDown.ForeColor = Color.Black;
+            PerfectNumericUpDown.BackColor = Color.White;
+            GreatNumericUpDown.ForeColor = Color.Black;
+            GreatNumericUpDown.BackColor = Color.White;
+            GoodNumericUpDown.ForeColor = Color.Black;
+            GoodNumericUpDown.BackColor = Color.White;
+            BadNumericUpDown.ForeColor = Color.Black;
+            BadNumericUpDown.BackColor = Color.White;
+            MissNumericUpDown.ForeColor = Color.Black;
+            MissNumericUpDown.BackColor = Color.White;
 
-            MaxComboTextBox.ForeColor = Color.Black;
-            MaxComboTextBox.BackColor = Color.White;
-            ScoreTextBox.ForeColor = Color.Black;
-            ScoreTextBox.BackColor = Color.White;
+            MaxComboNumericUpDown.ForeColor = Color.Black;
+            MaxComboNumericUpDown.BackColor = Color.White;
+            ScoreNumericUpDown.ForeColor = Color.Black;
+            ScoreNumericUpDown.BackColor = Color.White;
 
             // attache data (music)
             TitleTextBox.Text = music.title;
@@ -110,16 +119,16 @@ namespace BndrScoreRecorder
             if (music.scoreResultList.Count > 0)
             {
                 ScoreResult scoreResult = music.scoreResultList[0];
-                PerfectTextBox.Text = scoreResult.perfect.ToString();
-                GreatTextBox.Text = scoreResult.great.ToString();
-                GoodTextBox.Text = scoreResult.good.ToString();
-                BadTextBox.Text = scoreResult.bad.ToString();
-                MissTextBox.Text = scoreResult.miss.ToString();
-                MaxComboTextBox.Text = scoreResult.maxCombo.ToString();
-                ScoreTextBox.Text = scoreResult.score.ToString();
+                PerfectNumericUpDown.Value = scoreResult.perfect;
+                GreatNumericUpDown.Value = scoreResult.great;
+                GoodNumericUpDown.Value = scoreResult.good;
+                BadNumericUpDown.Value = scoreResult.bad;
+                MissNumericUpDown.Value = scoreResult.miss;
+                MaxComboNumericUpDown.Value = scoreResult.maxCombo;
+                ScoreNumericUpDown.Value = scoreResult.score;
 
-                ExScoreTextBox.Text = scoreResult.exScore.ToString();
-                TotalNotesTextBox.Text = scoreResult.totalNotes.ToString();
+                ExScoreNumericUpDown.Value = scoreResult.exScore;
+                TotalNotesNumericUpDown.Value = scoreResult.totalNotes;
 
                 ScreenshotPictureBox.ImageLocation =
                     dataFolderPath
@@ -133,11 +142,11 @@ namespace BndrScoreRecorder
                 // Initial check
                 musicMessageBuilder.AppendLine("新規登録の楽曲マスタデータです。読み取り異常がないか注意して確認してください。");
                 scoreResultMessageBuilder.AppendLine("新規登録の楽曲マスタデータです。読み取り異常がないか注意して確認してください。");
-                PerfectTextBox.BackColor = Color.Pink;
-                GreatTextBox.BackColor = Color.Pink;
-                GoodTextBox.BackColor = Color.Pink;
-                BadTextBox.BackColor = Color.Pink;
-                MissTextBox.BackColor = Color.Pink;
+                PerfectNumericUpDown.BackColor = Color.Pink;
+                GreatNumericUpDown.BackColor = Color.Pink;
+                GoodNumericUpDown.BackColor = Color.Pink;
+                BadNumericUpDown.BackColor = Color.Pink;
+                MissNumericUpDown.BackColor = Color.Pink;
                 if (music.scoreResultList.Count > 0)
                 {
                     ScoreResult scoreResult = music.scoreResultList[0];
@@ -146,79 +155,79 @@ namespace BndrScoreRecorder
                     if (scoreResult.perfect == 8 || scoreResult.perfect == 6 || scoreResult.perfect == 3)
                     {
                         scoreResultMessageBuilder.AppendLine("Perfectが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
-                        PerfectTextBox.BackColor = Color.Red;
-                        PerfectTextBox.ForeColor = Color.White;
+                        PerfectNumericUpDown.BackColor = Color.Red;
+                        PerfectNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.perfect < 0)
                     {
                         scoreResultMessageBuilder.AppendLine("Perfectが正常に読み取れませんでした。データを手動入力で修正してください。");
-                        PerfectTextBox.BackColor = Color.Red;
-                        PerfectTextBox.ForeColor = Color.White;
+                        PerfectNumericUpDown.BackColor = Color.Red;
+                        PerfectNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.great == 8 || scoreResult.great == 6 || scoreResult.great == 3)
                     {
                         scoreResultMessageBuilder.AppendLine("Greatが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
-                        GreatTextBox.BackColor = Color.Red;
-                        GreatTextBox.ForeColor = Color.White;
+                        GreatNumericUpDown.BackColor = Color.Red;
+                        GreatNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.great < 0)
                     {
                         scoreResultMessageBuilder.AppendLine("Greatが正常に読み取れませんでした。データを手動入力で修正してください。");
-                        GreatTextBox.BackColor = Color.Red;
-                        GreatTextBox.ForeColor = Color.White;
+                        GreatNumericUpDown.BackColor = Color.Red;
+                        GreatNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.good == 8 || scoreResult.good == 6 || scoreResult.good == 3)
                     {
                         scoreResultMessageBuilder.AppendLine("Goodが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
-                        GoodTextBox.BackColor = Color.Red;
-                        GoodTextBox.ForeColor = Color.White;
+                        GoodNumericUpDown.BackColor = Color.Red;
+                        GoodNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.good < 0)
                     {
                         scoreResultMessageBuilder.AppendLine("Goodが正常に読み取れませんでした。データを手動入力で修正してください。");
-                        GoodTextBox.BackColor = Color.Red;
-                        GoodTextBox.ForeColor = Color.White;
+                        GoodNumericUpDown.BackColor = Color.Red;
+                        GoodNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.bad == 8 || scoreResult.bad == 6 || scoreResult.bad == 3)
                     {
                         scoreResultMessageBuilder.AppendLine("Badが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
-                        BadTextBox.BackColor = Color.Red;
-                        BadTextBox.ForeColor = Color.White;
+                        BadNumericUpDown.BackColor = Color.Red;
+                        BadNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.bad < 0)
                     {
                         scoreResultMessageBuilder.AppendLine("Badが正常に読み取れませんでした。データを手動入力で修正してください。");
-                        BadTextBox.BackColor = Color.Red;
-                        BadTextBox.ForeColor = Color.White;
+                        BadNumericUpDown.BackColor = Color.Red;
+                        BadNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.miss == 8 || scoreResult.miss == 6 || scoreResult.miss == 3)
                     {
                         scoreResultMessageBuilder.AppendLine("Missが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
-                        MissTextBox.BackColor = Color.Red;
-                        MissTextBox.ForeColor = Color.White;
+                        MissNumericUpDown.BackColor = Color.Red;
+                        MissNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.miss < 0)
                     {
                         scoreResultMessageBuilder.AppendLine("Missが正常に読み取れませんでした。データを手動入力で修正してください。");
-                        MissTextBox.BackColor = Color.Red;
-                        MissTextBox.ForeColor = Color.White;
+                        MissNumericUpDown.BackColor = Color.Red;
+                        MissNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.maxCombo == 8 || scoreResult.maxCombo == 6 || scoreResult.maxCombo == 3)
                     {
                         scoreResultMessageBuilder.AppendLine("MaxComboが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
-                        MaxComboTextBox.BackColor = Color.Red;
-                        MaxComboTextBox.ForeColor = Color.White;
+                        MaxComboNumericUpDown.BackColor = Color.Red;
+                        MaxComboNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.maxCombo < 0)
                     {
                         scoreResultMessageBuilder.AppendLine("MaxComboが正常に読み取れませんでした。データを手動入力で修正してください。");
-                        MaxComboTextBox.BackColor = Color.Red;
-                        MaxComboTextBox.ForeColor = Color.White;
+                        MaxComboNumericUpDown.BackColor = Color.Red;
+                        MaxComboNumericUpDown.ForeColor = Color.White;
                     }
                 }
             } else
@@ -236,16 +245,16 @@ namespace BndrScoreRecorder
                             if (scoreResult.totalNotes != registeredScoreResult.totalNotes)
                             {
                                 scoreResultMessageBuilder.AppendLine("登録済みデータと合計ノーツ数が異なっています。読み取り異常がないか確認してください。");
-                                PerfectTextBox.BackColor = Color.Red;
-                                PerfectTextBox.ForeColor = Color.White;
-                                GreatTextBox.BackColor = Color.Red;
-                                GreatTextBox.ForeColor = Color.White;
-                                GoodTextBox.BackColor = Color.Red;
-                                GoodTextBox.ForeColor = Color.White;
-                                BadTextBox.BackColor = Color.Red;
-                                BadTextBox.ForeColor = Color.White;
-                                MissTextBox.BackColor = Color.Red;
-                                MissTextBox.ForeColor = Color.White;
+                                PerfectNumericUpDown.BackColor = Color.Red;
+                                PerfectNumericUpDown.ForeColor = Color.White;
+                                GreatNumericUpDown.BackColor = Color.Red;
+                                GreatNumericUpDown.ForeColor = Color.White;
+                                GoodNumericUpDown.BackColor = Color.Red;
+                                GoodNumericUpDown.ForeColor = Color.White;
+                                BadNumericUpDown.BackColor = Color.Red;
+                                BadNumericUpDown.ForeColor = Color.White;
+                                MissNumericUpDown.BackColor = Color.Red;
+                                MissNumericUpDown.ForeColor = Color.White;
                                 break;
                             }
                         }
@@ -274,13 +283,13 @@ namespace BndrScoreRecorder
             {
                 if (music.scoreResultList.Count > 0)
                 {
-                    music.scoreResultList[0].perfect = int.Parse(PerfectTextBox.Text);
-                    music.scoreResultList[0].great = int.Parse(GreatTextBox.Text);
-                    music.scoreResultList[0].good = int.Parse(GoodTextBox.Text);
-                    music.scoreResultList[0].bad = int.Parse(BadTextBox.Text);
-                    music.scoreResultList[0].miss = int.Parse(MissTextBox.Text);
-                    music.scoreResultList[0].maxCombo = int.Parse(MaxComboTextBox.Text);
-                    music.scoreResultList[0].score = int.Parse(ScoreTextBox.Text);
+                    music.scoreResultList[0].perfect = (int) PerfectNumericUpDown.Value;
+                    music.scoreResultList[0].great = (int) GreatNumericUpDown.Value;
+                    music.scoreResultList[0].good = (int) GoodNumericUpDown.Value;
+                    music.scoreResultList[0].bad = (int) BadNumericUpDown.Value;
+                    music.scoreResultList[0].miss = (int) MissNumericUpDown.Value;
+                    music.scoreResultList[0].maxCombo = (int) MaxComboNumericUpDown.Value;
+                    music.scoreResultList[0].score = (int) ScoreNumericUpDown.Value;
 
                     music.scoreResultList[0].CalculateInfos();
                 }
@@ -313,11 +322,11 @@ namespace BndrScoreRecorder
             try
             {
                 if (music.scoreResultList.Count > 0) {
-                    music.scoreResultList[0].perfect = int.Parse(PerfectTextBox.Text);
-                    music.scoreResultList[0].great = int.Parse(GreatTextBox.Text);
-                    music.scoreResultList[0].good = int.Parse(GoodTextBox.Text);
-                    music.scoreResultList[0].bad = int.Parse(BadTextBox.Text);
-                    music.scoreResultList[0].miss = int.Parse(MissTextBox.Text);
+                    music.scoreResultList[0].perfect = (int) PerfectNumericUpDown.Value;
+                    music.scoreResultList[0].great = (int) GreatNumericUpDown.Value;
+                    music.scoreResultList[0].good = (int) GoodNumericUpDown.Value;
+                    music.scoreResultList[0].bad = (int) BadNumericUpDown.Value;
+                    music.scoreResultList[0].miss = (int) MissNumericUpDown.Value;
 
                     // calculate ex score
                     music.scoreResultList[0].exScore = music.scoreResultList[0].perfect * 2 + music.scoreResultList[0].great;
@@ -330,8 +339,8 @@ namespace BndrScoreRecorder
                         + music.scoreResultList[0].miss;
 
                     // attach
-                    TotalNotesTextBox.Text = music.scoreResultList[0].totalNotes.ToString();
-                    ExScoreTextBox.Text = music.scoreResultList[0].exScore.ToString();
+                    TotalNotesNumericUpDown.Value = music.scoreResultList[0].totalNotes;
+                    ExScoreNumericUpDown.Value = music.scoreResultList[0].exScore;
 
                     DataAttach(music);
                 }
@@ -340,29 +349,15 @@ namespace BndrScoreRecorder
             }
         }
 
-        private void PerfectTextBox_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// EX ScoreとTotal Notesを再計算し、画面上に再表示＆警告チェックする。
+        /// </summary>
+        private void NumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            RecalculateAttachedData();
-        }
-
-        private void GreatTextBox_TextChanged(object sender, EventArgs e)
-        {
-            RecalculateAttachedData();
-        }
-
-        private void GoodTextBox_TextChanged(object sender, EventArgs e)
-        {
-            RecalculateAttachedData();
-        }
-
-        private void BadTextBox_TextChanged(object sender, EventArgs e)
-        {
-            RecalculateAttachedData();
-        }
-
-        private void MissTextBox_TextChanged(object sender, EventArgs e)
-        {
-            RecalculateAttachedData();
+            if (isInitializing == false)
+            {
+                RecalculateAttachedData();
+            }
         }
     }
 }

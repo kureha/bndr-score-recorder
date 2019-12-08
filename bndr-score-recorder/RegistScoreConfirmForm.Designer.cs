@@ -33,11 +33,6 @@
             this.GoodLabel = new System.Windows.Forms.Label();
             this.BadLabel = new System.Windows.Forms.Label();
             this.MissLabel = new System.Windows.Forms.Label();
-            this.PerfectTextBox = new System.Windows.Forms.TextBox();
-            this.GreatTextBox = new System.Windows.Forms.TextBox();
-            this.GoodTextBox = new System.Windows.Forms.TextBox();
-            this.BadTextBox = new System.Windows.Forms.TextBox();
-            this.MissTextBox = new System.Windows.Forms.TextBox();
             this.ConfirmMessageLabel = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.TitleLabel = new System.Windows.Forms.Label();
@@ -51,20 +46,34 @@
             this.LevelLabel = new System.Windows.Forms.Label();
             this.ScoreGroupBox = new System.Windows.Forms.GroupBox();
             this.ScoreMessageTextBox = new System.Windows.Forms.TextBox();
-            this.TotalNotesTextBox = new System.Windows.Forms.TextBox();
             this.TotalNotesLabel = new System.Windows.Forms.Label();
             this.ScreenshotPictureBox = new System.Windows.Forms.PictureBox();
-            this.ExScoreTextBox = new System.Windows.Forms.TextBox();
             this.ExScoreLabel = new System.Windows.Forms.Label();
-            this.MaxComboTextBox = new System.Windows.Forms.TextBox();
             this.MaxComboLabel = new System.Windows.Forms.Label();
             this.RegistButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
-            this.ScoreTextBox = new System.Windows.Forms.TextBox();
             this.ScoreLabel = new System.Windows.Forms.Label();
+            this.PerfectNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.GreatNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.GoodNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.BadNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.MissNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.MaxComboNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.ScoreNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.ExScoreNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.TotalNotesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.MusicGroupBox.SuspendLayout();
             this.ScoreGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScreenshotPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PerfectNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GreatNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GoodNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BadNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MissNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxComboNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScoreNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExScoreNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalNotesNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // PerfectLabel
@@ -116,46 +125,6 @@
             this.MissLabel.TabIndex = 4;
             this.MissLabel.Text = "Miss";
             this.MissLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // PerfectTextBox
-            // 
-            this.PerfectTextBox.Location = new System.Drawing.Point(81, 19);
-            this.PerfectTextBox.Name = "PerfectTextBox";
-            this.PerfectTextBox.Size = new System.Drawing.Size(94, 19);
-            this.PerfectTextBox.TabIndex = 5;
-            this.PerfectTextBox.TextChanged += new System.EventHandler(this.PerfectTextBox_TextChanged);
-            // 
-            // GreatTextBox
-            // 
-            this.GreatTextBox.Location = new System.Drawing.Point(81, 44);
-            this.GreatTextBox.Name = "GreatTextBox";
-            this.GreatTextBox.Size = new System.Drawing.Size(94, 19);
-            this.GreatTextBox.TabIndex = 6;
-            this.GreatTextBox.TextChanged += new System.EventHandler(this.GreatTextBox_TextChanged);
-            // 
-            // GoodTextBox
-            // 
-            this.GoodTextBox.Location = new System.Drawing.Point(81, 69);
-            this.GoodTextBox.Name = "GoodTextBox";
-            this.GoodTextBox.Size = new System.Drawing.Size(94, 19);
-            this.GoodTextBox.TabIndex = 7;
-            this.GoodTextBox.TextChanged += new System.EventHandler(this.GoodTextBox_TextChanged);
-            // 
-            // BadTextBox
-            // 
-            this.BadTextBox.Location = new System.Drawing.Point(81, 94);
-            this.BadTextBox.Name = "BadTextBox";
-            this.BadTextBox.Size = new System.Drawing.Size(94, 19);
-            this.BadTextBox.TabIndex = 8;
-            this.BadTextBox.TextChanged += new System.EventHandler(this.BadTextBox_TextChanged);
-            // 
-            // MissTextBox
-            // 
-            this.MissTextBox.Location = new System.Drawing.Point(81, 119);
-            this.MissTextBox.Name = "MissTextBox";
-            this.MissTextBox.Size = new System.Drawing.Size(94, 19);
-            this.MissTextBox.TabIndex = 9;
-            this.MissTextBox.TextChanged += new System.EventHandler(this.MissTextBox_TextChanged);
             // 
             // ConfirmMessageLabel
             // 
@@ -280,26 +249,26 @@
             this.ScoreGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScoreGroupBox.Controls.Add(this.ScoreTextBox);
+            this.ScoreGroupBox.Controls.Add(this.TotalNotesNumericUpDown);
+            this.ScoreGroupBox.Controls.Add(this.ExScoreNumericUpDown);
+            this.ScoreGroupBox.Controls.Add(this.ScoreNumericUpDown);
+            this.ScoreGroupBox.Controls.Add(this.MaxComboNumericUpDown);
+            this.ScoreGroupBox.Controls.Add(this.MissNumericUpDown);
+            this.ScoreGroupBox.Controls.Add(this.BadNumericUpDown);
+            this.ScoreGroupBox.Controls.Add(this.GoodNumericUpDown);
+            this.ScoreGroupBox.Controls.Add(this.GreatNumericUpDown);
+            this.ScoreGroupBox.Controls.Add(this.PerfectNumericUpDown);
             this.ScoreGroupBox.Controls.Add(this.ScoreLabel);
             this.ScoreGroupBox.Controls.Add(this.ScoreMessageTextBox);
-            this.ScoreGroupBox.Controls.Add(this.TotalNotesTextBox);
             this.ScoreGroupBox.Controls.Add(this.TotalNotesLabel);
             this.ScoreGroupBox.Controls.Add(this.ScreenshotPictureBox);
-            this.ScoreGroupBox.Controls.Add(this.ExScoreTextBox);
             this.ScoreGroupBox.Controls.Add(this.ExScoreLabel);
-            this.ScoreGroupBox.Controls.Add(this.MaxComboTextBox);
             this.ScoreGroupBox.Controls.Add(this.MaxComboLabel);
-            this.ScoreGroupBox.Controls.Add(this.PerfectTextBox);
             this.ScoreGroupBox.Controls.Add(this.PerfectLabel);
             this.ScoreGroupBox.Controls.Add(this.GreatLabel);
-            this.ScoreGroupBox.Controls.Add(this.MissTextBox);
             this.ScoreGroupBox.Controls.Add(this.GoodLabel);
-            this.ScoreGroupBox.Controls.Add(this.BadTextBox);
             this.ScoreGroupBox.Controls.Add(this.BadLabel);
-            this.ScoreGroupBox.Controls.Add(this.GoodTextBox);
             this.ScoreGroupBox.Controls.Add(this.MissLabel);
-            this.ScoreGroupBox.Controls.Add(this.GreatTextBox);
             this.ScoreGroupBox.Location = new System.Drawing.Point(12, 208);
             this.ScoreGroupBox.Name = "ScoreGroupBox";
             this.ScoreGroupBox.Size = new System.Drawing.Size(860, 427);
@@ -318,14 +287,6 @@
             this.ScoreMessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ScoreMessageTextBox.Size = new System.Drawing.Size(846, 37);
             this.ScoreMessageTextBox.TabIndex = 18;
-            // 
-            // TotalNotesTextBox
-            // 
-            this.TotalNotesTextBox.Location = new System.Drawing.Point(81, 219);
-            this.TotalNotesTextBox.Name = "TotalNotesTextBox";
-            this.TotalNotesTextBox.ReadOnly = true;
-            this.TotalNotesTextBox.Size = new System.Drawing.Size(94, 19);
-            this.TotalNotesTextBox.TabIndex = 16;
             // 
             // TotalNotesLabel
             // 
@@ -349,14 +310,6 @@
             this.ScreenshotPictureBox.TabIndex = 14;
             this.ScreenshotPictureBox.TabStop = false;
             // 
-            // ExScoreTextBox
-            // 
-            this.ExScoreTextBox.Location = new System.Drawing.Point(81, 194);
-            this.ExScoreTextBox.Name = "ExScoreTextBox";
-            this.ExScoreTextBox.ReadOnly = true;
-            this.ExScoreTextBox.Size = new System.Drawing.Size(94, 19);
-            this.ExScoreTextBox.TabIndex = 13;
-            // 
             // ExScoreLabel
             // 
             this.ExScoreLabel.AutoSize = true;
@@ -366,13 +319,6 @@
             this.ExScoreLabel.TabIndex = 12;
             this.ExScoreLabel.Text = "EX Score";
             this.ExScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // MaxComboTextBox
-            // 
-            this.MaxComboTextBox.Location = new System.Drawing.Point(81, 144);
-            this.MaxComboTextBox.Name = "MaxComboTextBox";
-            this.MaxComboTextBox.Size = new System.Drawing.Size(94, 19);
-            this.MaxComboTextBox.TabIndex = 11;
             // 
             // MaxComboLabel
             // 
@@ -406,13 +352,6 @@
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // ScoreTextBox
-            // 
-            this.ScoreTextBox.Location = new System.Drawing.Point(81, 169);
-            this.ScoreTextBox.Name = "ScoreTextBox";
-            this.ScoreTextBox.Size = new System.Drawing.Size(94, 19);
-            this.ScoreTextBox.TabIndex = 20;
-            // 
             // ScoreLabel
             // 
             this.ScoreLabel.AutoSize = true;
@@ -422,6 +361,166 @@
             this.ScoreLabel.TabIndex = 19;
             this.ScoreLabel.Text = "Score";
             this.ScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // PerfectNumericUpDown
+            // 
+            this.PerfectNumericUpDown.Location = new System.Drawing.Point(81, 20);
+            this.PerfectNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.PerfectNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.PerfectNumericUpDown.Name = "PerfectNumericUpDown";
+            this.PerfectNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.PerfectNumericUpDown.TabIndex = 21;
+            this.PerfectNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
+            // 
+            // GreatNumericUpDown
+            // 
+            this.GreatNumericUpDown.Location = new System.Drawing.Point(81, 45);
+            this.GreatNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.GreatNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.GreatNumericUpDown.Name = "GreatNumericUpDown";
+            this.GreatNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.GreatNumericUpDown.TabIndex = 22;
+            this.GreatNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
+            // 
+            // GoodNumericUpDown
+            // 
+            this.GoodNumericUpDown.Location = new System.Drawing.Point(81, 70);
+            this.GoodNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.GoodNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.GoodNumericUpDown.Name = "GoodNumericUpDown";
+            this.GoodNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.GoodNumericUpDown.TabIndex = 23;
+            this.GoodNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
+            // 
+            // BadNumericUpDown
+            // 
+            this.BadNumericUpDown.Location = new System.Drawing.Point(81, 95);
+            this.BadNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.BadNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.BadNumericUpDown.Name = "BadNumericUpDown";
+            this.BadNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.BadNumericUpDown.TabIndex = 24;
+            this.BadNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
+            // 
+            // MissNumericUpDown
+            // 
+            this.MissNumericUpDown.Location = new System.Drawing.Point(81, 120);
+            this.MissNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.MissNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.MissNumericUpDown.Name = "MissNumericUpDown";
+            this.MissNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.MissNumericUpDown.TabIndex = 25;
+            this.MissNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
+            // 
+            // MaxComboNumericUpDown
+            // 
+            this.MaxComboNumericUpDown.Location = new System.Drawing.Point(81, 145);
+            this.MaxComboNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.MaxComboNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.MaxComboNumericUpDown.Name = "MaxComboNumericUpDown";
+            this.MaxComboNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.MaxComboNumericUpDown.TabIndex = 26;
+            // 
+            // ScoreNumericUpDown
+            // 
+            this.ScoreNumericUpDown.Location = new System.Drawing.Point(81, 170);
+            this.ScoreNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.ScoreNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.ScoreNumericUpDown.Name = "ScoreNumericUpDown";
+            this.ScoreNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.ScoreNumericUpDown.TabIndex = 27;
+            // 
+            // ExScoreNumericUpDown
+            // 
+            this.ExScoreNumericUpDown.Location = new System.Drawing.Point(81, 195);
+            this.ExScoreNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.ExScoreNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.ExScoreNumericUpDown.Name = "ExScoreNumericUpDown";
+            this.ExScoreNumericUpDown.ReadOnly = true;
+            this.ExScoreNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.ExScoreNumericUpDown.TabIndex = 28;
+            // 
+            // TotalNotesNumericUpDown
+            // 
+            this.TotalNotesNumericUpDown.Location = new System.Drawing.Point(81, 220);
+            this.TotalNotesNumericUpDown.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.TotalNotesNumericUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.TotalNotesNumericUpDown.Name = "TotalNotesNumericUpDown";
+            this.TotalNotesNumericUpDown.ReadOnly = true;
+            this.TotalNotesNumericUpDown.Size = new System.Drawing.Size(94, 19);
+            this.TotalNotesNumericUpDown.TabIndex = 29;
             // 
             // RegistScoreConfirmForm
             // 
@@ -440,6 +539,15 @@
             this.ScoreGroupBox.ResumeLayout(false);
             this.ScoreGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScreenshotPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PerfectNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GreatNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GoodNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BadNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MissNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxComboNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScoreNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExScoreNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalNotesNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,11 +560,6 @@
         private System.Windows.Forms.Label GoodLabel;
         private System.Windows.Forms.Label BadLabel;
         private System.Windows.Forms.Label MissLabel;
-        private System.Windows.Forms.TextBox PerfectTextBox;
-        private System.Windows.Forms.TextBox GreatTextBox;
-        private System.Windows.Forms.TextBox GoodTextBox;
-        private System.Windows.Forms.TextBox BadTextBox;
-        private System.Windows.Forms.TextBox MissTextBox;
         private System.Windows.Forms.Label ConfirmMessageLabel;
         private System.Windows.Forms.TextBox TitleTextBox;
         private System.Windows.Forms.Label TitleLabel;
@@ -467,19 +570,24 @@
         private System.Windows.Forms.Label LevelLabel;
         private System.Windows.Forms.GroupBox ScoreGroupBox;
         private System.Windows.Forms.PictureBox ScreenshotPictureBox;
-        private System.Windows.Forms.TextBox ExScoreTextBox;
         private System.Windows.Forms.Label ExScoreLabel;
-        private System.Windows.Forms.TextBox MaxComboTextBox;
         private System.Windows.Forms.Label MaxComboLabel;
         private System.Windows.Forms.Button RegistButton;
         private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.TextBox TotalNotesTextBox;
         private System.Windows.Forms.Label TotalNotesLabel;
         private System.Windows.Forms.TextBox MusicMessageTextBox;
         private System.Windows.Forms.TextBox ScoreMessageTextBox;
         private System.Windows.Forms.TextBox DifficultTextBox;
         private System.Windows.Forms.Label DifficultLabel;
-        private System.Windows.Forms.TextBox ScoreTextBox;
         private System.Windows.Forms.Label ScoreLabel;
+        private System.Windows.Forms.NumericUpDown GoodNumericUpDown;
+        private System.Windows.Forms.NumericUpDown GreatNumericUpDown;
+        private System.Windows.Forms.NumericUpDown PerfectNumericUpDown;
+        private System.Windows.Forms.NumericUpDown ScoreNumericUpDown;
+        private System.Windows.Forms.NumericUpDown MaxComboNumericUpDown;
+        private System.Windows.Forms.NumericUpDown MissNumericUpDown;
+        private System.Windows.Forms.NumericUpDown BadNumericUpDown;
+        private System.Windows.Forms.NumericUpDown TotalNotesNumericUpDown;
+        private System.Windows.Forms.NumericUpDown ExScoreNumericUpDown;
     }
 }

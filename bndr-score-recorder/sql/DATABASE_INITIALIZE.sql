@@ -20,6 +20,7 @@ CREATE TABLE "T_SCORE_RECORD" (
 	"total_notes"	INTEGER,
 	"max_combo"	INTEGER,
 	"ex_score"	INTEGER,
+	"score"	INTEGER,
 	"image_file_path"	TEXT,
 	"insert_date"	TEXT,
 	"update_date"	TEXT
