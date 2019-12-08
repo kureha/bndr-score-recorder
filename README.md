@@ -74,7 +74,7 @@
 
 ## Support
 
-もし不具合を見つけたり機能要望があったら、君は[Issues](https://github.com/kureha/bndr-score-recorder/issues)に登録してもよいし、作者の[Twitter](https://twitter.com/atodelie)に言ってもいいし、このソフトウェアはOSSなので自分で修正してPull Requestを出してもよいのです。
+もし不具合を見つけたり機能要望があったら、君は[Issues](https://github.com/kureha/bndr-score-recorder/issues)に登録してもよいし、作者の[Twitter](https://twitter.com/atodelie)に言ってもいいし、なんならこのソフトウェアはOSSなので自分で修正してPull Requestを出してもよいのです。
 
 ## Author
 
