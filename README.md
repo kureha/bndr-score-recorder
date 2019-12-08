@@ -3,11 +3,11 @@
 リズムゲーム等のスクリーンショット画像をスキャンし、曲名・結果ノーツ数・最大コンボ等の情報を文字情報として抽出し、データベース化して閲覧可能にするソフトウェアです。
 詳細結果の記録機能が無いリズムゲーム等で、結果入力の手間を大幅に簡略化することを目的としています。
 
-以下のスクリーンショットでは[BanG Dream！ガールズバンドパーティー！](https://bang-dream.bushimo.jp/)のスクリーンショットを引用して解説しています。
+以下では一部、[BanG Dream！ガールズバンドパーティー！](https://bang-dream.bushimo.jp/)のゲーム内スクリーンショットが使用されています。
 
 ## Demo
 
-
+![Demo01](https://user-images.githubusercontent.com/175231/70383546-0a3f9180-19b3-11ea-9a4d-ee34a905c955.jpg)
 
 ## Requirements
 
@@ -36,11 +36,17 @@
 
 1. BndrScoreRecorder.exeを起動する。
 
-2. 外部EXEが要求されるので、事前に配置＆インストールしたImageMagickのconvert.exeと、Tesseract-OCRのtesseract.exeを指定する。
+2 .外部EXEが要求されるので、事前に配置＆インストールしたImageMagickのconvert.exeと、Tesseract-OCRのtesseract.exeを指定する。
+
+![Usage02-01](https://user-images.githubusercontent.com/175231/70383549-0a3f9180-19b3-11ea-9a75-25b4a4a825d3.jpg)
 
 3. メニューから「環境設定」→「画像切り抜き座標設定」をクリックし、解析したいリズムゲーム等のスクリーンショット画像ファイルを指定する。
 
+![Usage03-01](https://user-images.githubusercontent.com/175231/70383550-0a3f9180-19b3-11ea-8334-460f7a4c5981.jpg)
+
 4. 「3.」のファイルを使用し、画像切り取り画面が表示される。5つの情報の画像読み込み位置を画像上でクリック＆ドラッグで指定し、Position x Sizeで調整する。
+
+![Usage04-01](https://user-images.githubusercontent.com/175231/70383547-0a3f9180-19b3-11ea-8049-23bc189b0316.jpg)
 
 5. 「4.」で調整したら「Try to Analyze」で試験切り出しをし、読み取り結果が期待される出力内容の読み取り結果のようになっているか？を確認する。問題なければ「↑ SAVE」ボタンで設定をメモリ上に仮保存する。
 
