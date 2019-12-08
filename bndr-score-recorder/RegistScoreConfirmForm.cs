@@ -95,6 +95,11 @@ namespace BndrScoreRecorder
             MissTextBox.ForeColor = Color.Black;
             MissTextBox.BackColor = Color.White;
 
+            MaxComboTextBox.ForeColor = Color.Black;
+            MaxComboTextBox.BackColor = Color.White;
+            ScoreTextBox.ForeColor = Color.Black;
+            ScoreTextBox.BackColor = Color.White;
+
             // attache data (music)
             TitleTextBox.Text = music.title;
             DifficultTextBox.Text = music.difficult;
@@ -111,6 +116,7 @@ namespace BndrScoreRecorder
                 BadTextBox.Text = scoreResult.bad.ToString();
                 MissTextBox.Text = scoreResult.miss.ToString();
                 MaxComboTextBox.Text = scoreResult.maxCombo.ToString();
+                ScoreTextBox.Text = scoreResult.score.ToString();
 
                 ExScoreTextBox.Text = scoreResult.exScore.ToString();
                 TotalNotesTextBox.Text = scoreResult.totalNotes.ToString();
@@ -274,6 +280,7 @@ namespace BndrScoreRecorder
                     music.scoreResultList[0].bad = int.Parse(BadTextBox.Text);
                     music.scoreResultList[0].miss = int.Parse(MissTextBox.Text);
                     music.scoreResultList[0].maxCombo = int.Parse(MaxComboTextBox.Text);
+                    music.scoreResultList[0].score = int.Parse(ScoreTextBox.Text);
 
                     music.scoreResultList[0].CalculateInfos();
                 }
@@ -311,7 +318,6 @@ namespace BndrScoreRecorder
                     music.scoreResultList[0].good = int.Parse(GoodTextBox.Text);
                     music.scoreResultList[0].bad = int.Parse(BadTextBox.Text);
                     music.scoreResultList[0].miss = int.Parse(MissTextBox.Text);
-                    music.scoreResultList[0].maxCombo = int.Parse(MaxComboTextBox.Text);
 
                     // calculate ex score
                     music.scoreResultList[0].exScore = music.scoreResultList[0].perfect * 2 + music.scoreResultList[0].great;

@@ -89,7 +89,7 @@ namespace BndrScoreRecorder.common.entity
         /// <param name="rawResultNotesString">Tesseractで読み取ったResultNotes文字列</param>
         /// <param name="imageFilePath">読み取り元画像ファイルパス</param>
         /// <returns>ScoreResultオブジェクト</returns>
-        public static ScoreResult Parse(string rawResultNotesString, string imageFilePath)
+        public static ScoreResult Parse(string rawResultNotesString, string rawMaxComboString, string rawScoreString, string imageFilePath)
         {
             logger.Info("ScoreResult parse start. rawResultNotesString = " + rawResultNotesString);
 
@@ -97,20 +97,20 @@ namespace BndrScoreRecorder.common.entity
             ScoreResult scoreResult = new ScoreResult();
 
             // split raw string and convert to list
-            string[] rawScoreArray = rawResultNotesString.Split(CHAR_RAW_SCORE_LIST_SPLITER, StringSplitOptions.RemoveEmptyEntries);
-            List<string> rawScoreList = new List<string>();
-            rawScoreList.AddRange(rawScoreArray);
+            string[] rawResultNotesArray = rawResultNotesString.Split(CHAR_RAW_SCORE_LIST_SPLITER, StringSplitOptions.RemoveEmptyEntries);
+            List<string> rawResultNotesList = new List<string>();
+            rawResultNotesList.AddRange(rawResultNotesArray);
 
-            logger.Info("RawString convert to RawList success. List size = " + rawScoreList.Count);
+            logger.Info("RawString convert to RawList success. List size = " + rawResultNotesList.Count);
 
             // insert data if line is enable
             try
             {
-                scoreResult.perfect = ExtractResultNotes(rawScoreArray[LINE_NUM_PERFECT]);
-                scoreResult.great = ExtractResultNotes(rawScoreArray[LINE_NUM_GREAT]);
-                scoreResult.good = ExtractResultNotes(rawScoreArray[LINE_NUM_GOOD]);
-                scoreResult.bad = ExtractResultNotes(rawScoreArray[LINE_NUM_BAD]);
-                scoreResult.miss = ExtractResultNotes(rawScoreArray[LINE_NUM_MISS]);
+                scoreResult.perfect = ExtractResultNotes(rawResultNotesArray[LINE_NUM_PERFECT]);
+                scoreResult.great = ExtractResultNotes(rawResultNotesArray[LINE_NUM_GREAT]);
+                scoreResult.good = ExtractResultNotes(rawResultNotesArray[LINE_NUM_GOOD]);
+                scoreResult.bad = ExtractResultNotes(rawResultNotesArray[LINE_NUM_BAD]);
+                scoreResult.miss = ExtractResultNotes(rawResultNotesArray[LINE_NUM_MISS]);
             } catch (IndexOutOfRangeException)
             {
                 logger.Error("RawString is not containes all data.");
@@ -118,6 +118,25 @@ namespace BndrScoreRecorder.common.entity
 
             // image file path
             scoreResult.imageFilePath = imageFilePath;
+
+            // max combo
+            try
+            {
+                scoreResult.maxCombo = int.Parse(rawMaxComboString);
+            } catch (FormatException)
+            {
+                scoreResult.maxCombo = ERROR_COUNT;
+            }
+
+            // score
+            try
+            {
+                scoreResult.score = int.Parse(rawScoreString);
+            }
+            catch (FormatException)
+            {
+                scoreResult.score = ERROR_COUNT;
+            }
 
             // calculate ex score, total notes, clear type
             scoreResult.CalculateInfos();

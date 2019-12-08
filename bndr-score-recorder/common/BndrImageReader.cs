@@ -158,6 +158,15 @@ namespace BndrScoreRecorder.common
                 bndrOcrSetting.getLevelOcrOption());
             logger.Info("Level = " + levelString);
 
+            // Score read
+            string scoreString = OcrReader.ReadFromImageFileOnlyNumber(
+                setting.pathImageMagickConvertExe,
+                setting.pathTesseractExe,
+                scrennShotImageFileDestPath,
+                SUFFIX_CROPNAME_LEVEL,
+                bndrOcrSetting.getScoreOcrOption());
+            logger.Info("Level = " + levelString);
+
             logger.Info("OCR read section end.");
 
             // Create return value start
@@ -179,15 +188,13 @@ namespace BndrScoreRecorder.common
             // Create Hashed OCR Data
             analyzedMusic.CreateHashedOcrDataFromTitleAndDifficult();
 
-            analyzedMusic.scoreResultList.Add(ScoreResult.Parse(resultNotesString, scrennShotImageFileDestPath.Replace(destDirPath, string.Empty)));
-
-            try
-            {
-                analyzedMusic.scoreResultList[0].maxCombo = int.Parse(maxComboString);
-            } catch (FormatException)
-            {
-                analyzedMusic.scoreResultList[0].maxCombo = 0;
-            }
+            // Parse
+            analyzedMusic.scoreResultList.Add(ScoreResult.Parse(
+                resultNotesString, 
+                maxComboString, 
+                scoreString, 
+                scrennShotImageFileDestPath.Replace(destDirPath, string.Empty))
+                );
 
             logger.Info("Musc score result creation end.");
 

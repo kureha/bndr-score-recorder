@@ -39,6 +39,7 @@ namespace BndrScoreRecorder
         private static readonly string LIST_ITEM_OCR_RESULT_NOTES = "3.ノーツ結果切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_MAX_COMBO = "4.MAX COMBO切り抜き座標設定 [{0}]";
         private static readonly string LIST_ITEM_OCR_LEVEL = "5.LEVEL切り抜き座標設定 [{0}]";
+        private static readonly string LIST_ITEM_OCR_SCORE = "6.Score切り抜き座標設定 [{0}]";
 
         // ListBox's description define
         private static readonly string DESCRIPTION_OCR_TITLE = "曲名そのものの文字列。日本語を含む。読み取り結果例：てすと曲名";
@@ -46,6 +47,7 @@ namespace BndrScoreRecorder
         private static readonly string DESCRIPTION_OCR_RESULT_NOTES = "ノーツ結果の数字5行。上の行からPerfect,Great,Good,Bad,Miss。読み取り結果例：\r\n500\r\n100\r\n0005\r\n0003\r\n1";
         private static readonly string DESCRIPTION_OCR_MAX_COMBO = "MAX COMBOの数字。読み取り結果例：0500";
         private static readonly string DESCRIPTION_OCR_LEVEL = "LEVELの数字。読み取り結果例：25";
+        private static readonly string DESCRIPTION_OCR_SCORE = "Scoreの数字。読み取り結果例：1000000";
 
         // ListBox's item index define
         private const int LIST_INDEX_OCR_TITLE = 0;
@@ -53,6 +55,7 @@ namespace BndrScoreRecorder
         private const int LIST_INDEX_OCR_RESULT_NOTES = 2;
         private const int LIST_INDEX_OCR_MAX_COMBO = 3;
         private const int LIST_INDEX_OCR_LEVEL = 4;
+        private const int LIST_INDEX_OCR_SCORE = 5;
 
         // Use for drag flag
         private bool isMouseDown = false;
@@ -126,6 +129,8 @@ namespace BndrScoreRecorder
                 setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption()));
             SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_LEVEL, 
                 setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption()));
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_SCORE,
+                setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption()));
 
             // Init
             SelectOcrSettingListBox.SelectedIndex = 0;
@@ -156,6 +161,10 @@ namespace BndrScoreRecorder
             SelectOcrSettingListBox.Items[LIST_INDEX_OCR_LEVEL] = 
                 String.Format(LIST_ITEM_OCR_LEVEL,
                 setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption());
+
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_SCORE] =
+                String.Format(LIST_ITEM_OCR_SCORE,
+                setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption());
         }
 
         /// <summary>
@@ -192,6 +201,12 @@ namespace BndrScoreRecorder
                     // Level
                     targetOcrSettiong = setting.defaultBndrOcrSetting.LevelOcrSetting;
                     break;
+
+                case LIST_INDEX_OCR_SCORE:
+                    // Score
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.ScoreOcrSetting;
+                    break;
+
                 default:
                     // Default
                     targetOcrSettiong = new OcrSetting();
@@ -238,6 +253,12 @@ namespace BndrScoreRecorder
                     // Level
                     targetOcrSettiong = setting.defaultBndrOcrSetting.LevelOcrSetting;
                     break;
+
+                case LIST_INDEX_OCR_SCORE:
+                    // Score
+                    targetOcrSettiong = setting.defaultBndrOcrSetting.ScoreOcrSetting;
+                    break;
+
                 default:
                     // Default
                     targetOcrSettiong = new OcrSetting();
@@ -295,6 +316,7 @@ namespace BndrScoreRecorder
                         SUFFIX_CROPNAME_TEST,
                         CreateCropString());
                     break;
+
                 case LIST_INDEX_OCR_RESULT_NOTES:
                     // Result notes
                     CropResultTextBox.Text = OcrReader.ReadFromImageFileOnlyNumber(
@@ -304,6 +326,7 @@ namespace BndrScoreRecorder
                         SUFFIX_CROPNAME_TEST,
                         CreateCropString());
                     break;
+
                 case LIST_INDEX_OCR_LEVEL:
                     // Level
                     CropResultTextBox.Text = OcrReader.ReadFromImageFileOnlyNumber(
@@ -313,6 +336,17 @@ namespace BndrScoreRecorder
                         SUFFIX_CROPNAME_TEST,
                         CreateCropString());
                     break;
+
+                case LIST_INDEX_OCR_SCORE:
+                    // Score
+                    CropResultTextBox.Text = OcrReader.ReadFromImageFileOnlyNumber(
+                        setting.pathImageMagickConvertExe,
+                        setting.pathTesseractExe,
+                        workImageFilePath,
+                        SUFFIX_CROPNAME_TEST,
+                        CreateCropString());
+                    break;
+
                 default:
                     // Default
                     break;
@@ -468,6 +502,12 @@ namespace BndrScoreRecorder
                     // Level
                     message = DESCRIPTION_OCR_LEVEL;
                     break;
+
+                case LIST_INDEX_OCR_SCORE:
+                    // Score
+                    message = DESCRIPTION_OCR_SCORE;
+                    break;
+
                 default:
                     // Default
                     message = string.Empty;

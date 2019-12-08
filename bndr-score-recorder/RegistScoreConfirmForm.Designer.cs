@@ -60,6 +60,8 @@
             this.MaxComboLabel = new System.Windows.Forms.Label();
             this.RegistButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.ScoreTextBox = new System.Windows.Forms.TextBox();
+            this.ScoreLabel = new System.Windows.Forms.Label();
             this.MusicGroupBox.SuspendLayout();
             this.ScoreGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScreenshotPictureBox)).BeginInit();
@@ -278,6 +280,8 @@
             this.ScoreGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ScoreGroupBox.Controls.Add(this.ScoreTextBox);
+            this.ScoreGroupBox.Controls.Add(this.ScoreLabel);
             this.ScoreGroupBox.Controls.Add(this.ScoreMessageTextBox);
             this.ScoreGroupBox.Controls.Add(this.TotalNotesTextBox);
             this.ScoreGroupBox.Controls.Add(this.TotalNotesLabel);
@@ -317,7 +321,7 @@
             // 
             // TotalNotesTextBox
             // 
-            this.TotalNotesTextBox.Location = new System.Drawing.Point(81, 194);
+            this.TotalNotesTextBox.Location = new System.Drawing.Point(81, 219);
             this.TotalNotesTextBox.Name = "TotalNotesTextBox";
             this.TotalNotesTextBox.ReadOnly = true;
             this.TotalNotesTextBox.Size = new System.Drawing.Size(94, 19);
@@ -326,7 +330,7 @@
             // TotalNotesLabel
             // 
             this.TotalNotesLabel.AutoSize = true;
-            this.TotalNotesLabel.Location = new System.Drawing.Point(10, 197);
+            this.TotalNotesLabel.Location = new System.Drawing.Point(10, 222);
             this.TotalNotesLabel.Name = "TotalNotesLabel";
             this.TotalNotesLabel.Size = new System.Drawing.Size(65, 12);
             this.TotalNotesLabel.TabIndex = 15;
@@ -347,7 +351,7 @@
             // 
             // ExScoreTextBox
             // 
-            this.ExScoreTextBox.Location = new System.Drawing.Point(81, 169);
+            this.ExScoreTextBox.Location = new System.Drawing.Point(81, 194);
             this.ExScoreTextBox.Name = "ExScoreTextBox";
             this.ExScoreTextBox.ReadOnly = true;
             this.ExScoreTextBox.Size = new System.Drawing.Size(94, 19);
@@ -356,7 +360,7 @@
             // ExScoreLabel
             // 
             this.ExScoreLabel.AutoSize = true;
-            this.ExScoreLabel.Location = new System.Drawing.Point(23, 172);
+            this.ExScoreLabel.Location = new System.Drawing.Point(23, 197);
             this.ExScoreLabel.Name = "ExScoreLabel";
             this.ExScoreLabel.Size = new System.Drawing.Size(52, 12);
             this.ExScoreLabel.TabIndex = 12;
@@ -401,6 +405,23 @@
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // ScoreTextBox
+            // 
+            this.ScoreTextBox.Location = new System.Drawing.Point(81, 169);
+            this.ScoreTextBox.Name = "ScoreTextBox";
+            this.ScoreTextBox.Size = new System.Drawing.Size(94, 19);
+            this.ScoreTextBox.TabIndex = 20;
+            // 
+            // ScoreLabel
+            // 
+            this.ScoreLabel.AutoSize = true;
+            this.ScoreLabel.Location = new System.Drawing.Point(41, 172);
+            this.ScoreLabel.Name = "ScoreLabel";
+            this.ScoreLabel.Size = new System.Drawing.Size(34, 12);
+            this.ScoreLabel.TabIndex = 19;
+            this.ScoreLabel.Text = "Score";
+            this.ScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // RegistScoreConfirmForm
             // 
@@ -458,5 +479,7 @@
         private System.Windows.Forms.TextBox ScoreMessageTextBox;
         private System.Windows.Forms.TextBox DifficultTextBox;
         private System.Windows.Forms.Label DifficultLabel;
+        private System.Windows.Forms.TextBox ScoreTextBox;
+        private System.Windows.Forms.Label ScoreLabel;
     }
 }

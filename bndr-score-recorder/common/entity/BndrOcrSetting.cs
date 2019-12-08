@@ -30,6 +30,10 @@ namespace BndrScoreRecorder.common.entity
         [DataMember]
         public OcrSetting LevelOcrSetting;
 
+        // Score用設定
+        [DataMember]
+        public OcrSetting ScoreOcrSetting;
+
         // Is default flag
         [DataMember]
         public bool isDefault;
@@ -44,6 +48,7 @@ namespace BndrScoreRecorder.common.entity
             ResultNotesOcrSetting = new OcrSetting();
             MaxComboOcrSetting = new OcrSetting();
             LevelOcrSetting = new OcrSetting();
+            ScoreOcrSetting = new OcrSetting();
             isDefault = false;
         }
 
@@ -119,6 +124,22 @@ namespace BndrScoreRecorder.common.entity
             } else
             {
                 return LevelOcrSetting.ImageMagickCropOption();
+            }
+        }
+
+        /// <summary>
+        /// Score OCR Optionを取得。
+        /// </summary>
+        /// <returns>有効なImageMagick Cropオプション値</returns>
+        public string getScoreOcrOption()
+        {
+            if (ScoreOcrSetting == null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return ScoreOcrSetting.ImageMagickCropOption();
             }
         }
     }
