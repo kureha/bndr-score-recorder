@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.components = new System.ComponentModel.Container();
+            this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.MainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExePathSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,22 +44,26 @@
             this.MusicListGroupBox = new System.Windows.Forms.GroupBox();
             this.MusicTreeView = new System.Windows.Forms.TreeView();
             this.ScoreDataGridView = new System.Windows.Forms.DataGridView();
-            this.menuStrip1.SuspendLayout();
+            this.SocreDataGridViewContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ScoreEditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ScoreDeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MainMenuStrip.SuspendLayout();
             this.MusicListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).BeginInit();
+            this.SocreDataGridViewContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // MainMenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MainToolStripMenuItem,
             this.AnalyzeToolStripMenuItem,
             this.HelpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1164, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MainMenuStrip.Name = "MainMenuStrip";
+            this.MainMenuStrip.Size = new System.Drawing.Size(1164, 24);
+            this.MainMenuStrip.TabIndex = 0;
+            this.MainMenuStrip.Text = "menuStrip1";
             // 
             // MainToolStripMenuItem
             // 
@@ -183,6 +188,29 @@
             this.ScoreDataGridView.Size = new System.Drawing.Size(895, 504);
             this.ScoreDataGridView.TabIndex = 2;
             this.ScoreDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ScoreDataGridView_CellDoubleClick);
+            this.ScoreDataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ScoreDataGridView_CellMouseClick);
+            // 
+            // SocreDataGridViewContextMenuStrip
+            // 
+            this.SocreDataGridViewContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ScoreEditToolStripMenuItem,
+            this.ScoreDeleteToolStripMenuItem});
+            this.SocreDataGridViewContextMenuStrip.Name = "SocreDataGridViewContextMenuStrip";
+            this.SocreDataGridViewContextMenuStrip.Size = new System.Drawing.Size(181, 70);
+            // 
+            // ScoreEditToolStripMenuItem
+            // 
+            this.ScoreEditToolStripMenuItem.Name = "ScoreEditToolStripMenuItem";
+            this.ScoreEditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ScoreEditToolStripMenuItem.Text = "編集";
+            this.ScoreEditToolStripMenuItem.Click += new System.EventHandler(this.ScoreEditToolStripMenuItem_Click);
+            // 
+            // ScoreDeleteToolStripMenuItem
+            // 
+            this.ScoreDeleteToolStripMenuItem.Name = "ScoreDeleteToolStripMenuItem";
+            this.ScoreDeleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ScoreDeleteToolStripMenuItem.Text = "削除";
+            this.ScoreDeleteToolStripMenuItem.Click += new System.EventHandler(this.ScoreDeleteToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -191,14 +219,15 @@
             this.ClientSize = new System.Drawing.Size(1164, 561);
             this.Controls.Add(this.ScoreDataGridView);
             this.Controls.Add(this.MusicListGroupBox);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.MainMenuStrip);
+            this.MainMenuStrip = this.MainMenuStrip;
             this.Name = "MainForm";
             this.Text = "BNDRスコアレコーダー";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MainMenuStrip.ResumeLayout(false);
+            this.MainMenuStrip.PerformLayout();
             this.MusicListGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).EndInit();
+            this.SocreDataGridViewContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,7 +235,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip MainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem MainToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ConfigToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator MainStripSeparator01;
@@ -221,6 +250,9 @@
         private System.Windows.Forms.ToolStripMenuItem ExecuteAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExePathSettingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CropImageRangeToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip SocreDataGridViewContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ScoreEditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ScoreDeleteToolStripMenuItem;
     }
 }
 

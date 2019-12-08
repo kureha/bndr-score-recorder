@@ -548,12 +548,75 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ScoreDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            // If clicked is not a cell, return
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+
+            // Edit selected score data
+            ScoreDataEdit();
+        }
+
+        /// <summary>
+        /// DataGridViewで右クリックされたときに編集・削除メニューを表示する。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScoreDataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // If not right click, return
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+
+            // If clicked cell, continue
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                SocreDataGridViewContextMenuStrip.Show(System.Windows.Forms.Cursor.Position);
+            }
+
+        }
+
+        /// <summary>
+        /// ContextMenuで編集が押されたときの処理。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScoreEditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ScoreDataEdit();
+        }
+
+        /// <summary>
+        /// ContextMenuで削除が押されたときの処理。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScoreDeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                "選択されているスコアデータを削除します。よろしいですか？", 
+                "警告", 
+                MessageBoxButtons.OKCancel, 
+                MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 選択されているスコアデータを編集する。
+        /// </summary>
+        private void ScoreDataEdit()
+        {
             // Get selected item
             ScoreResult scoreResult = null;
             int selectedRow = 0;
 
             // Get selected row
-            foreach(DataGridViewCell cell in ScoreDataGridView.SelectedCells)
+            foreach (DataGridViewCell cell in ScoreDataGridView.SelectedCells)
             {
                 selectedRow = cell.RowIndex;
                 scoreResult = (ScoreResult)ScoreDataGridView.Rows[selectedRow].DataBoundItem;
@@ -582,7 +645,7 @@ namespace BndrScoreRecorder
             music.scoreResultList = new List<ScoreResult>();
             music.scoreResultList.Add(scoreResult);
 
-            using(RegistScoreConfirmForm registScoreConfirmForm = new RegistScoreConfirmForm(ref music, ref music))
+            using (RegistScoreConfirmForm registScoreConfirmForm = new RegistScoreConfirmForm(ref music, ref music))
             {
                 if (DialogResult.OK == registScoreConfirmForm.ShowDialog())
                 {
@@ -593,13 +656,13 @@ namespace BndrScoreRecorder
                     RefreshScoreDataGridView();
 
                     MessageBox.Show("スコアデータの修正が完了しました。");
-                } else
+                }
+                else
                 {
                     // cancel
                     return;
                 }
             }
-
         }
 
         /// <summary>
