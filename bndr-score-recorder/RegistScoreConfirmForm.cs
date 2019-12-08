@@ -147,6 +147,10 @@ namespace BndrScoreRecorder
                 GoodNumericUpDown.BackColor = Color.Pink;
                 BadNumericUpDown.BackColor = Color.Pink;
                 MissNumericUpDown.BackColor = Color.Pink;
+
+                string readWarningMessage = "{0}が3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。";
+                string readErrorMessage = "{0}が正常に読み取れませんでした。データを手動入力で修正してください。";
+
                 if (music.scoreResultList.Count > 0)
                 {
                     ScoreResult scoreResult = music.scoreResultList[0];
@@ -154,80 +158,93 @@ namespace BndrScoreRecorder
                     // error detect
                     if (scoreResult.perfect == 8 || scoreResult.perfect == 6 || scoreResult.perfect == 3)
                     {
-                        scoreResultMessageBuilder.AppendLine("Perfectが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readWarningMessage, "Perfect"));
                         PerfectNumericUpDown.BackColor = Color.Red;
                         PerfectNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.perfect < 0)
                     {
-                        scoreResultMessageBuilder.AppendLine("Perfectが正常に読み取れませんでした。データを手動入力で修正してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readErrorMessage, "Perfect"));
                         PerfectNumericUpDown.BackColor = Color.Red;
                         PerfectNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.great == 8 || scoreResult.great == 6 || scoreResult.great == 3)
                     {
-                        scoreResultMessageBuilder.AppendLine("Greatが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readWarningMessage, "Great"));
                         GreatNumericUpDown.BackColor = Color.Red;
                         GreatNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.great < 0)
                     {
-                        scoreResultMessageBuilder.AppendLine("Greatが正常に読み取れませんでした。データを手動入力で修正してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readErrorMessage, "Great"));
                         GreatNumericUpDown.BackColor = Color.Red;
                         GreatNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.good == 8 || scoreResult.good == 6 || scoreResult.good == 3)
                     {
-                        scoreResultMessageBuilder.AppendLine("Goodが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readWarningMessage, "Good"));
                         GoodNumericUpDown.BackColor = Color.Red;
                         GoodNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.good < 0)
                     {
-                        scoreResultMessageBuilder.AppendLine("Goodが正常に読み取れませんでした。データを手動入力で修正してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readErrorMessage, "Good"));
                         GoodNumericUpDown.BackColor = Color.Red;
                         GoodNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.bad == 8 || scoreResult.bad == 6 || scoreResult.bad == 3)
                     {
-                        scoreResultMessageBuilder.AppendLine("Badが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readWarningMessage, "Bad"));
                         BadNumericUpDown.BackColor = Color.Red;
                         BadNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.bad < 0)
                     {
-                        scoreResultMessageBuilder.AppendLine("Badが正常に読み取れませんでした。データを手動入力で修正してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readErrorMessage, "Bad"));
                         BadNumericUpDown.BackColor = Color.Red;
                         BadNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.miss == 8 || scoreResult.miss == 6 || scoreResult.miss == 3)
                     {
-                        scoreResultMessageBuilder.AppendLine("Missが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readWarningMessage, "Miss"));
                         MissNumericUpDown.BackColor = Color.Red;
                         MissNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.miss < 0)
                     {
-                        scoreResultMessageBuilder.AppendLine("Missが正常に読み取れませんでした。データを手動入力で修正してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readErrorMessage, "Miss"));
                         MissNumericUpDown.BackColor = Color.Red;
                         MissNumericUpDown.ForeColor = Color.White;
                     }
 
                     if (scoreResult.maxCombo == 8 || scoreResult.maxCombo == 6 || scoreResult.maxCombo == 3)
                     {
-                        scoreResultMessageBuilder.AppendLine("MaxComboが3/6/8のいずれか１文字のため読み取りエラーの可能性があります。読み取り異常がないか確認してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readWarningMessage, "Max Combo"));
                         MaxComboNumericUpDown.BackColor = Color.Red;
                         MaxComboNumericUpDown.ForeColor = Color.White;
                     }
                     else if (scoreResult.maxCombo < 0)
                     {
-                        scoreResultMessageBuilder.AppendLine("MaxComboが正常に読み取れませんでした。データを手動入力で修正してください。");
+                        scoreResultMessageBuilder.AppendLine(String.Format(readErrorMessage, "Max Combo"));
                         MaxComboNumericUpDown.BackColor = Color.Red;
                         MaxComboNumericUpDown.ForeColor = Color.White;
+                    }
+
+                    if (scoreResult.score == 8 || scoreResult.score == 6 || scoreResult.score == 3)
+                    {
+                        scoreResultMessageBuilder.AppendLine(String.Format(readWarningMessage, "Score"));
+                        ScoreNumericUpDown.BackColor = Color.Red;
+                        ScoreNumericUpDown.ForeColor = Color.White;
+                    }
+                    else if (scoreResult.score < 0)
+                    {
+                        scoreResultMessageBuilder.AppendLine(String.Format(readErrorMessage, "Score"));
+                        ScoreNumericUpDown.BackColor = Color.Red;
+                        ScoreNumericUpDown.ForeColor = Color.White;
                     }
                 }
             } else
