@@ -160,9 +160,9 @@
             this.ConfirmMessageLabel.AutoSize = true;
             this.ConfirmMessageLabel.Location = new System.Drawing.Point(3, 9);
             this.ConfirmMessageLabel.Name = "ConfirmMessageLabel";
-            this.ConfirmMessageLabel.Size = new System.Drawing.Size(303, 12);
+            this.ConfirmMessageLabel.Size = new System.Drawing.Size(388, 12);
             this.ConfirmMessageLabel.TabIndex = 10;
-            this.ConfirmMessageLabel.Text = "次のスコアを登録します。必要があれば修正を実施してください。";
+            this.ConfirmMessageLabel.Text = "画像から以下のスコアが読み込まれました。必要があれば修正を実施してください。";
             // 
             // TitleTextBox
             // 

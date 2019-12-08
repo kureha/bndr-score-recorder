@@ -76,7 +76,7 @@
             this.ExePathSettingToolStripMenuItem,
             this.CropImageRangeToolStripMenuItem});
             this.ConfigToolStripMenuItem.Name = "ConfigToolStripMenuItem";
-            this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.ConfigToolStripMenuItem.Text = "環境設定";
             // 
             // ExePathSettingToolStripMenuItem
@@ -96,12 +96,12 @@
             // MainStripSeparator01
             // 
             this.MainStripSeparator01.Name = "MainStripSeparator01";
-            this.MainStripSeparator01.Size = new System.Drawing.Size(177, 6);
+            this.MainStripSeparator01.Size = new System.Drawing.Size(119, 6);
             // 
             // ExitStripMenuItem
             // 
             this.ExitStripMenuItem.Name = "ExitStripMenuItem";
-            this.ExitStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.ExitStripMenuItem.Text = "終了";
             this.ExitStripMenuItem.Click += new System.EventHandler(this.ExitStripMenuItem_Click);
             // 
@@ -117,14 +117,14 @@
             // ExecuteToolStripMenuItem
             // 
             this.ExecuteToolStripMenuItem.Name = "ExecuteToolStripMenuItem";
-            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExecuteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.ExecuteToolStripMenuItem.Text = "解析実行";
             this.ExecuteToolStripMenuItem.Click += new System.EventHandler(this.ExecuteToolStripMenuItem_Click);
             // 
             // ExecuteAllToolStripMenuItem
             // 
             this.ExecuteAllToolStripMenuItem.Name = "ExecuteAllToolStripMenuItem";
-            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExecuteAllToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.ExecuteAllToolStripMenuItem.Text = "全件解析実行";
             this.ExecuteAllToolStripMenuItem.Click += new System.EventHandler(this.ExecuteAllToolStripMenuItem_Click);
             // 
@@ -139,7 +139,7 @@
             // ApplicationInfoToolStripMenuItem
             // 
             this.ApplicationInfoToolStripMenuItem.Name = "ApplicationInfoToolStripMenuItem";
-            this.ApplicationInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ApplicationInfoToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.ApplicationInfoToolStripMenuItem.Text = "アプリケーション情報";
             this.ApplicationInfoToolStripMenuItem.Click += new System.EventHandler(this.ApplicationInfoToolStripMenuItem_Click);
             // 
@@ -194,7 +194,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "スコアレコーダー";
+            this.Text = "BNDRスコアレコーダー";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.MusicListGroupBox.ResumeLayout(false);
