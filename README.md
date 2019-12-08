@@ -24,8 +24,8 @@
 
 ## Install
 
-* BNDR Score Recorder
-配布されたZipフォルダ解凍してください。
+* BNDR Score Recorder  
+[Releaseページ](https://github.com/kureha/bndr-score-recorder/releases)からダウンロードしたバイナリファイルを解凍するだけです。
 
 * External Software
 	* Microsoft .NET Framework 4.7.2+  
