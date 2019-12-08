@@ -258,8 +258,8 @@ namespace BndrScoreRecorder.common
 
                     // prepared statement
                     command.Parameters.AddWithValue("title", title);
-                    command.Parameters.AddWithValue("level", title);
-                    command.Parameters.AddWithValue("difficult", title);
+                    command.Parameters.AddWithValue("level", level);
+                    command.Parameters.AddWithValue("difficult", difficult);
 
                     // check music is still exists?
                     using (SqliteDataReader reader = command.ExecuteReader())
