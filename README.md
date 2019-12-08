@@ -51,6 +51,13 @@
 6. 6つの情報を設定し終えたら「Save Setting」で設定ファイルに保存する。
 7. メニューから「スコア解析」→「解析実行」をクリックし、スクリーンショット画像の入ったディレクトリを指定する。
 
+## Update plan
+
+* スコアリザルト表にソート機能の実装。
+* TreeViewのモード切替。Level順だけではなく、曲名ベース等。
+* スコアリザルトのImport/Export。
+* 「画像切り抜き座標設定」を複数保持可能化。複数レイアウトの入力に対応（タブレット＆スマホ両持ちプレイヤー向け）。
+
 ## License
 
     The code in this repository is licensed under the Apache License, Version 2.0 (the "License");
