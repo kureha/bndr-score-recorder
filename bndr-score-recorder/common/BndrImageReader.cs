@@ -131,14 +131,14 @@ namespace BndrScoreRecorder.common
                 bndrOcrSetting.getDifficultOcrOption());
             logger.Info("Difficult = " + difficultString);
 
-            // Score read
-            string scoreString = OcrReader.ReadFromImageFileOnlyNumber(
+            // Result notes read
+            string resultNotesString = OcrReader.ReadFromImageFileOnlyNumber(
                 setting.pathImageMagickConvertExe,
                 setting.pathTesseractExe,
                 scrennShotImageFileDestPath,
                 SUFFIX_CROPNAME_SCORE,
                 bndrOcrSetting.getResultNotesOcrOption());
-            logger.Info("Score = " + scoreString);
+            logger.Info("Score = " + resultNotesString);
 
             // Max combo read
             string maxComboString = OcrReader.ReadFromImageFileOnlyNumber(
@@ -179,7 +179,7 @@ namespace BndrScoreRecorder.common
             // Create Hashed OCR Data
             analyzedMusic.CreateHashedOcrDataFromTitleAndDifficult();
 
-            analyzedMusic.scoreResultList.Add(ScoreResult.Parse(scoreString, scrennShotImageFileDestPath.Replace(destDirPath, string.Empty)));
+            analyzedMusic.scoreResultList.Add(ScoreResult.Parse(resultNotesString, scrennShotImageFileDestPath.Replace(destDirPath, string.Empty)));
 
             try
             {

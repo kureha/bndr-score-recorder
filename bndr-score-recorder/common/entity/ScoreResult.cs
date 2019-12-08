@@ -70,7 +70,7 @@ namespace BndrScoreRecorder.common.entity
 
         // score
         [DataMember]
-        public long score;
+        public long score { set; get; }
 
         // rank code : CodeMaster.RankCodeMaster
         [DataMember]
@@ -86,18 +86,18 @@ namespace BndrScoreRecorder.common.entity
         /// <summary>
         /// 文字列をもとにScoreResultを生成する。
         /// </summary>
-        /// <param name="rawScoreString">Tesseractで読み取ったScoreResult文字列</param>
+        /// <param name="rawResultNotesString">Tesseractで読み取ったResultNotes文字列</param>
         /// <param name="imageFilePath">読み取り元画像ファイルパス</param>
         /// <returns>ScoreResultオブジェクト</returns>
-        public static ScoreResult Parse(string rawScoreString, string imageFilePath)
+        public static ScoreResult Parse(string rawResultNotesString, string imageFilePath)
         {
-            logger.Info("ScoreResult parse start. rawScoreString = " + rawScoreString);
+            logger.Info("ScoreResult parse start. rawResultNotesString = " + rawResultNotesString);
 
             // result
             ScoreResult scoreResult = new ScoreResult();
 
             // split raw string and convert to list
-            string[] rawScoreArray = rawScoreString.Split(CHAR_RAW_SCORE_LIST_SPLITER, StringSplitOptions.RemoveEmptyEntries);
+            string[] rawScoreArray = rawResultNotesString.Split(CHAR_RAW_SCORE_LIST_SPLITER, StringSplitOptions.RemoveEmptyEntries);
             List<string> rawScoreList = new List<string>();
             rawScoreList.AddRange(rawScoreArray);
 
@@ -106,11 +106,11 @@ namespace BndrScoreRecorder.common.entity
             // insert data if line is enable
             try
             {
-                scoreResult.perfect = ExtractScore(rawScoreArray[LINE_NUM_PERFECT]);
-                scoreResult.great = ExtractScore(rawScoreArray[LINE_NUM_GREAT]);
-                scoreResult.good = ExtractScore(rawScoreArray[LINE_NUM_GOOD]);
-                scoreResult.bad = ExtractScore(rawScoreArray[LINE_NUM_BAD]);
-                scoreResult.miss = ExtractScore(rawScoreArray[LINE_NUM_MISS]);
+                scoreResult.perfect = ExtractResultNotes(rawScoreArray[LINE_NUM_PERFECT]);
+                scoreResult.great = ExtractResultNotes(rawScoreArray[LINE_NUM_GREAT]);
+                scoreResult.good = ExtractResultNotes(rawScoreArray[LINE_NUM_GOOD]);
+                scoreResult.bad = ExtractResultNotes(rawScoreArray[LINE_NUM_BAD]);
+                scoreResult.miss = ExtractResultNotes(rawScoreArray[LINE_NUM_MISS]);
             } catch (IndexOutOfRangeException)
             {
                 logger.Error("RawString is not containes all data.");
@@ -132,7 +132,7 @@ namespace BndrScoreRecorder.common.entity
         public void CalculateInfos()
         {
             // If data is invalid, nothing to do.
-            if (IsValidScore() == false)
+            if (IsValidResultNotes() == false)
             {
                 return;
             }
@@ -164,18 +164,18 @@ namespace BndrScoreRecorder.common.entity
         }
 
         /// <summary>
-        /// 文字列を空白で分割し、末尾の文字列をスコアとみなしてLong型で返却する。
+        /// 文字列を空白で分割し、末尾の文字列をノーツとみなしてLong型で返却する。
         /// </summary>
-        /// <param name="rawScoreString">スコア文字列</param>
+        /// <param name="rawResultNotesString">ノーツ文字列</param>
         /// <returns>スコア値</returns>
-        private static long ExtractScore(string rawScoreString)
+        private static long ExtractResultNotes(string rawResultNotesString)
         {
             try
             {
-                return long.Parse(rawScoreString.Trim());
+                return long.Parse(rawResultNotesString.Trim());
             } catch (Exception e)
             {
-                logger.Error("Score parse error. raw score string = " + rawScoreString);
+                logger.Error("Score parse error. raw result notes string = " + rawResultNotesString);
                 logger.Error(e);
                 return ERROR_COUNT;
             }
@@ -198,10 +198,10 @@ namespace BndrScoreRecorder.common.entity
         }
 
         /// <summary>
-        /// スコアにエラー値が残っていないか検査する。
+        /// ResultNotesにエラー値が残っていないか検査する。
         /// </summary>
         /// <returns>true:成功、false:エラー値が存在</returns>
-        public bool IsValidScore()
+        public bool IsValidResultNotes()
         {
             // return value (initialize true)
             bool result = true;

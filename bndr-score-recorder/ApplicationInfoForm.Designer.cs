@@ -42,7 +42,7 @@
             this.MainMessageLabel.Name = "MainMessageLabel";
             this.MainMessageLabel.Size = new System.Drawing.Size(250, 60);
             this.MainMessageLabel.TabIndex = 0;
-            this.MainMessageLabel.Text = "BNDR Score Recorder\r\nVersion 1.0\r\nUnder Apache License 2.0\r\n\r\nCreated by Kureha H" +
+            this.MainMessageLabel.Text = "BNDR Score Recorder\r\nVersion 0.1\r\nUnder Apache License 2.0\r\n\r\nCreated by Kureha H" +
     "isame <kureha@gmail.com>";
             this.MainMessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
