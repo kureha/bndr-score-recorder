@@ -345,7 +345,10 @@ namespace BndrScoreRecorder
                             + Path.DirectorySeparatorChar
                             + Path.GetFileNameWithoutExtension(filePath);
                         logger.Info("DialogResult is cancel, cleanup score data. Directory path = " + workfileOutputPath);
-                        Directory.Delete(workfileOutputPath, true);
+                        if (Directory.Exists(workfileOutputPath) == true)
+                        {
+                            Directory.Delete(workfileOutputPath, true);
+                        }
                     }
                 }
 
@@ -602,8 +605,51 @@ namespace BndrScoreRecorder
                 MessageBoxButtons.OKCancel, 
                 MessageBoxIcon.Warning) == DialogResult.OK)
             {
-
+                ScoreDataDelete();
             }
+        }
+
+        /// <summary>
+        /// 選択されているスコアデータを削除する。
+        /// </summary>
+        private void ScoreDataDelete()
+        {
+            // Get selected item
+            ScoreResult scoreResult = null;
+            int selectedRow = 0;
+
+            // Get selected row
+            foreach (DataGridViewCell cell in ScoreDataGridView.SelectedCells)
+            {
+                selectedRow = cell.RowIndex;
+                scoreResult = (ScoreResult)ScoreDataGridView.Rows[selectedRow].DataBoundItem;
+                break;
+            }
+
+            // If can't selected, no action
+            if (scoreResult == null)
+            {
+                return;
+            }
+
+            // Get music object from Music ID
+            MusicDao musicDao = new MusicDao(databaseFilePath);
+            musicDao.DeleteScoreResult(scoreResult);
+
+            // If canceled, delete work file
+            string workfileOutputPath = dataFolderPath
+                + Path.DirectorySeparatorChar
+                + Path.GetDirectoryName(scoreResult.imageFilePath);
+            logger.Info("Score result data is delete, cleanup directory. Directory path = " + workfileOutputPath);
+            if (Directory.Exists(workfileOutputPath) == true)
+            {
+                Directory.Delete(workfileOutputPath, true);
+            }
+
+            // Reflesh view
+            RefreshScoreDataGridView();
+
+            MessageBox.Show("スコアデータの削除が完了しました。");
         }
 
         /// <summary>

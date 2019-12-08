@@ -691,5 +691,62 @@ namespace BndrScoreRecorder.common
 
             return result;
         }
+
+        /// <summary>
+        /// 対象のスコアリザルトを削除する。
+        /// </summary>
+        /// <param name="scoreResult">削除対象のスコアリザルト</param>
+        /// <returns>true:登録成功、false：登録失敗</returns>
+        public bool DeleteScoreResult(ScoreResult scoreResult)
+        {
+            // return value initialized with false
+            bool result = false;
+
+            logger.Info("Music dao insert or replace start.");
+            logger.Info("Target score data id = " + scoreResult.id);
+
+            // database access section
+            using (SqliteConnection connection = new SqliteConnection(builder.ToString()))
+            {
+                // connection open
+                connection.Open();
+
+                // enable transaction
+                using (SqliteTransaction transaction = connection.BeginTransaction())
+                using (SqliteCommand command = connection.CreateCommand())
+                {
+                    // SQL
+                    command.CommandText = "DELETE FROM T_SCORE_RECORD WHERE @id = id;";
+
+                    // query to log
+                    logger.Info(command.CommandText);
+
+                    // prepared statement
+                    command.Parameters.AddWithValue("id", scoreResult.id);
+
+                    // execute
+                    if (command.ExecuteNonQuery() == 1)
+                    {
+                        logger.Info("Delete result is ok.");
+                    }
+                    else
+                    {
+                        logger.Info("Delete result NG!");
+                        throw new SqliteException("Delete count is ng, not 1.", 5000);
+                    }
+
+                    // clear parameters
+                    command.Parameters.Clear();
+
+                    // commit
+                    transaction.Commit();
+
+                    // successful all command
+                    result = true;
+                }
+            }
+
+            return result;
+        }
     }
 }
