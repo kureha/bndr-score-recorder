@@ -94,9 +94,6 @@ namespace BndrScoreRecorder
                 }
             }
 
-            // Enable development mode
-            BndrImageReader.DEBUG_MODE = true;
-
             // Initialize component
             InitializeComponent();
 

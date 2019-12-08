@@ -19,13 +19,10 @@ namespace BndrScoreRecorder.common
         private const string SUFFIX_CROPNAME_MAXCOMBO = ".maxcombo";
         private const string SUFFIX_CROPNAME_LEVEL = ".level";
 
-        // debug mode (dry run for files)
-        public static bool DEBUG_MODE = false;
-
         /// <summary>
         /// 画像ファイルを解析し、Musicオブジェクトを返却する。
         /// </summary>
-        /// <param name="setting">Exeのパス等が格納されたSettingおbジェクト</param>
+        /// <param name="setting">Exeのパス等が格納されたSettingオブジェクト</param>
         /// <param name="screenshotImageFilePath">解析したい画像ファイルのパス</param>
         /// <param name="destDirPath">アプリケーションのデータ格納先ディレクトリパス</param>
         /// <param name="analyzeAllFile">true:全ファイルを解析、false:既に解析済みファイルがあればスキップ</param>
@@ -79,28 +76,21 @@ namespace BndrScoreRecorder.common
 
             // Move image file to dest directory
             string scrennShotImageFileDestPath = screenshotDestDirPath + Path.DirectorySeparatorChar + Path.GetFileName(screenshotImageFilePath);
-            if (DEBUG_MODE == true)
+            logger.Info("Copy screen shot file. Destination path = " + scrennShotImageFileDestPath);
+            if (File.Exists(scrennShotImageFileDestPath) == true)
             {
-                logger.Info("Copy screen shot file. Destination path = " + scrennShotImageFileDestPath);
-                if (File.Exists(scrennShotImageFileDestPath) == true)
+                if (analyzeAllFile == true)
                 {
-                    if (analyzeAllFile == true)
-                    {
-                        logger.Info("Overwrite copy file.");
-                        File.Delete(scrennShotImageFileDestPath);
-                    }
-                    else
-                    {
-                        logger.Info("Target file is still exists, skip regist.");
-                        return null;
-                    }
+                    logger.Info("Overwrite copy file.");
+                    File.Delete(scrennShotImageFileDestPath);
                 }
-                File.Copy(screenshotImageFilePath, scrennShotImageFileDestPath);
-            } else
-            {
-                logger.Info("Move screen shot file. Destination path = " + scrennShotImageFileDestPath);
-                File.Move(screenshotImageFilePath, scrennShotImageFileDestPath);
+                else
+                {
+                    logger.Info("Target file is still exists, skip regist.");
+                    return null;
+                }
             }
+            File.Copy(screenshotImageFilePath, scrennShotImageFileDestPath);
 
             // Dest file path check
             logger.Info("OCR read screenshot image file = " + scrennShotImageFileDestPath);
@@ -113,11 +103,41 @@ namespace BndrScoreRecorder.common
 
             logger.Info("OCR read section start.");
 
+            return AnalyzeMusic(setting, scrennShotImageFileDestPath, destDirPath);
+        }
+
+        /// <summary>
+        /// 画像ファイルを解析し、Musicオブジェクトを返却する。
+        /// </summary>
+        /// <param name="setting">Exeのパス等が格納されたSettingオブジェクト</param>
+        /// <param name="scrennShotImageWorkFilePath">解析したい画像ファイルのパス</param>
+        /// <param name="destDirPath">アプリケーションのデータ格納先ディレクトリパス</param>
+        /// <returns></returns>
+        private static Music AnalyzeMusic(Setting setting, string scrennShotImageWorkFilePath, string destDirPath)
+        {
+            // Check setting object
+            if (setting == null)
+            {
+                logger.Error("Setting object is null!");
+                return null;
+            }
+
+            // Load ocr setting
+            BndrOcrSetting bndrOcrSetting = setting.defaultBndrOcrSetting;
+
+            if (bndrOcrSetting == null)
+            {
+                logger.Error("Default setting is null!");
+                return null;
+            }
+
+            logger.Info("OCR read section start.");
+
             // Title read
             string titleString = OcrReader.ReadFromImageFileJapaneseLang(
                 setting.pathImageMagickConvertExe,
                 setting.pathTesseractExe,
-                scrennShotImageFileDestPath,
+                scrennShotImageWorkFilePath,
                 SUFFIX_CROPNAME_TITLE,
                 bndrOcrSetting.getTitleOcrOption());
             logger.Info("Title = " + titleString);
@@ -126,7 +146,7 @@ namespace BndrScoreRecorder.common
             string difficultString = OcrReader.ReadFromImageFileJapaneseLang(
                 setting.pathImageMagickConvertExe,
                 setting.pathTesseractExe,
-                scrennShotImageFileDestPath,
+                scrennShotImageWorkFilePath,
                 SUFFIX_CROPNAME_TITLE,
                 bndrOcrSetting.getDifficultOcrOption());
             logger.Info("Difficult = " + difficultString);
@@ -135,7 +155,7 @@ namespace BndrScoreRecorder.common
             string resultNotesString = OcrReader.ReadFromImageFileOnlyNumber(
                 setting.pathImageMagickConvertExe,
                 setting.pathTesseractExe,
-                scrennShotImageFileDestPath,
+                scrennShotImageWorkFilePath,
                 SUFFIX_CROPNAME_SCORE,
                 bndrOcrSetting.getResultNotesOcrOption());
             logger.Info("Score = " + resultNotesString);
@@ -144,7 +164,7 @@ namespace BndrScoreRecorder.common
             string maxComboString = OcrReader.ReadFromImageFileOnlyNumber(
                 setting.pathImageMagickConvertExe,
                 setting.pathTesseractExe,
-                scrennShotImageFileDestPath,
+                scrennShotImageWorkFilePath,
                 SUFFIX_CROPNAME_MAXCOMBO,
                 bndrOcrSetting.getMaxComboOcrOption());
             logger.Info("Max combo = " + maxComboString);
@@ -153,7 +173,7 @@ namespace BndrScoreRecorder.common
             string levelString = OcrReader.ReadFromImageFileOnlyNumber(
                 setting.pathImageMagickConvertExe,
                 setting.pathTesseractExe,
-                scrennShotImageFileDestPath,
+                scrennShotImageWorkFilePath,
                 SUFFIX_CROPNAME_LEVEL,
                 bndrOcrSetting.getLevelOcrOption());
             logger.Info("Level = " + levelString);
@@ -162,7 +182,7 @@ namespace BndrScoreRecorder.common
             string scoreString = OcrReader.ReadFromImageFileOnlyNumber(
                 setting.pathImageMagickConvertExe,
                 setting.pathTesseractExe,
-                scrennShotImageFileDestPath,
+                scrennShotImageWorkFilePath,
                 SUFFIX_CROPNAME_LEVEL,
                 bndrOcrSetting.getScoreOcrOption());
             logger.Info("Level = " + levelString);
@@ -180,7 +200,8 @@ namespace BndrScoreRecorder.common
             try
             {
                 analyzedMusic.level = int.Parse(levelString);
-            } catch (FormatException)
+            }
+            catch (FormatException)
             {
                 analyzedMusic.level = 0;
             }
@@ -190,10 +211,10 @@ namespace BndrScoreRecorder.common
 
             // Parse
             analyzedMusic.scoreResultList.Add(ScoreResult.Parse(
-                resultNotesString, 
-                maxComboString, 
-                scoreString, 
-                scrennShotImageFileDestPath.Replace(destDirPath, string.Empty))
+                resultNotesString,
+                maxComboString,
+                scoreString,
+                scrennShotImageWorkFilePath.Replace(destDirPath, string.Empty))
                 );
 
             logger.Info("Musc score result creation end.");
