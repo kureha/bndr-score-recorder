@@ -50,6 +50,8 @@
 5. 「4.」で調整したら「Try to Analyze」で試験切り出しをし、読み取り結果が期待される出力内容の読み取り結果のようになっているか？を確認する。問題なければ「↑ SAVE」ボタンで設定をメモリ上に仮保存する。
 6. 6つの情報を設定し終えたら「Save Setting」で設定ファイルに保存する。
 7. メニューから「スコア解析」→「解析実行」をクリックし、スクリーンショット画像の入ったディレクトリを指定する。
+![Usage07-01](https://user-images.githubusercontent.com/175231/70389936-4c93bd80-1a09-11ea-94a4-57931dbd73d0.jpg)
+![Usage07-02](https://user-images.githubusercontent.com/175231/70389937-4c93bd80-1a09-11ea-975d-3ae265171749.jpg)
 
 ## Update plan
 
