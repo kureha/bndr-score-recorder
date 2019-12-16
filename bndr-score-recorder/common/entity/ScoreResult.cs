@@ -111,7 +111,8 @@ namespace BndrScoreRecorder.common.entity
                 scoreResult.good = ExtractResultNotes(rawResultNotesArray[LINE_NUM_GOOD]);
                 scoreResult.bad = ExtractResultNotes(rawResultNotesArray[LINE_NUM_BAD]);
                 scoreResult.miss = ExtractResultNotes(rawResultNotesArray[LINE_NUM_MISS]);
-            } catch (IndexOutOfRangeException)
+            }
+            catch (IndexOutOfRangeException)
             {
                 logger.Error("RawString is not containes all data.");
             }
@@ -123,7 +124,8 @@ namespace BndrScoreRecorder.common.entity
             try
             {
                 scoreResult.maxCombo = int.Parse(rawMaxComboString);
-            } catch (FormatException)
+            }
+            catch (FormatException)
             {
                 scoreResult.maxCombo = ERROR_COUNT;
             }
@@ -192,7 +194,8 @@ namespace BndrScoreRecorder.common.entity
             try
             {
                 return long.Parse(rawResultNotesString.Trim());
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 logger.Error("Score parse error. raw result notes string = " + rawResultNotesString);
                 logger.Error(e);
@@ -226,10 +229,10 @@ namespace BndrScoreRecorder.common.entity
             bool result = true;
 
             // if contains "-1", this is error object.
-            if (perfect == ERROR_COUNT || 
-                great == ERROR_COUNT || 
-                good == ERROR_COUNT || 
-                bad == ERROR_COUNT || 
+            if (perfect == ERROR_COUNT ||
+                great == ERROR_COUNT ||
+                good == ERROR_COUNT ||
+                bad == ERROR_COUNT ||
                 miss == ERROR_COUNT)
             {
                 result = false;

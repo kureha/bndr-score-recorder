@@ -119,15 +119,15 @@ namespace BndrScoreRecorder
         private void InitializeSelectOcrSettingListBox()
         {
             // Add items
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_TITLE, 
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_TITLE,
                 setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_DIFFICULT, 
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_DIFFICULT,
                 setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_RESULT_NOTES, 
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_RESULT_NOTES,
                 setting.defaultBndrOcrSetting.ResultNotesOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_MAX_COMBO, 
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_MAX_COMBO,
                 setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption()));
-            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_LEVEL, 
+            SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_LEVEL,
                 setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption()));
             SelectOcrSettingListBox.Items.Add(String.Format(LIST_ITEM_OCR_SCORE,
                 setting.defaultBndrOcrSetting.ScoreOcrSetting.ImageMagickCropOption()));
@@ -142,23 +142,23 @@ namespace BndrScoreRecorder
         private void ChangeApplyToSelectOcrSettingListBox()
         {
             // Change items
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_TITLE] = 
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_TITLE] =
                 String.Format(LIST_ITEM_OCR_TITLE,
                 setting.defaultBndrOcrSetting.TitleOcrSetting.ImageMagickCropOption());
 
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_DIFFICULT] = 
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_DIFFICULT] =
                 String.Format(LIST_ITEM_OCR_DIFFICULT,
                 setting.defaultBndrOcrSetting.DifficultOcrSetting.ImageMagickCropOption());
 
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_RESULT_NOTES] = 
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_RESULT_NOTES] =
                 String.Format(LIST_ITEM_OCR_RESULT_NOTES,
                 setting.defaultBndrOcrSetting.ResultNotesOcrSetting.ImageMagickCropOption());
 
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_MAX_COMBO] = 
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_MAX_COMBO] =
                 String.Format(LIST_ITEM_OCR_MAX_COMBO,
                 setting.defaultBndrOcrSetting.MaxComboOcrSetting.ImageMagickCropOption());
 
-            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_LEVEL] = 
+            SelectOcrSettingListBox.Items[LIST_INDEX_OCR_LEVEL] =
                 String.Format(LIST_ITEM_OCR_LEVEL,
                 setting.defaultBndrOcrSetting.LevelOcrSetting.ImageMagickCropOption());
 
@@ -264,10 +264,10 @@ namespace BndrScoreRecorder
                     targetOcrSettiong = new OcrSetting();
                     break;
             }
-            targetOcrSettiong.positionX = (int) PositionXNumericUpDown.Value;
-            targetOcrSettiong.positionY = (int) PositionYNumericUpDown.Value;
-            targetOcrSettiong.width = (int) WidthNumericUpDown.Value;
-            targetOcrSettiong.height = (int) HeightNumericUpDown.Value;
+            targetOcrSettiong.positionX = (int)PositionXNumericUpDown.Value;
+            targetOcrSettiong.positionY = (int)PositionYNumericUpDown.Value;
+            targetOcrSettiong.width = (int)WidthNumericUpDown.Value;
+            targetOcrSettiong.height = (int)HeightNumericUpDown.Value;
 
             // Apply to control
             ChangeApplyToSelectOcrSettingListBox();
@@ -290,20 +290,20 @@ namespace BndrScoreRecorder
                 case LIST_INDEX_OCR_TITLE:
                     // Title
                     CropResultTextBox.Text = OcrReader.ReadFromImageFileJapaneseLang(
-                        setting.pathImageMagickConvertExe, 
-                        setting.pathTesseractExe, 
-                        workImageFilePath, 
-                        SUFFIX_CROPNAME_TEST, 
+                        setting.pathImageMagickConvertExe,
+                        setting.pathTesseractExe,
+                        workImageFilePath,
+                        SUFFIX_CROPNAME_TEST,
                         CreateCropString());
                     break;
 
                 case LIST_INDEX_OCR_DIFFICULT:
                     //Difficult
                     CropResultTextBox.Text = OcrReader.ReadFromImageFile(
-                        setting.pathImageMagickConvertExe, 
-                        setting.pathTesseractExe, 
-                        workImageFilePath, 
-                        SUFFIX_CROPNAME_TEST, 
+                        setting.pathImageMagickConvertExe,
+                        setting.pathTesseractExe,
+                        workImageFilePath,
+                        SUFFIX_CROPNAME_TEST,
                         CreateCropString());
                     break;
 
@@ -363,9 +363,9 @@ namespace BndrScoreRecorder
         /// <returns></returns>
         private string CreateCropString()
         {
-            return WidthNumericUpDown.Value.ToString() 
-                + "x" + HeightNumericUpDown.Value.ToString() 
-                + "+" + PositionXNumericUpDown.Value.ToString() 
+            return WidthNumericUpDown.Value.ToString()
+                + "x" + HeightNumericUpDown.Value.ToString()
+                + "+" + PositionXNumericUpDown.Value.ToString()
                 + "+" + PositionYNumericUpDown.Value.ToString();
         }
 
@@ -526,9 +526,9 @@ namespace BndrScoreRecorder
         private void PositionNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             DrawRectangleInCropPictureBox(
-                new Point((int)PositionXNumericUpDown.Value, (int)PositionYNumericUpDown.Value), 
+                new Point((int)PositionXNumericUpDown.Value, (int)PositionYNumericUpDown.Value),
                 new Point(
-                    (int)(PositionXNumericUpDown.Value + WidthNumericUpDown.Value), 
+                    (int)(PositionXNumericUpDown.Value + WidthNumericUpDown.Value),
                     (int)(PositionYNumericUpDown.Value + HeightNumericUpDown.Value))
                 );
         }

@@ -30,7 +30,7 @@ namespace BndrScoreRecorder
 
         private void ImageMagickConvertPathSelectButton_Click(object sender, EventArgs e)
         {
-            using(OpenFileDialog dialog = new OpenFileDialog())
+            using (OpenFileDialog dialog = new OpenFileDialog())
             {
                 dialog.Filter = "ImageMagick convert.exe file|convert.exe|All files (*.*)|*.*";
                 if (dialog.ShowDialog() == DialogResult.OK)

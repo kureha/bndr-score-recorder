@@ -121,8 +121,8 @@ namespace BndrScoreRecorder.common
 
             // create ocr read file name
             string tesseractOutputFilePath =
-                Path.GetDirectoryName(imageMagickOutputFilePath) + 
-                Path.DirectorySeparatorChar + 
+                Path.GetDirectoryName(imageMagickOutputFilePath) +
+                Path.DirectorySeparatorChar +
                 Path.GetFileNameWithoutExtension(imageMagickOutputFilePath);
 
             logger.Info("Tesseract Output file path = " + tesseractOutputFilePath + TesseractBridge.SUFFIX_OUTPUT_FILE_NAME);
@@ -137,13 +137,14 @@ namespace BndrScoreRecorder.common
                     tesseractOutputFilePath
                     );
             }
-            else if (mode == MODE_JAPANESE_LANG) {
+            else if (mode == MODE_JAPANESE_LANG)
+            {
                 standardOutput = TesseractBridge.ReadJapaneseLangExecute(
                     tesseractExePath,
                     imageMagickOutputFilePath,
                     tesseractOutputFilePath
                     );
-            } 
+            }
             else if (mode == MODE_ONLY_NUMBER)
             {
                 standardOutput = TesseractBridge.ReadOnlyNumberExecute(

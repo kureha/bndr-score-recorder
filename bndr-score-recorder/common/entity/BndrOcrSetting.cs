@@ -61,7 +61,8 @@ namespace BndrScoreRecorder.common.entity
             if (TitleOcrSetting == null)
             {
                 return string.Empty;
-            } else
+            }
+            else
             {
                 return TitleOcrSetting.ImageMagickCropOption();
             }
@@ -76,7 +77,8 @@ namespace BndrScoreRecorder.common.entity
             if (DifficultOcrSetting == null)
             {
                 return string.Empty;
-            } else
+            }
+            else
             {
                 return DifficultOcrSetting.ImageMagickCropOption();
             }
@@ -91,7 +93,8 @@ namespace BndrScoreRecorder.common.entity
             if (ResultNotesOcrSetting == null)
             {
                 return string.Empty;
-            } else
+            }
+            else
             {
                 return ResultNotesOcrSetting.ImageMagickCropOption();
             }
@@ -106,7 +109,8 @@ namespace BndrScoreRecorder.common.entity
             if (MaxComboOcrSetting == null)
             {
                 return string.Empty;
-            } else
+            }
+            else
             {
                 return MaxComboOcrSetting.ImageMagickCropOption();
             }
@@ -121,7 +125,8 @@ namespace BndrScoreRecorder.common.entity
             if (LevelOcrSetting == null)
             {
                 return string.Empty;
-            } else
+            }
+            else
             {
                 return LevelOcrSetting.ImageMagickCropOption();
             }

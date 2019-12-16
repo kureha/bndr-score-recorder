@@ -25,7 +25,7 @@ namespace BndrScoreRecorder.common.tesseract
 
             string standardOutputMessage = string.Empty;
 
-            using(Process process = new Process())
+            using (Process process = new Process())
             {
                 // create process
                 logger.Info("ImageMagick ext path = " + pathImageMagickExe);
@@ -38,7 +38,7 @@ namespace BndrScoreRecorder.common.tesseract
                 }
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 // arguments
-                process.StartInfo.Arguments = 
+                process.StartInfo.Arguments =
                     @"""" + pathInputImageFile + @"""" + ARG_SPLIT_CHAR
                     + ImageMagickBridge.OPTION_CROP + ARG_SPLIT_CHAR
                     + @"""" + cropOption + @"""" + ARG_SPLIT_CHAR

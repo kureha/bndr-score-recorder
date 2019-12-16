@@ -53,7 +53,8 @@ namespace BndrScoreRecorder
                     DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Setting));
                     setting = (Setting)jsonSerializer.ReadObject(fileStream);
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
 
             }
@@ -76,7 +77,7 @@ namespace BndrScoreRecorder
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(jsonFilePath));
                 }
-                
+
                 // Write settings to JSON file
                 using (StreamWriter streamWriter = new StreamWriter(jsonFilePath))
                 using (MemoryStream memoryStream = new MemoryStream())

@@ -35,9 +35,9 @@ namespace BndrScoreRecorder
         private const string PREFIX_LEVEL_TREE_NODE = "LEVEL_";
 
         // Exception message
-        private static readonly string EXCEPTION_MESSAGE_FORMAT = "予期せぬ例外が発生したため、処理を中断しました。" 
-            + Environment.NewLine + "[Message]" 
-            + Environment.NewLine  + "{0}"
+        private static readonly string EXCEPTION_MESSAGE_FORMAT = "予期せぬ例外が発生したため、処理を中断しました。"
+            + Environment.NewLine + "[Message]"
+            + Environment.NewLine + "{0}"
             + Environment.NewLine + "[StackTrace]"
             + Environment.NewLine + "{1}";
 
@@ -56,11 +56,11 @@ namespace BndrScoreRecorder
 
             // Create screenshot data folder path
             dataFolderPath = System.Windows.Forms.Application.StartupPath
-                + Path.DirectorySeparatorChar 
+                + Path.DirectorySeparatorChar
                 + "data";
 
-            databaseFilePath = dataFolderPath 
-                + Path.DirectorySeparatorChar 
+            databaseFilePath = dataFolderPath
+                + Path.DirectorySeparatorChar
                 + "bndr-score-recorder.db";
 
             settingFilePath = dataFolderPath
@@ -75,7 +75,7 @@ namespace BndrScoreRecorder
             {
                 logger.Info("Create new setting file.");
                 MessageBox.Show("初期設定が必要です。");
-                
+
                 setting = new Setting();
                 logger.Info("Initializing setting object complete.");
 
@@ -86,7 +86,8 @@ namespace BndrScoreRecorder
                         setting.defaultBndrOcrSetting = new BndrOcrSetting();
                         Setting.SaveToFile(setting, settingFilePath);
                         MessageBox.Show("設定を保存しました。");
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("初期設定が実施されませんでした。終了します。");
                         Environment.Exit(EXIT_CODE_NORMAL);
@@ -112,7 +113,7 @@ namespace BndrScoreRecorder
 
             // DataSource clear
             ScoreDataGridView.DataSource = null;
-            
+
             // EX Score
             column = new DataGridViewTextBoxColumn();
             column.Name = "exScore";
@@ -331,7 +332,8 @@ namespace BndrScoreRecorder
                                 analyzedMusic.id = registeredMusic.id;
                                 analyzedMusic.hashedOcrDataList = registeredMusic.hashedOcrDataList;
                             }
-                        } else
+                        }
+                        else
                         {
                             logger.Info("Registered music is not null, update execute.");
                         }
@@ -379,7 +381,8 @@ namespace BndrScoreRecorder
                 {
                     MessageBox.Show("実行をキャンセルしました。");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(String.Format(EXCEPTION_MESSAGE_FORMAT, ex.Message, ex.StackTrace));
             }
@@ -600,9 +603,9 @@ namespace BndrScoreRecorder
         private void ScoreDeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(
-                "選択されているスコアデータを削除します。よろしいですか？", 
-                "警告", 
-                MessageBoxButtons.OKCancel, 
+                "選択されているスコアデータを削除します。よろしいですか？",
+                "警告",
+                MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 ScoreDataDelete();
@@ -728,7 +731,7 @@ namespace BndrScoreRecorder
         /// <param name="e"></param>
         private void ApplicationInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(ApplicationInfoForm applicationInfoForm = new ApplicationInfoForm())
+            using (ApplicationInfoForm applicationInfoForm = new ApplicationInfoForm())
             {
                 applicationInfoForm.ShowDialog();
             }

@@ -55,8 +55,8 @@ namespace BndrScoreRecorder.common
             }
 
             // If dest directory is not exists, create directory
-            string screenshotDestDirPath = destDirPath 
-                + Path.DirectorySeparatorChar 
+            string screenshotDestDirPath = destDirPath
+                + Path.DirectorySeparatorChar
                 + Path.GetFileNameWithoutExtension(screenshotImageFilePath);
             logger.Info("Screenshot dest directory path = " + screenshotDestDirPath);
             if (Directory.Exists(screenshotDestDirPath) == true)

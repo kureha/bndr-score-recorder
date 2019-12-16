@@ -74,7 +74,7 @@ namespace BndrScoreRecorder.common.tesseract
 
             string standardOutputMessage = string.Empty;
 
-            using(Process process = new Process())
+            using (Process process = new Process())
             {
                 // create process
                 logger.Info("Tesseract ext path = " + pathTesseractExe);
@@ -87,7 +87,7 @@ namespace BndrScoreRecorder.common.tesseract
                 }
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 // arguments
-                process.StartInfo.Arguments = 
+                process.StartInfo.Arguments =
                     PARAM_NAME_TESSERACT_OPTION_PSM + ARG_SPLIT_CHAR
                     + PARAM_VALUE_TESSERACT_OPTION_PSM + ARG_SPLIT_CHAR
                     + extraOption + ARG_SPLIT_CHAR

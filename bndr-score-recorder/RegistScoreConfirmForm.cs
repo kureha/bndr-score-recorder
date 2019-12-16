@@ -247,7 +247,8 @@ namespace BndrScoreRecorder
                         ScoreNumericUpDown.ForeColor = Color.White;
                     }
                 }
-            } else
+            }
+            else
             {
                 musicMessageBuilder.AppendLine("楽曲マスタデータが既に存在します。データを更新した場合、今までの全データが書き換わります。");
 
@@ -300,17 +301,18 @@ namespace BndrScoreRecorder
             {
                 if (music.scoreResultList.Count > 0)
                 {
-                    music.scoreResultList[0].perfect = (int) PerfectNumericUpDown.Value;
-                    music.scoreResultList[0].great = (int) GreatNumericUpDown.Value;
-                    music.scoreResultList[0].good = (int) GoodNumericUpDown.Value;
-                    music.scoreResultList[0].bad = (int) BadNumericUpDown.Value;
-                    music.scoreResultList[0].miss = (int) MissNumericUpDown.Value;
-                    music.scoreResultList[0].maxCombo = (int) MaxComboNumericUpDown.Value;
-                    music.scoreResultList[0].score = (int) ScoreNumericUpDown.Value;
+                    music.scoreResultList[0].perfect = (int)PerfectNumericUpDown.Value;
+                    music.scoreResultList[0].great = (int)GreatNumericUpDown.Value;
+                    music.scoreResultList[0].good = (int)GoodNumericUpDown.Value;
+                    music.scoreResultList[0].bad = (int)BadNumericUpDown.Value;
+                    music.scoreResultList[0].miss = (int)MissNumericUpDown.Value;
+                    music.scoreResultList[0].maxCombo = (int)MaxComboNumericUpDown.Value;
+                    music.scoreResultList[0].score = (int)ScoreNumericUpDown.Value;
 
                     music.scoreResultList[0].CalculateInfos();
                 }
-            } catch (FormatException)
+            }
+            catch (FormatException)
             {
                 MessageBox.Show("数字項目に数字以外が入力されています。");
                 return;
@@ -338,12 +340,13 @@ namespace BndrScoreRecorder
         {
             try
             {
-                if (music.scoreResultList.Count > 0) {
-                    music.scoreResultList[0].perfect = (int) PerfectNumericUpDown.Value;
-                    music.scoreResultList[0].great = (int) GreatNumericUpDown.Value;
-                    music.scoreResultList[0].good = (int) GoodNumericUpDown.Value;
-                    music.scoreResultList[0].bad = (int) BadNumericUpDown.Value;
-                    music.scoreResultList[0].miss = (int) MissNumericUpDown.Value;
+                if (music.scoreResultList.Count > 0)
+                {
+                    music.scoreResultList[0].perfect = (int)PerfectNumericUpDown.Value;
+                    music.scoreResultList[0].great = (int)GreatNumericUpDown.Value;
+                    music.scoreResultList[0].good = (int)GoodNumericUpDown.Value;
+                    music.scoreResultList[0].bad = (int)BadNumericUpDown.Value;
+                    music.scoreResultList[0].miss = (int)MissNumericUpDown.Value;
 
                     // calculate ex score
                     music.scoreResultList[0].exScore = music.scoreResultList[0].perfect * 2 + music.scoreResultList[0].great;
@@ -361,7 +364,9 @@ namespace BndrScoreRecorder
 
                     DataAttach(music);
                 }
-            } catch (FormatException) {
+            }
+            catch (FormatException)
+            {
 
             }
         }
