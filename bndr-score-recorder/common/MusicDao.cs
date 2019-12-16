@@ -17,6 +17,12 @@ namespace BndrScoreRecorder.common
         // 接続文字列
         public SqliteConnectionStringBuilder builder;
 
+        // Error int value
+        public static readonly int ERROR_INTEGER = -1;
+
+        // Error long value
+        public static readonly long ERROR_LONG = -1L;
+
         /// <summary>
         /// コンストラクタ。
         /// </summary>
@@ -98,7 +104,7 @@ namespace BndrScoreRecorder.common
                         command.ExecuteNonQuery();
 
                         // commit
-                    transaction.Commit();
+                        transaction.Commit();
                     }
                 }
 
@@ -140,10 +146,10 @@ namespace BndrScoreRecorder.common
                         {
                             Music music = new Music
                             {
-                                id = reader.GetInt32(0),
-                                title = reader.GetString(1),
-                                difficult = reader.GetString(2),
-                                level = reader.GetInt32(3)
+                                id = GetInt(0, reader),
+                                title = GetString(1, reader),
+                                difficult = GetString(2, reader),
+                                level = GetInt(3, reader)
                             };
                             musicList.Add(music);
                         }
@@ -199,7 +205,7 @@ namespace BndrScoreRecorder.common
                     {
                         while (reader.Read() == true)
                         {
-                            musicId = reader.GetInt32(0);
+                            musicId = GetInt(0, reader);
                             logger.Info("Selected music id = " + musicId);
                         }
                     }
@@ -267,7 +273,7 @@ namespace BndrScoreRecorder.common
                     {
                         while (reader.Read() == true)
                         {
-                            musicId = reader.GetInt32(0);
+                            musicId = GetInt(0, reader);
                             logger.Info("Selected music id = " + musicId);
                         }
                     }
@@ -340,9 +346,9 @@ namespace BndrScoreRecorder.common
                             music = new Music
                             {
                                 id = musicId,
-                                title = reader.GetString(0),
-                                difficult = reader.GetString(1),
-                                level = reader.GetInt32(2)
+                                title = GetString(0, reader),
+                                difficult = GetString(1, reader),
+                                level = GetInt(2, reader)
                             };
                         }
                     }
@@ -370,7 +376,7 @@ namespace BndrScoreRecorder.common
                     {
                         while (reader.Read() == true)
                         {
-                            music.hashedOcrDataList.Add(reader.GetString(1));
+                            music.hashedOcrDataList.Add(GetString(1, reader));
                         }
                     }
                     // clear parameters
@@ -394,17 +400,18 @@ namespace BndrScoreRecorder.common
                         {
                             scoreReuslt = new ScoreResult();
 
-                            scoreReuslt.id = reader.GetString(0);
-                            scoreReuslt.perfect = reader.GetInt64(1);
-                            scoreReuslt.great = reader.GetInt64(2);
-                            scoreReuslt.good = reader.GetInt64(3);
-                            scoreReuslt.bad = reader.GetInt64(4);
-                            scoreReuslt.miss = reader.GetInt64(5);
-                            scoreReuslt.totalNotes = reader.GetInt64(6);
-                            scoreReuslt.maxCombo = reader.GetInt64(7);
-                            scoreReuslt.exScore = reader.GetInt64(8);
-                            scoreReuslt.score = reader.GetInt64(9);
-                            scoreReuslt.imageFilePath = reader.GetString(10);
+
+                            scoreReuslt.id = GetString(0, reader);
+                            scoreReuslt.perfect = GetLong(1, reader);
+                            scoreReuslt.great = GetLong(2, reader);
+                            scoreReuslt.good = GetLong(3, reader);
+                            scoreReuslt.bad = GetLong(4, reader);
+                            scoreReuslt.miss = GetLong(5, reader);
+                            scoreReuslt.totalNotes = GetLong(6, reader);
+                            scoreReuslt.maxCombo = GetLong(7, reader);
+                            scoreReuslt.exScore = GetLong(8, reader);
+                            scoreReuslt.score = GetLong(9, reader);
+                            scoreReuslt.imageFilePath = GetString(10, reader);
 
                             scoreReuslt.CalculateInfos();
 
@@ -533,7 +540,7 @@ namespace BndrScoreRecorder.common
                         {
                             while (reader.Read() == true)
                             {
-                                music.id = reader.GetInt32(0);
+                                music.id = GetInt(0, reader);
                             }
                         }
 
@@ -543,14 +550,16 @@ namespace BndrScoreRecorder.common
                             logger.Error("Can't get inserted music id!");
                             result = false;
                             return result;
-                        } else
+                        }
+                        else
                         {
                             logger.Info("Inserted music id = " + music.id);
                         }
 
                         // clear parameters
                         command.Parameters.Clear();
-                    } else
+                    }
+                    else
                     {
                         logger.Info("Music master data is exists, update music master data. Music id = " + music.id);
 
@@ -578,7 +587,7 @@ namespace BndrScoreRecorder.common
                     /** Section.2 - Score data**/
                     logger.Info("Section 2. score data insert start.");
 
-                    foreach(ScoreResult scoreResult in music.scoreResultList)
+                    foreach (ScoreResult scoreResult in music.scoreResultList)
                     {
                         // If scoreReuslt.id == null -> insert, else == update
                         if (scoreResult.id == null)
@@ -609,7 +618,8 @@ namespace BndrScoreRecorder.common
 
                             // clear parameters
                             command.Parameters.Clear();
-                        } else
+                        }
+                        else
                         {
                             logger.Info("Score result data is exists, update Score result data. Score Result id = " + scoreResult.id);
 
@@ -653,11 +663,12 @@ namespace BndrScoreRecorder.common
                     logger.Info("Section 3. hashed ocr data insert start.");
 
                     if (music.hashedOcrData == null ||
-                        music.hashedOcrData == string.Empty || 
+                        music.hashedOcrData == string.Empty ||
                         music.hashedOcrDataList.Contains(music.hashedOcrData) == true)
                     {
                         logger.Info("No need to insert hashed ocr data.");
-                    } else
+                    }
+                    else
                     {
                         // SQL
                         command.CommandText = "INSERT INTO T_OCRREAD_MUSIC_LINK(music_id, hashed_ocr_data) VALUES (@music_id, @hashed_ocr_data);";
@@ -747,6 +758,21 @@ namespace BndrScoreRecorder.common
             }
 
             return result;
+        }
+
+        public string GetString(int index, SqliteDataReader reader)
+        {
+            return reader.IsDBNull(index) ? string.Empty : reader.GetString(index);
+        }
+
+        public int GetInt(int index, SqliteDataReader reader)
+        {
+            return reader.IsDBNull(index) ? ERROR_INTEGER : reader.GetInt32(index);
+        }
+
+        public long GetLong(int index, SqliteDataReader reader)
+        {
+            return reader.IsDBNull(index) ? ERROR_LONG : reader.GetInt64(index);
         }
     }
 }
